@@ -1,0 +1,15 @@
+id: extract_euphemism_17
+family: slot_extraction
+input: 王总夫妇带父母，四位，10月下旬去京都一周，老人生冷的少一点，走不了太多路。
+slots: {}
+generate: false
+expect:
+  slots:
+    adults: 4
+    children: 0
+  must_have_followup_slots:
+  - dietary
+  inferred_slots_any:
+  - dietary
+  - accessibility
+note: 委婉表达：生冷少一点→饮食倾向；走不了太多路→无障碍/节奏倾向

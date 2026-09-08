@@ -1,0 +1,15 @@
+# 手册默认基线 + 本阶段按需模块（见《技术适配声明》第 2、3 节）
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.9
+pydantic-settings>=2.5
+sqlalchemy>=2.0
+alembic>=1.13
+psycopg[binary,pool]>=3.2
+anthropic>=1.0
+python-dotenv>=1.0
+pyyaml>=6.0
+pytest>=8
+httpx>=0.27
+# 无 Docker 时的本地内嵌 PostgreSQL 16（含 pgvector）。生产/有 Docker 时不需要。
+pgserver>=0.1.4

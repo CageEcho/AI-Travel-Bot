@@ -1,0 +1,51 @@
+{
+ "provider": "deepseek",
+ "model": "deepseek-v4-pro",
+ "extract": {
+  "latency_ms": 4568,
+  "input_tokens": 24,
+  "output_tokens": 481,
+  "cache_read_tokens": 2176,
+  "cost_usd": null,
+  "slots_extracted": 6,
+  "schema_ok_first_try": true,
+  "followups": [
+   "destination_cities",
+   "budget_basis",
+   "hotel_tier"
+  ],
+  "dietary_followup": false,
+  "warnings": []
+ },
+ "plan": {
+  "latency_ms_total": 19501,
+  "llm_calls": [
+   {
+    "round": 1,
+    "latency_ms": 19461,
+    "input_tokens": 96,
+    "output_tokens": 2290,
+    "cache_read_tokens": 11136,
+    "retried": false
+   }
+  ],
+  "input_tokens": 96,
+  "output_tokens": 2290,
+  "cache_read_tokens": 11136,
+  "cost_usd": null,
+  "replan_rounds": 0,
+  "blocking_violations": 0,
+  "ref_blocked": 0,
+  "unknown_items": 0,
+  "days": 7,
+  "days_with_hotel": 6,
+  "total_jpy": "3040243.20",
+  "total_cny": "145627.65",
+  "assumptions": [
+   "客户未说明是否需要包车，按每日包车安排；转场日使用包车",
+   "东京住宿选择汐留奢华家庭房酒店以满足儿童住宿需求，避免儿童年龄未记录房型",
+   "美食类餐厅中未记录儿童友好程度的已列入待核实清单"
+  ],
+  "reason_notes_with_digits": 0
+ }
+}

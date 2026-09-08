@@ -1,0 +1,26 @@
+id: null_vehicle_luggage_12
+family: null_handling
+input: 两大一小箱根 3 天，孩子5岁，需要包车。
+slots:
+  destination_cities:
+  - 箱根
+  date_start: '2026-10-15'
+  duration_days: 3
+  adults: 2
+  children: 1
+  child_ages:
+  - 5
+  budget_amount: 100000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - ryokan
+  - luxury
+  dietary:
+  - no_raw
+  accessibility: none
+generate: true
+expect:
+  max_blocking_violations: 0
+  min_unknown: 0
+note: 行李容量 NULL 的车若被选中 → H4 UNKNOWN

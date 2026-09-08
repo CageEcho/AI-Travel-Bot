@@ -1,0 +1,28 @@
+id: tuesday_restaurant_06
+family: hard_constraint_trap
+input: 两大一小 10月19到22号京都，孩子6岁，忌生食，住五星。
+slots:
+  destination_cities:
+  - 京都
+  date_start: '2026-10-19'
+  duration_days: 4
+  adults: 2
+  children: 1
+  child_ages:
+  - 6
+  budget_amount: 100000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - 5star
+  - luxury
+  dietary:
+  - no_raw
+  accessibility: none
+generate: true
+expect:
+  max_blocking_violations: 0
+  forbid_code_fail:
+  - H3
+  - H2
+note: T5：10-20 是周二，周二定休的餐厅不得排在周二；T6：不支持忌生食的餐厅不得用

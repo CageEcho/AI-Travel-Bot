@@ -1,0 +1,1624 @@
+[
+ {
+  "rest_id": "RST-TYO-001",
+  "name_zh": "银座鮨一",
+  "name_local": "銀座 鮨いち",
+  "city": "东京",
+  "district": "银座",
+  "lat": 35.670531,
+  "lng": 139.764678,
+  "cuisine": "sushi",
+  "price_band": "luxury",
+  "closed_days": [
+   0
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": false,
+  "lead_time_days": 7,
+  "tags": [
+   "counter",
+   "omakase"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-002",
+  "name_zh": "六本木鉄板 炎",
+  "name_local": "六本木 鉄板 炎",
+  "city": "东京",
+  "district": "六本木",
+  "lat": 35.662303,
+  "lng": 139.733824,
+  "cuisine": "teppanyaki",
+  "price_band": "luxury",
+  "closed_days": [
+   1
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "gluten_free"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 7,
+  "tags": [
+   "wagyu",
+   "show"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-003",
+  "name_zh": "丸之内 割烹 千",
+  "name_local": "丸の内 割烹 千",
+  "city": "东京",
+  "district": "丸之内",
+  "lat": 35.682462,
+  "lng": 139.767842,
+  "cuisine": "kappo",
+  "price_band": "high",
+  "closed_days": [
+   0
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "private_room"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-004",
+  "name_zh": "汐留 天麸罗 白",
+  "name_local": "汐留 天ぷら 白",
+  "city": "东京",
+  "district": "汐留",
+  "lat": 35.665305,
+  "lng": 139.761765,
+  "cuisine": "tempura",
+  "price_band": "high",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "counter"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-005",
+  "name_zh": "赤坂 鳗 松",
+  "name_local": "赤坂 うなぎ 松",
+  "city": "东京",
+  "district": "赤坂",
+  "lat": 35.67572,
+  "lng": 139.736863,
+  "cuisine": "unagi",
+  "price_band": "high",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "heritage"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-006",
+  "name_zh": "神乐坂 荞麦 庵",
+  "name_local": "神楽坂 蕎麦 庵",
+  "city": "东京",
+  "district": "神乐坂",
+  "lat": 35.704135,
+  "lng": 139.733364,
+  "cuisine": "soba",
+  "price_band": "mid",
+  "closed_days": [
+   3
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian",
+   "vegan"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "local"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-007",
+  "name_zh": "表参道 精进 蓮",
+  "name_local": "表参道 精進 蓮",
+  "city": "东京",
+  "district": "表参道",
+  "lat": 35.66758,
+  "lng": 139.715529,
+  "cuisine": "shojin",
+  "price_band": "high",
+  "closed_days": null,
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "vegetarian",
+   "vegan",
+   "no_raw",
+   "halal"
+  ],
+  "child_friendly": null,
+  "lead_time_days": 3,
+  "tags": [
+   "temple_style"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-008",
+  "name_zh": "日本桥 寿司 与",
+  "name_local": "日本橋 鮨 与",
+  "city": "东京",
+  "district": "日本桥",
+  "lat": 35.685498,
+  "lng": 139.775523,
+  "cuisine": "sushi",
+  "price_band": "high",
+  "closed_days": [
+   1
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": false,
+  "lead_time_days": 3,
+  "tags": [
+   "edomae"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-009",
+  "name_zh": "涩谷 烧肉 牛心",
+  "name_local": "渋谷 焼肉 牛心",
+  "city": "东京",
+  "district": "涩谷",
+  "lat": 35.657878,
+  "lng": 139.699026,
+  "cuisine": "yakiniku",
+  "price_band": "mid",
+  "closed_days": [],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_pork"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "family",
+   "late_night",
+   "yukhoe"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-010",
+  "name_zh": "新宿 怀石 晓",
+  "name_local": "新宿 懐石 暁",
+  "city": "东京",
+  "district": "新宿",
+  "lat": 35.687145,
+  "lng": 139.703519,
+  "cuisine": "kaiseki",
+  "price_band": "luxury",
+  "closed_days": [
+   1
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": null,
+  "lead_time_days": 7,
+  "tags": [
+   "private_room",
+   "view"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-011",
+  "name_zh": "惠比寿 法餐 Lumière",
+  "name_local": "恵比寿 リュミエール",
+  "city": "东京",
+  "district": "惠比寿",
+  "lat": 35.646211,
+  "lng": 139.711193,
+  "cuisine": "french",
+  "price_band": "luxury",
+  "closed_days": [
+   1,
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "gluten_free",
+   "vegetarian"
+  ],
+  "child_friendly": false,
+  "lead_time_days": 7,
+  "tags": [
+   "michelin"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-012",
+  "name_zh": "品川 拉面 潮",
+  "name_local": "品川 ラーメン 潮",
+  "city": "东京",
+  "district": "品川",
+  "lat": 35.626461,
+  "lng": 139.739686,
+  "cuisine": "ramen",
+  "price_band": "budget",
+  "closed_days": null,
+  "open_from": "11:30:00",
+  "open_to": "23:30:00",
+  "dietary_support": [
+   "no_raw",
+   "no_pork"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "quick"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-013",
+  "name_zh": "浅草 天丼 雷",
+  "name_local": "浅草 天丼 雷",
+  "city": "东京",
+  "district": "浅草",
+  "lat": 35.709755,
+  "lng": 139.799421,
+  "cuisine": "tempura",
+  "price_band": "mid",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "heritage",
+   "family"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-014",
+  "name_zh": "目黑 居酒屋 灶",
+  "name_local": "目黒 居酒屋 竈",
+  "city": "东京",
+  "district": "目黑",
+  "lat": 35.637052,
+  "lng": 139.716994,
+  "cuisine": "izakaya",
+  "price_band": "mid",
+  "closed_days": [
+   0
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "local",
+   "late_night"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-015",
+  "name_zh": "有乐町 海鲜丼 海",
+  "name_local": "有楽町 海鮮丼 海",
+  "city": "东京",
+  "district": "有乐町",
+  "lat": 35.674537,
+  "lng": 139.763374,
+  "cuisine": "seafood",
+  "price_band": "budget",
+  "closed_days": null,
+  "open_from": "11:30:00",
+  "open_to": "23:30:00",
+  "dietary_support": [],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "market"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-016",
+  "name_zh": "台场 意餐 Onda",
+  "name_local": "台場 オンダ",
+  "city": "东京",
+  "district": "台场",
+  "lat": 35.628038,
+  "lng": 139.775546,
+  "cuisine": "italian",
+  "price_band": "mid",
+  "closed_days": [],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian",
+   "gluten_free"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "bay_view",
+   "family"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-017",
+  "name_zh": "大手町 寿喜锅 今",
+  "name_local": "大手町 すき焼き 今",
+  "city": "东京",
+  "district": "大手町",
+  "lat": 35.687324,
+  "lng": 139.764133,
+  "cuisine": "sukiyaki",
+  "price_band": "high",
+  "closed_days": [
+   0
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "private_room"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-018",
+  "name_zh": "虎之门 寿司 宙",
+  "name_local": "虎ノ門 鮨 宙",
+  "city": "东京",
+  "district": "虎之门",
+  "lat": 35.666407,
+  "lng": 139.752433,
+  "cuisine": "sushi",
+  "price_band": "luxury",
+  "closed_days": [
+   0,
+   1
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": false,
+  "lead_time_days": 7,
+  "tags": [
+   "omakase"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-019",
+  "name_zh": "银座 割烹 京味",
+  "name_local": "銀座 割烹 京味",
+  "city": "东京",
+  "district": "银座",
+  "lat": 35.673798,
+  "lng": 139.767502,
+  "cuisine": "kappo",
+  "price_band": "luxury",
+  "closed_days": [
+   0
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": null,
+  "lead_time_days": 7,
+  "tags": [
+   "counter"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-TYO-020",
+  "name_zh": "六本木 烧鸟 鸟幸",
+  "name_local": "六本木 焼鳥 鳥幸",
+  "city": "东京",
+  "district": "六本木",
+  "lat": 35.658986,
+  "lng": 139.729289,
+  "cuisine": "yakitori",
+  "price_band": "mid",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "no_pork"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "casual"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-001",
+  "name_zh": "祇园 怀石 花见",
+  "name_local": "祇園 懐石 花見",
+  "city": "京都",
+  "district": "祇园",
+  "lat": 35.002067,
+  "lng": 135.77777,
+  "cuisine": "kaiseki",
+  "price_band": "luxury",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": false,
+  "lead_time_days": 7,
+  "tags": [
+   "machiya",
+   "private_room"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-002",
+  "name_zh": "东山 汤豆腐 顺",
+  "name_local": "東山 湯豆腐 順",
+  "city": "京都",
+  "district": "东山",
+  "lat": 34.999934,
+  "lng": 135.78092,
+  "cuisine": "tofu",
+  "price_band": "high",
+  "closed_days": [],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "vegetarian",
+   "vegan",
+   "no_raw",
+   "gluten_free"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "garden",
+   "family"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-003",
+  "name_zh": "岚山 川床 渡",
+  "name_local": "嵐山 川床 渡",
+  "city": "京都",
+  "district": "岚山",
+  "lat": 35.011902,
+  "lng": 135.674077,
+  "cuisine": "kyo_ryori",
+  "price_band": "luxury",
+  "closed_days": [
+   1
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 7,
+  "tags": [
+   "river_view",
+   "seasonal"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-004",
+  "name_zh": "锦市场 寿司 锦",
+  "name_local": "錦市場 鮨 錦",
+  "city": "京都",
+  "district": "河原町",
+  "lat": 35.000947,
+  "lng": 135.771252,
+  "cuisine": "sushi",
+  "price_band": "high",
+  "closed_days": [
+   3
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": false,
+  "lead_time_days": 3,
+  "tags": [
+   "market"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-005",
+  "name_zh": "乌丸 京料理 松",
+  "name_local": "烏丸 京料理 松",
+  "city": "京都",
+  "district": "乌丸",
+  "lat": 35.006705,
+  "lng": 135.761792,
+  "cuisine": "kyo_ryori",
+  "price_band": "high",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "private_room"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-006",
+  "name_zh": "二条 精进 天龄",
+  "name_local": "二条 精進 天齢",
+  "city": "京都",
+  "district": "二条",
+  "lat": 35.012943,
+  "lng": 135.749249,
+  "cuisine": "shojin",
+  "price_band": "high",
+  "closed_days": [
+   1
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "vegetarian",
+   "vegan",
+   "no_raw",
+   "halal"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "temple_style"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-007",
+  "name_zh": "河原町 鸭肉 鸭川",
+  "name_local": "河原町 鴨 鴨川",
+  "city": "京都",
+  "district": "鸭川",
+  "lat": 35.010341,
+  "lng": 135.76929,
+  "cuisine": "kappo",
+  "price_band": "high",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": null,
+  "lead_time_days": 3,
+  "tags": [
+   "river_view",
+   "duck_sashimi"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-008",
+  "name_zh": "京都站前 拉面 一乘",
+  "name_local": "京都駅前 ラーメン 一乗",
+  "city": "京都",
+  "district": "京都站前",
+  "lat": 34.982943,
+  "lng": 135.762134,
+  "cuisine": "ramen",
+  "price_band": "budget",
+  "closed_days": null,
+  "open_from": "11:30:00",
+  "open_to": "23:30:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "quick"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-009",
+  "name_zh": "北山 法餐 Kitayama",
+  "name_local": "北山 キタヤマ",
+  "city": "京都",
+  "district": "北山",
+  "lat": 35.048329,
+  "lng": 135.763277,
+  "cuisine": "french",
+  "price_band": "luxury",
+  "closed_days": [
+   1
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "gluten_free",
+   "vegetarian"
+  ],
+  "child_friendly": false,
+  "lead_time_days": 7,
+  "tags": [
+   "michelin"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-010",
+  "name_zh": "清水 荞麦 清",
+  "name_local": "清水 蕎麦 清",
+  "city": "京都",
+  "district": "清水",
+  "lat": 34.993974,
+  "lng": 135.783592,
+  "cuisine": "soba",
+  "price_band": "mid",
+  "closed_days": [
+   3
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "local"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-011",
+  "name_zh": "宇治 抹茶膳 茶寮",
+  "name_local": "宇治 抹茶膳 茶寮",
+  "city": "京都",
+  "district": "宇治",
+  "lat": 34.888246,
+  "lng": 135.806425,
+  "cuisine": "cafe",
+  "price_band": "mid",
+  "closed_days": null,
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "vegetarian",
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "dessert",
+   "family"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-012",
+  "name_zh": "伏见 鮨 伏",
+  "name_local": "伏見 鮨 伏",
+  "city": "京都",
+  "district": "伏见",
+  "lat": 34.938447,
+  "lng": 135.758465,
+  "cuisine": "sushi",
+  "price_band": "high",
+  "closed_days": [
+   0
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": false,
+  "lead_time_days": 3,
+  "tags": [
+   "counter"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-013",
+  "name_zh": "西阵 御番菜 织",
+  "name_local": "西陣 おばんざい 織",
+  "city": "京都",
+  "district": "西阵",
+  "lat": 35.032766,
+  "lng": 135.742973,
+  "cuisine": "obanzai",
+  "price_band": "mid",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "home_style"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-014",
+  "name_zh": "祇园 铁板 神",
+  "name_local": "祇園 鉄板 神",
+  "city": "京都",
+  "district": "祇园",
+  "lat": 35.000554,
+  "lng": 135.778625,
+  "cuisine": "teppanyaki",
+  "price_band": "luxury",
+  "closed_days": [
+   0
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "gluten_free"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 7,
+  "tags": [
+   "wagyu"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-015",
+  "name_zh": "三条 烧肉 弘",
+  "name_local": "三条 焼肉 弘",
+  "city": "京都",
+  "district": "三条",
+  "lat": 35.00997,
+  "lng": 135.773088,
+  "cuisine": "yakiniku",
+  "price_band": "mid",
+  "closed_days": [],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "no_pork"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "family"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-016",
+  "name_zh": "御所南 割烹 志",
+  "name_local": "御所南 割烹 志",
+  "city": "京都",
+  "district": "御所南",
+  "lat": 35.015199,
+  "lng": 135.760054,
+  "cuisine": "kappo",
+  "price_band": "luxury",
+  "closed_days": [
+   1
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": null,
+  "lead_time_days": 7,
+  "tags": [
+   "counter",
+   "omakase"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-017",
+  "name_zh": "冈崎 天麸罗 圆",
+  "name_local": "岡崎 天ぷら 圓",
+  "city": "京都",
+  "district": "冈崎",
+  "lat": 35.013018,
+  "lng": 135.780798,
+  "cuisine": "tempura",
+  "price_band": "high",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "counter"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-018",
+  "name_zh": "岚山 湯葉 汤叶",
+  "name_local": "嵐山 湯葉 ゆば",
+  "city": "京都",
+  "district": "岚山",
+  "lat": 35.011057,
+  "lng": 135.673278,
+  "cuisine": "tofu",
+  "price_band": "mid",
+  "closed_days": null,
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "vegetarian",
+   "vegan",
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "family",
+   "garden"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-019",
+  "name_zh": "鸭川 意餐 Fiume",
+  "name_local": "鴨川 フィウメ",
+  "city": "京都",
+  "district": "鸭川",
+  "lat": 35.009904,
+  "lng": 135.772681,
+  "cuisine": "italian",
+  "price_band": "high",
+  "closed_days": [
+   1
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian",
+   "gluten_free"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "river_view"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-KYO-020",
+  "name_zh": "京都站前 鮨 京",
+  "name_local": "京都駅前 鮨 京",
+  "city": "京都",
+  "district": "京都站前",
+  "lat": 34.986398,
+  "lng": 135.760613,
+  "cuisine": "sushi",
+  "price_band": "mid",
+  "closed_days": null,
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "quick"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-001",
+  "name_zh": "强罗 怀石 月",
+  "name_local": "強羅 懐石 月",
+  "city": "箱根",
+  "district": "强罗",
+  "lat": 35.248593,
+  "lng": 139.046086,
+  "cuisine": "kaiseki",
+  "price_band": "luxury",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": false,
+  "lead_time_days": 7,
+  "tags": [
+   "private_room",
+   "onsen_town"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-002",
+  "name_zh": "仙石原 荞麦 雾",
+  "name_local": "仙石原 蕎麦 霧",
+  "city": "箱根",
+  "district": "仙石原",
+  "lat": 35.266162,
+  "lng": 139.009096,
+  "cuisine": "soba",
+  "price_band": "mid",
+  "closed_days": [
+   3
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "local"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-003",
+  "name_zh": "宫之下 洋食 富士",
+  "name_local": "宮ノ下 洋食 富士",
+  "city": "箱根",
+  "district": "宫之下",
+  "lat": 35.245469,
+  "lng": 139.057566,
+  "cuisine": "western",
+  "price_band": "mid",
+  "closed_days": [],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "heritage",
+   "family"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-004",
+  "name_zh": "汤本 鮨 汤",
+  "name_local": "湯本 鮨 湯",
+  "city": "箱根",
+  "district": "汤本",
+  "lat": 35.232566,
+  "lng": 139.104645,
+  "cuisine": "sushi",
+  "price_band": "high",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": false,
+  "lead_time_days": 3,
+  "tags": [
+   "counter"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-005",
+  "name_zh": "元箱根 湖畔 意餐 Lago",
+  "name_local": "元箱根 ラーゴ",
+  "city": "箱根",
+  "district": "元箱根",
+  "lat": 35.205445,
+  "lng": 139.029038,
+  "cuisine": "italian",
+  "price_band": "high",
+  "closed_days": [
+   1
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian",
+   "gluten_free"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "lake_view"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-006",
+  "name_zh": "小涌谷 豆腐 森",
+  "name_local": "小涌谷 豆腐 森",
+  "city": "箱根",
+  "district": "小涌谷",
+  "lat": 35.241149,
+  "lng": 139.045409,
+  "cuisine": "tofu",
+  "price_band": "mid",
+  "closed_days": null,
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "vegetarian",
+   "vegan",
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "family"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-007",
+  "name_zh": "芦之湖 鳗 芦",
+  "name_local": "芦ノ湖 うなぎ 芦",
+  "city": "箱根",
+  "district": "芦之湖",
+  "lat": 35.212096,
+  "lng": 139.016441,
+  "cuisine": "unagi",
+  "price_band": "high",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "lake_view"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-008",
+  "name_zh": "塔之泽 割烹 泽",
+  "name_local": "塔ノ沢 割烹 沢",
+  "city": "箱根",
+  "district": "塔之泽",
+  "lat": 35.239205,
+  "lng": 139.096561,
+  "cuisine": "kappo",
+  "price_band": "high",
+  "closed_days": [
+   0
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": null,
+  "lead_time_days": 3,
+  "tags": [
+   "river_view"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-009",
+  "name_zh": "强罗 烧肉 火",
+  "name_local": "強羅 焼肉 火",
+  "city": "箱根",
+  "district": "强罗",
+  "lat": 35.247455,
+  "lng": 139.047265,
+  "cuisine": "yakiniku",
+  "price_band": "mid",
+  "closed_days": [],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "no_pork"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "family"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-010",
+  "name_zh": "仙石原 法餐 Brume",
+  "name_local": "仙石原 ブリューム",
+  "city": "箱根",
+  "district": "仙石原",
+  "lat": 35.268959,
+  "lng": 139.008201,
+  "cuisine": "french",
+  "price_band": "luxury",
+  "closed_days": [
+   1,
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "gluten_free"
+  ],
+  "child_friendly": false,
+  "lead_time_days": 7,
+  "tags": [
+   "michelin"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-011",
+  "name_zh": "汤本 天麸罗 泷",
+  "name_local": "湯本 天ぷら 滝",
+  "city": "箱根",
+  "district": "汤本",
+  "lat": 35.232318,
+  "lng": 139.10337,
+  "cuisine": "tempura",
+  "price_band": "mid",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "heritage"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-012",
+  "name_zh": "元箱根 鮨 湖",
+  "name_local": "元箱根 鮨 湖",
+  "city": "箱根",
+  "district": "元箱根",
+  "lat": 35.206393,
+  "lng": 139.030045,
+  "cuisine": "sushi",
+  "price_band": "high",
+  "closed_days": [
+   3
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [],
+  "child_friendly": false,
+  "lead_time_days": 3,
+  "tags": [
+   "counter"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-013",
+  "name_zh": "宫之下 咖啡 老街",
+  "name_local": "宮ノ下 珈琲 旧街道",
+  "city": "箱根",
+  "district": "宫之下",
+  "lat": 35.243396,
+  "lng": 139.055307,
+  "cuisine": "cafe",
+  "price_band": "budget",
+  "closed_days": null,
+  "open_from": "11:30:00",
+  "open_to": "23:30:00",
+  "dietary_support": [
+   "vegetarian",
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "dessert"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-014",
+  "name_zh": "小涌谷 寿喜锅 谷",
+  "name_local": "小涌谷 すき焼き 谷",
+  "city": "箱根",
+  "district": "小涌谷",
+  "lat": 35.237819,
+  "lng": 139.0468,
+  "cuisine": "sukiyaki",
+  "price_band": "high",
+  "closed_days": [
+   0
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 3,
+  "tags": [
+   "private_room"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-015",
+  "name_zh": "芦之湖 荞麦 湖畔",
+  "name_local": "芦ノ湖 蕎麦 湖畔",
+  "city": "箱根",
+  "district": "芦之湖",
+  "lat": 35.214817,
+  "lng": 139.022687,
+  "cuisine": "soba",
+  "price_band": "mid",
+  "closed_days": [
+   3
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian",
+   "vegan"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "lake_view",
+   "family"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-016",
+  "name_zh": "强罗 洋食 花",
+  "name_local": "強羅 洋食 花",
+  "city": "箱根",
+  "district": "强罗",
+  "lat": 35.246588,
+  "lng": 139.045375,
+  "cuisine": "western",
+  "price_band": "mid",
+  "closed_days": [],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "vegetarian"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "family"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-017",
+  "name_zh": "汤本 居酒屋 汤治",
+  "name_local": "湯本 居酒屋 湯治",
+  "city": "箱根",
+  "district": "汤本",
+  "lat": 35.22957,
+  "lng": 139.102967,
+  "cuisine": "izakaya",
+  "price_band": "budget",
+  "closed_days": [
+   0
+  ],
+  "open_from": "11:30:00",
+  "open_to": "23:30:00",
+  "dietary_support": [],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "local"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-018",
+  "name_zh": "塔之泽 怀石 溪",
+  "name_local": "塔ノ沢 懐石 渓",
+  "city": "箱根",
+  "district": "塔之泽",
+  "lat": 35.234302,
+  "lng": 139.092863,
+  "cuisine": "kaiseki",
+  "price_band": "luxury",
+  "closed_days": [
+   1
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": null,
+  "lead_time_days": 7,
+  "tags": [
+   "river_view"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-019",
+  "name_zh": "仙石原 拉面 原",
+  "name_local": "仙石原 ラーメン 原",
+  "city": "箱根",
+  "district": "仙石原",
+  "lat": 35.266545,
+  "lng": 139.009474,
+  "cuisine": "ramen",
+  "price_band": "budget",
+  "closed_days": null,
+  "open_from": "11:30:00",
+  "open_to": "23:30:00",
+  "dietary_support": [
+   "no_raw"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 0,
+  "tags": [
+   "quick"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "rest_id": "RST-HKN-020",
+  "name_zh": "元箱根 鉄板 富",
+  "name_local": "元箱根 鉄板 富",
+  "city": "箱根",
+  "district": "元箱根",
+  "lat": 35.201948,
+  "lng": 139.026754,
+  "cuisine": "teppanyaki",
+  "price_band": "luxury",
+  "closed_days": [
+   2
+  ],
+  "open_from": "11:30:00",
+  "open_to": "22:00:00",
+  "dietary_support": [
+   "no_raw",
+   "gluten_free"
+  ],
+  "child_friendly": true,
+  "lead_time_days": 7,
+  "tags": [
+   "lake_view",
+   "wagyu"
+  ],
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ }
+]

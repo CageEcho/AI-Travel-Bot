@@ -1,0 +1,28 @@
+id: tokyo_couple_luxury_04
+family: hard_constraint_trap
+input: 一对夫妻，10月20到24号东京，住奢华档，无特别忌口，预算8万人民币不含机票。
+slots:
+  destination_cities:
+  - 东京
+  date_start: '2026-10-20'
+  duration_days: 5
+  adults: 2
+  children: 0
+  child_ages: []
+  budget_amount: 80000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - luxury
+  dietary:
+  - none
+  accessibility: none
+generate: true
+expect:
+  must_not_contain_resources:
+  - HTL-TYO-T8-001
+  max_blocking_violations: 0
+  slots:
+    adults: 2
+    children: 0
+note: T8：合约已过期的酒店不得进候选

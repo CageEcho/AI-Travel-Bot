@@ -1,0 +1,28 @@
+id: hakone_family_03
+family: hard_constraint_trap
+input: 两大一小去箱根泡温泉，孩子5岁，10月16号起住两晚，要私汤，孩子吃不了生的。
+slots:
+  destination_cities:
+  - 箱根
+  date_start: '2026-10-16'
+  duration_days: 3
+  adults: 2
+  children: 1
+  child_ages:
+  - 5
+  budget_amount: 100000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - ryokan
+  - luxury
+  dietary:
+  - no_raw
+  accessibility: none
+generate: true
+expect:
+  must_not_contain_resources:
+  - HTL-HKN-T1-001
+  - HTL-HKN-T2-001
+  - HTL-HKN-T2-002
+  max_blocking_violations: 0

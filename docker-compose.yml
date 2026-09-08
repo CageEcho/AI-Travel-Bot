@@ -1,0 +1,8 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16      # M1 启用 pgvector 扩展时无需换镜像
+    environment:
+      POSTGRES_DB: travel
+      POSTGRES_PASSWORD: dev
+    ports: ["5432:5432"]
+    volumes: ["./pgdata:/var/lib/postgresql/data"]

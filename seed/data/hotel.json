@@ -1,0 +1,1110 @@
+[
+ {
+  "hotel_id": "HTL-TYO-0001",
+  "name_zh": "丸之内玄庐",
+  "name_local": "丸の内 玄廬",
+  "alias": [
+   "丸の内 玄廬"
+  ],
+  "city": "东京",
+  "district": "丸之内",
+  "lat": 35.680309,
+  "lng": 139.768381,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "quiet",
+   "city_view",
+   "club_lounge",
+   "family_room"
+  ],
+  "nearest_station": "东京站",
+  "walk_min": 2,
+  "advisor_notes": "客人要面子、要安静，这家不会出错；行政酒廊下午茶带小孩也不尴尬。",
+  "supplier_id": "SUP-015",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0002",
+  "name_zh": "银座澪 Rei",
+  "name_local": "銀座 澪",
+  "alias": [
+   "銀座 澪"
+  ],
+  "city": "东京",
+  "district": "银座",
+  "lat": 35.670672,
+  "lng": 139.766767,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "design",
+   "shopping",
+   "michelin_dining"
+  ],
+  "nearest_station": "银座站",
+  "walk_min": 10,
+  "advisor_notes": "客人要面子、要安静，这家不会出错；行政酒廊下午茶带小孩也不尴尬。",
+  "supplier_id": "SUP-002",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0003",
+  "name_zh": "六本木天景酒店",
+  "name_local": "六本木 スカイテラス",
+  "alias": [
+   "六本木 スカイテラス"
+  ],
+  "city": "东京",
+  "district": "六本木",
+  "lat": 35.660148,
+  "lng": 139.73337,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "city_view",
+   "art",
+   "family_room",
+   "pool"
+  ],
+  "nearest_station": "六本木站",
+  "walk_min": 8,
+  "advisor_notes": "客人要面子、要安静，这家不会出错；行政酒廊下午茶带小孩也不尴尬。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0004",
+  "name_zh": "虎之门叙 Jo",
+  "name_local": "虎ノ門 叙",
+  "alias": [
+   "虎ノ門 叙"
+  ],
+  "city": "东京",
+  "district": "虎之门",
+  "lat": 35.669505,
+  "lng": 139.751318,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "quiet",
+   "spa",
+   "club_lounge"
+  ],
+  "nearest_station": "虎之门站",
+  "walk_min": 5,
+  "advisor_notes": "服务是真的细，早餐也好，价格在这一档里不算贵。",
+  "supplier_id": "SUP-004",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0005",
+  "name_zh": "汐留云海",
+  "name_local": "汐留 雲海",
+  "alias": [
+   "汐留 雲海"
+  ],
+  "city": "东京",
+  "district": "汐留",
+  "lat": 35.661199,
+  "lng": 139.757357,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "bay_view",
+   "family_room",
+   "pool",
+   "kids_club"
+  ],
+  "nearest_station": "汐留站",
+  "walk_min": 10,
+  "advisor_notes": "服务是真的细，早餐也好，价格在这一档里不算贵。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-T1-001",
+  "name_zh": "日本桥橘庵",
+  "name_local": "日本橋 橘庵",
+  "alias": [
+   "日本橋 橘庵"
+  ],
+  "city": "东京",
+  "district": "日本桥",
+  "lat": 35.685611,
+  "lng": 139.775427,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "heritage",
+   "quiet",
+   "tea_ceremony"
+  ],
+  "nearest_station": "日本桥站",
+  "walk_min": 8,
+  "advisor_notes": "服务是真的细，早餐也好，价格在这一档里不算贵。",
+  "supplier_id": "SUP-004",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0006",
+  "name_zh": "新宿御苑前格兰",
+  "name_local": "新宿御苑前 グラン",
+  "alias": [
+   "新宿御苑前 グラン"
+  ],
+  "city": "东京",
+  "district": "新宿",
+  "lat": 35.69034,
+  "lng": 139.697424,
+  "tier": "5star",
+  "category": "city_hotel",
+  "tags": [
+   "park_view",
+   "family_room",
+   "connecting_rooms"
+  ],
+  "nearest_station": "新宿站",
+  "walk_min": 2,
+  "advisor_notes": "性价比选手，家庭房够大，适合带娃。",
+  "supplier_id": "SUP-015",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0007",
+  "name_zh": "涩谷 Hikari 酒店",
+  "name_local": "渋谷 ヒカリ",
+  "alias": [
+   "渋谷 ヒカリ"
+  ],
+  "city": "东京",
+  "district": "涩谷",
+  "lat": 35.658023,
+  "lng": 139.702167,
+  "tier": "5star",
+  "category": "city_hotel",
+  "tags": [
+   "shopping",
+   "youth",
+   "city_view"
+  ],
+  "nearest_station": "涩谷站",
+  "walk_min": 6,
+  "advisor_notes": "新干线过去方便，最后一晚住这里省事。",
+  "supplier_id": "SUP-002",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-T1-002",
+  "name_zh": "表参道青木旅居",
+  "name_local": "表参道 青木",
+  "alias": [
+   "表参道 青木"
+  ],
+  "city": "东京",
+  "district": "表参道",
+  "lat": 35.666667,
+  "lng": 139.714216,
+  "tier": "5star",
+  "category": "city_hotel",
+  "tags": [
+   "design",
+   "quiet",
+   "shopping"
+  ],
+  "nearest_station": "表参道站",
+  "walk_min": 5,
+  "advisor_notes": "新干线过去方便，最后一晚住这里省事。",
+  "supplier_id": "SUP-011",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0008",
+  "name_zh": "品川湾岸大酒店",
+  "name_local": "品川 ベイサイドグランド",
+  "alias": [
+   "品川 ベイサイドグランド"
+  ],
+  "city": "东京",
+  "district": "品川",
+  "lat": 35.625622,
+  "lng": 139.74227,
+  "tier": "5star",
+  "category": "city_hotel",
+  "tags": [
+   "family_room",
+   "kids_club",
+   "pool",
+   "shinkansen_access"
+  ],
+  "nearest_station": "品川站",
+  "walk_min": 5,
+  "advisor_notes": "新干线过去方便，最后一晚住这里省事。",
+  "supplier_id": "SUP-015",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0009",
+  "name_zh": "赤坂迎宾馆酒店",
+  "name_local": "赤坂 迎賓ホテル",
+  "alias": [
+   "赤坂 迎賓ホテル"
+  ],
+  "city": "东京",
+  "district": "赤坂",
+  "lat": 35.671706,
+  "lng": 139.73868,
+  "tier": "5star",
+  "category": "city_hotel",
+  "tags": [
+   "quiet",
+   "garden",
+   "club_lounge"
+  ],
+  "nearest_station": "赤坂站",
+  "walk_min": 10,
+  "advisor_notes": "商务感重一点，蜜月客人别推。",
+  "supplier_id": "SUP-015",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-T8-001",
+  "name_zh": "大手町松风",
+  "name_local": "大手町 松風",
+  "alias": [
+   "大手町 松風"
+  ],
+  "city": "东京",
+  "district": "大手町",
+  "lat": 35.68773,
+  "lng": 139.766856,
+  "tier": "5star",
+  "category": "city_hotel",
+  "tags": [
+   "business",
+   "quiet",
+   "family_room"
+  ],
+  "nearest_station": "大手町站",
+  "walk_min": 3,
+  "advisor_notes": "商务感重一点，蜜月客人别推。",
+  "supplier_id": "SUP-001",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0010",
+  "name_zh": "神乐坂小路旅宿",
+  "name_local": "神楽坂 小路の宿",
+  "alias": [
+   "神楽坂 小路の宿"
+  ],
+  "city": "东京",
+  "district": "神乐坂",
+  "lat": 35.704189,
+  "lng": 139.734425,
+  "tier": "boutique",
+  "category": "boutique_hotel",
+  "tags": [
+   "alley",
+   "local",
+   "quiet"
+  ],
+  "nearest_station": "饭田桥站",
+  "walk_min": 2,
+  "advisor_notes": "本地感强，早餐一般，可以外面吃。",
+  "supplier_id": "SUP-002",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0011",
+  "name_zh": "惠比寿白壁",
+  "name_local": "恵比寿 白壁",
+  "alias": [
+   "恵比寿 白壁"
+  ],
+  "city": "东京",
+  "district": "惠比寿",
+  "lat": 35.6486,
+  "lng": 139.708181,
+  "tier": "boutique",
+  "category": "boutique_hotel",
+  "tags": [
+   "design",
+   "dining",
+   "quiet"
+  ],
+  "nearest_station": "惠比寿站",
+  "walk_min": 10,
+  "advisor_notes": "小而美，情侣和摄影爱好者喜欢；行李多的家庭不方便。",
+  "supplier_id": "SUP-004",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0012",
+  "name_zh": "浅草雷门别邸",
+  "name_local": "浅草 雷門別邸",
+  "alias": [
+   "浅草 雷門別邸"
+  ],
+  "city": "东京",
+  "district": "浅草",
+  "lat": 35.714008,
+  "lng": 139.794771,
+  "tier": "boutique",
+  "category": "boutique_hotel",
+  "tags": [
+   "heritage",
+   "family_room",
+   "onsen"
+  ],
+  "nearest_station": "浅草站",
+  "walk_min": 3,
+  "advisor_notes": "小而美，情侣和摄影爱好者喜欢；行李多的家庭不方便。",
+  "supplier_id": "SUP-001",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0013",
+  "name_zh": "目黑川季",
+  "name_local": "目黒川 季",
+  "alias": [
+   "目黒川 季"
+  ],
+  "city": "东京",
+  "district": "目黑",
+  "lat": 35.635669,
+  "lng": 139.717075,
+  "tier": "4star",
+  "category": "city_hotel",
+  "tags": [
+   "value",
+   "river_view",
+   "family_room"
+  ],
+  "nearest_station": "目黑站",
+  "walk_min": 8,
+  "advisor_notes": "干净利索，但别对早餐抱期望。",
+  "supplier_id": "SUP-011",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0014",
+  "name_zh": "有乐町站前之宿",
+  "name_local": "有楽町 駅前の宿",
+  "alias": [
+   "有楽町 駅前の宿"
+  ],
+  "city": "东京",
+  "district": "有乐町",
+  "lat": 35.674261,
+  "lng": 139.76122,
+  "tier": "4star",
+  "category": "city_hotel",
+  "tags": [
+   "value",
+   "central",
+   "family_room"
+  ],
+  "nearest_station": "有乐町站",
+  "walk_min": 5,
+  "advisor_notes": "预算紧的时候用，位置比设施值钱。",
+  "supplier_id": "SUP-004",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-TYO-0015",
+  "name_zh": "台场海风",
+  "name_local": "台場 海風",
+  "alias": [
+   "台場 海風"
+  ],
+  "city": "东京",
+  "district": "台场",
+  "lat": 35.624959,
+  "lng": 139.771785,
+  "tier": "4star",
+  "category": "city_hotel",
+  "tags": [
+   "bay_view",
+   "family_room",
+   "kids_club",
+   "value"
+  ],
+  "nearest_station": "台场站",
+  "walk_min": 8,
+  "advisor_notes": "预算紧的时候用，位置比设施值钱。",
+  "supplier_id": "SUP-011",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-0001",
+  "name_zh": "御所南 · 一花",
+  "name_local": "御所南 一花",
+  "alias": [
+   "御所南 一花"
+  ],
+  "city": "京都",
+  "district": "御所南",
+  "lat": 35.01683,
+  "lng": 135.764484,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "quiet",
+   "garden",
+   "tea_ceremony",
+   "family_room"
+  ],
+  "nearest_station": "丸太町站",
+  "walk_min": 3,
+  "advisor_notes": "服务是真的细，早餐也好，价格在这一档里不算贵。",
+  "supplier_id": "SUP-004",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-0002",
+  "name_zh": "鸭川宵月",
+  "name_local": "鴨川 宵月",
+  "alias": [
+   "鴨川 宵月"
+  ],
+  "city": "京都",
+  "district": "鸭川",
+  "lat": 35.009816,
+  "lng": 135.768269,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "river_view",
+   "design",
+   "michelin_dining"
+  ],
+  "nearest_station": "三条站",
+  "walk_min": 3,
+  "advisor_notes": "客人要面子、要安静，这家不会出错；行政酒廊下午茶带小孩也不尴尬。",
+  "supplier_id": "SUP-011",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-T1-001",
+  "name_zh": "东山翠嵐",
+  "name_local": "東山 翠嵐",
+  "alias": [
+   "東山 翠嵐"
+  ],
+  "city": "京都",
+  "district": "东山",
+  "lat": 34.995998,
+  "lng": 135.783983,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "heritage",
+   "quiet",
+   "garden",
+   "spa"
+  ],
+  "nearest_station": "清水五条站",
+  "walk_min": 8,
+  "advisor_notes": "服务是真的细，早餐也好，价格在这一档里不算贵。",
+  "supplier_id": "SUP-001",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-0003",
+  "name_zh": "二条城前雅叙",
+  "name_local": "二条城前 雅叙",
+  "alias": [
+   "二条城前 雅叙"
+  ],
+  "city": "京都",
+  "district": "二条",
+  "lat": 35.013796,
+  "lng": 135.747146,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "family_room",
+   "pool",
+   "kids_club",
+   "connecting_rooms"
+  ],
+  "nearest_station": "二条城前站",
+  "walk_min": 2,
+  "advisor_notes": "客人要面子、要安静，这家不会出错；行政酒廊下午茶带小孩也不尴尬。",
+  "supplier_id": "SUP-001",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-0004",
+  "name_zh": "京都站前格兰 Miyako",
+  "name_local": "京都駅前 グラン都",
+  "alias": [
+   "京都駅前 グラン都"
+  ],
+  "city": "京都",
+  "district": "京都站前",
+  "lat": 34.986148,
+  "lng": 135.758865,
+  "tier": "5star",
+  "category": "city_hotel",
+  "tags": [
+   "shinkansen_access",
+   "family_room",
+   "value"
+  ],
+  "nearest_station": "京都站",
+  "walk_min": 2,
+  "advisor_notes": "新干线过去方便，最后一晚住这里省事。",
+  "supplier_id": "SUP-002",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-0005",
+  "name_zh": "乌丸凛",
+  "name_local": "烏丸 凛",
+  "alias": [
+   "烏丸 凛"
+  ],
+  "city": "京都",
+  "district": "乌丸",
+  "lat": 35.002437,
+  "lng": 135.757242,
+  "tier": "5star",
+  "category": "city_hotel",
+  "tags": [
+   "design",
+   "central",
+   "quiet"
+  ],
+  "nearest_station": "乌丸站",
+  "walk_min": 8,
+  "advisor_notes": "商务感重一点，蜜月客人别推。",
+  "supplier_id": "SUP-015",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-0006",
+  "name_zh": "冈崎疏水苑",
+  "name_local": "岡崎 疏水苑",
+  "alias": [
+   "岡崎 疏水苑"
+  ],
+  "city": "京都",
+  "district": "冈崎",
+  "lat": 35.012563,
+  "lng": 135.781173,
+  "tier": "5star",
+  "category": "city_hotel",
+  "tags": [
+   "park_view",
+   "art",
+   "family_room"
+  ],
+  "nearest_station": "东山站",
+  "walk_min": 5,
+  "advisor_notes": "新干线过去方便，最后一晚住这里省事。",
+  "supplier_id": "SUP-002",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-T8-001",
+  "name_zh": "三条木屋町 Sora",
+  "name_local": "三条木屋町 宙",
+  "alias": [
+   "三条木屋町 宙"
+  ],
+  "city": "京都",
+  "district": "三条",
+  "lat": 35.010126,
+  "lng": 135.771339,
+  "tier": "5star",
+  "category": "city_hotel",
+  "tags": [
+   "nightlife",
+   "river_view",
+   "design"
+  ],
+  "nearest_station": "三条站",
+  "walk_min": 10,
+  "advisor_notes": "商务感重一点，蜜月客人别推。",
+  "supplier_id": "SUP-001",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-T2-001",
+  "name_zh": "祇园白川旅馆",
+  "name_local": "祇園白川 旅館",
+  "alias": [
+   "祇園白川 旅館"
+  ],
+  "city": "京都",
+  "district": "祇园",
+  "lat": 35.003749,
+  "lng": 135.774134,
+  "tier": "ryokan",
+  "category": "ryokan",
+  "tags": [
+   "kaiseki",
+   "quiet",
+   "geisha_district"
+  ],
+  "nearest_station": "祇园四条站",
+  "walk_min": 6,
+  "advisor_notes": "老板娘讲究，客人不守时会有点尴尬，提前打招呼。",
+  "supplier_id": "SUP-015",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-T2-002",
+  "name_zh": "岚山渡月庵",
+  "name_local": "嵐山 渡月庵",
+  "alias": [
+   "嵐山 渡月庵"
+  ],
+  "city": "京都",
+  "district": "岚山",
+  "lat": 35.015009,
+  "lng": 135.67983,
+  "tier": "ryokan",
+  "category": "ryokan",
+  "tags": [
+   "river_view",
+   "kaiseki",
+   "onsen",
+   "quiet"
+  ],
+  "nearest_station": "岚山站",
+  "walk_min": 2,
+  "advisor_notes": "老板娘讲究，客人不守时会有点尴尬，提前打招呼。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-0007",
+  "name_zh": "西阵织屋旅馆",
+  "name_local": "西陣 織屋",
+  "alias": [
+   "西陣 織屋"
+  ],
+  "city": "京都",
+  "district": "西阵",
+  "lat": 35.031096,
+  "lng": 135.744375,
+  "tier": "ryokan",
+  "category": "ryokan",
+  "tags": [
+   "heritage",
+   "quiet",
+   "craft"
+  ],
+  "nearest_station": "今出川站",
+  "walk_min": 5,
+  "advisor_notes": "怀石晚餐是亮点，但对小孩不算友好，先问清年龄限制。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-0008",
+  "name_zh": "清水坂听雨",
+  "name_local": "清水坂 聴雨",
+  "alias": [
+   "清水坂 聴雨"
+  ],
+  "city": "京都",
+  "district": "清水",
+  "lat": 34.994589,
+  "lng": 135.784139,
+  "tier": "ryokan",
+  "category": "ryokan",
+  "tags": [
+   "heritage",
+   "kaiseki",
+   "family_room"
+  ],
+  "nearest_station": "清水五条站",
+  "walk_min": 5,
+  "advisor_notes": "私汤是卖点，老人腿脚不好也能泡。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-0009",
+  "name_zh": "宇治茶乡之宿",
+  "name_local": "宇治 茶郷の宿",
+  "alias": [
+   "宇治 茶郷の宿"
+  ],
+  "city": "京都",
+  "district": "宇治",
+  "lat": 34.890511,
+  "lng": 135.808525,
+  "tier": "ryokan",
+  "category": "ryokan",
+  "tags": [
+   "tea_ceremony",
+   "quiet",
+   "river_view"
+  ],
+  "nearest_station": "宇治站",
+  "walk_min": 2,
+  "advisor_notes": "怀石晚餐是亮点，但对小孩不算友好，先问清年龄限制。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-T1-002",
+  "name_zh": "河原町 Machiya 别邸",
+  "name_local": "河原町 町家別邸",
+  "alias": [
+   "河原町 町家別邸"
+  ],
+  "city": "京都",
+  "district": "河原町",
+  "lat": 35.004549,
+  "lng": 135.771597,
+  "tier": "boutique",
+  "category": "boutique_hotel",
+  "tags": [
+   "machiya",
+   "local",
+   "family_room"
+  ],
+  "nearest_station": "京都河原町站",
+  "walk_min": 8,
+  "advisor_notes": "小而美，情侣和摄影爱好者喜欢；行李多的家庭不方便。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-0010",
+  "name_zh": "北山森居",
+  "name_local": "北山 森居",
+  "alias": [
+   "北山 森居"
+  ],
+  "city": "京都",
+  "district": "北山",
+  "lat": 35.048355,
+  "lng": 135.76218,
+  "tier": "boutique",
+  "category": "boutique_hotel",
+  "tags": [
+   "design",
+   "quiet",
+   "garden"
+  ],
+  "nearest_station": "北山站",
+  "walk_min": 10,
+  "advisor_notes": "本地感强，早餐一般，可以外面吃。",
+  "supplier_id": "SUP-004",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-KYO-0011",
+  "name_zh": "伏见酒藏旅居",
+  "name_local": "伏見 酒蔵の宿",
+  "alias": [
+   "伏見 酒蔵の宿"
+  ],
+  "city": "京都",
+  "district": "伏见",
+  "lat": 34.935866,
+  "lng": 135.764368,
+  "tier": "boutique",
+  "category": "boutique_hotel",
+  "tags": [
+   "sake",
+   "local",
+   "value"
+  ],
+  "nearest_station": "伏见桃山站",
+  "walk_min": 10,
+  "advisor_notes": "本地感强，早餐一般，可以外面吃。",
+  "supplier_id": "SUP-011",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-HKN-T2-001",
+  "name_zh": "强罗花月庵",
+  "name_local": "強羅 花月庵",
+  "alias": [
+   "強羅 花月庵"
+  ],
+  "city": "箱根",
+  "district": "强罗",
+  "lat": 35.250313,
+  "lng": 139.047163,
+  "tier": "ryokan",
+  "category": "ryokan",
+  "tags": [
+   "onsen",
+   "kaiseki",
+   "private_bath",
+   "quiet"
+  ],
+  "nearest_station": "强罗站",
+  "walk_min": 3,
+  "advisor_notes": "怀石晚餐是亮点，但对小孩不算友好，先问清年龄限制。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-HKN-0001",
+  "name_zh": "仙石原雾之宿",
+  "name_local": "仙石原 霧の宿",
+  "alias": [
+   "仙石原 霧の宿"
+  ],
+  "city": "箱根",
+  "district": "仙石原",
+  "lat": 35.267046,
+  "lng": 139.005558,
+  "tier": "ryokan",
+  "category": "ryokan",
+  "tags": [
+   "onsen",
+   "kaiseki",
+   "family_room",
+   "private_bath"
+  ],
+  "nearest_station": "仙石原巴士站",
+  "walk_min": 2,
+  "advisor_notes": "私汤是卖点，老人腿脚不好也能泡。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-HKN-T2-002",
+  "name_zh": "宫之下老铺富士屋别馆",
+  "name_local": "宮ノ下 老舗別館",
+  "alias": [
+   "宮ノ下 老舗別館"
+  ],
+  "city": "箱根",
+  "district": "宫之下",
+  "lat": 35.246479,
+  "lng": 139.053108,
+  "tier": "ryokan",
+  "category": "ryokan",
+  "tags": [
+   "heritage",
+   "onsen",
+   "kaiseki"
+  ],
+  "nearest_station": "宫之下站",
+  "walk_min": 2,
+  "advisor_notes": "怀石晚餐是亮点，但对小孩不算友好，先问清年龄限制。",
+  "supplier_id": "SUP-004",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-HKN-0002",
+  "name_zh": "汤本溪声",
+  "name_local": "湯本 渓声",
+  "alias": [
+   "湯本 渓声"
+  ],
+  "city": "箱根",
+  "district": "汤本",
+  "lat": 35.232779,
+  "lng": 139.103896,
+  "tier": "ryokan",
+  "category": "ryokan",
+  "tags": [
+   "onsen",
+   "river_view",
+   "family_room",
+   "value"
+  ],
+  "nearest_station": "箱根汤本站",
+  "walk_min": 10,
+  "advisor_notes": "怀石晚餐是亮点，但对小孩不算友好，先问清年龄限制。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-HKN-T1-001",
+  "name_zh": "元箱根湖畔庵",
+  "name_local": "元箱根 湖畔庵",
+  "alias": [
+   "元箱根 湖畔庵"
+  ],
+  "city": "箱根",
+  "district": "元箱根",
+  "lat": 35.202798,
+  "lng": 139.029693,
+  "tier": "ryokan",
+  "category": "ryokan",
+  "tags": [
+   "lake_view",
+   "onsen",
+   "private_bath"
+  ],
+  "nearest_station": "元箱根港",
+  "walk_min": 10,
+  "advisor_notes": "老板娘讲究，客人不守时会有点尴尬，提前打招呼。",
+  "supplier_id": "SUP-015",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-HKN-0003",
+  "name_zh": "小涌谷森之汤",
+  "name_local": "小涌谷 森の湯",
+  "alias": [
+   "小涌谷 森の湯"
+  ],
+  "city": "箱根",
+  "district": "小涌谷",
+  "lat": 35.240314,
+  "lng": 139.051988,
+  "tier": "ryokan",
+  "category": "ryokan",
+  "tags": [
+   "onsen",
+   "family_room",
+   "kids_club",
+   "buffet"
+  ],
+  "nearest_station": "小涌谷站",
+  "walk_min": 8,
+  "advisor_notes": "老板娘讲究，客人不守时会有点尴尬，提前打招呼。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-HKN-0004",
+  "name_zh": "芦之湖天悦",
+  "name_local": "芦ノ湖 天悦",
+  "alias": [
+   "芦ノ湖 天悦"
+  ],
+  "city": "箱根",
+  "district": "芦之湖",
+  "lat": 35.212636,
+  "lng": 139.017704,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "lake_view",
+   "onsen",
+   "spa",
+   "family_room",
+   "private_bath"
+  ],
+  "nearest_station": "桃源台",
+  "walk_min": 3,
+  "advisor_notes": "客人要面子、要安静，这家不会出错；行政酒廊下午茶带小孩也不尴尬。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "hotel_id": "HTL-HKN-0005",
+  "name_zh": "塔之泽玻璃之家",
+  "name_local": "塔ノ沢 硝子の家",
+  "alias": [
+   "塔ノ沢 硝子の家"
+  ],
+  "city": "箱根",
+  "district": "塔之泽",
+  "lat": 35.239555,
+  "lng": 139.096187,
+  "tier": "luxury",
+  "category": "luxury_hotel",
+  "tags": [
+   "design",
+   "onsen",
+   "quiet",
+   "private_bath"
+  ],
+  "nearest_station": "塔之泽站",
+  "walk_min": 2,
+  "advisor_notes": "服务是真的细，早餐也好，价格在这一档里不算贵。",
+  "supplier_id": "SUP-003",
+  "status": "active",
+  "is_synthetic": true,
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ }
+]

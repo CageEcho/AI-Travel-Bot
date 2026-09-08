@@ -1,0 +1,33 @@
+id: large_family_luggage_07
+family: hard_constraint_trap
+input: 四个大人两个小孩（5岁和8岁），10月15号起东京京都7天，需要包车，行李多，住五星或奢华。
+slots:
+  destination_cities:
+  - 东京
+  - 京都
+  date_start: '2026-10-15'
+  duration_days: 7
+  adults: 4
+  children: 2
+  child_ages:
+  - 5
+  - 8
+  budget_amount: 300000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - 5star
+  - luxury
+  dietary:
+  - none
+  accessibility: none
+generate: true
+expect:
+  must_not_contain_resources:
+  - VEH-TYO-T7-001
+  - VEH-KYO-T7-001
+  max_blocking_violations: 0
+  forbid_code_fail:
+  - H4
+  - H1
+note: T7：座位够但行李不够的 7 座车不得进候选；C3 多间房

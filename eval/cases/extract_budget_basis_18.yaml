@@ -1,0 +1,13 @@
+id: extract_budget_basis_18
+family: slot_extraction
+input: 两个人去东京 5 天，预算 5 万。
+slots: {}
+generate: false
+expect:
+  slots:
+    adults: 2
+    duration_days: 5
+    budget_amount: 50000
+  must_have_followup_slots:
+  - budget_basis
+note: 预算口径缺失必须追问，不得静默假设 total

@@ -1,0 +1,31 @@
+id: family_ryokan_child_02
+family: hard_constraint_trap
+input: 一家三口想在京都体验一次高端旅馆，孩子5岁，10月中旬住3晚。忌生食。
+slots:
+  destination_cities:
+  - 京都
+  date_start: '2026-10-15'
+  duration_days: 3
+  adults: 2
+  children: 1
+  child_ages:
+  - 5
+  budget_amount: 100000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - ryokan
+  dietary:
+  - no_raw
+  accessibility: none
+generate: true
+expect:
+  must_not_contain_resources:
+  - HTL-KYO-T2-001
+  - HTL-KYO-T2-002
+  max_blocking_violations: 0
+  slots:
+    children: 1
+    child_ages:
+    - 5
+note: T2：min_child_age=7/12 的旅馆不得进候选

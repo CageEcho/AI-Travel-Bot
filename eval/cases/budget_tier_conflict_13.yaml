@@ -1,0 +1,18 @@
+id: budget_tier_conflict_13
+family: budget_conflict
+input: 四个大人，8万预算，住五星，10天，东京京都。
+slots:
+  destination_cities:
+  - 东京
+  - 京都
+  duration_days: 10
+  adults: 4
+  children: 0
+  budget_amount: 80000
+  budget_basis: total
+  hotel_tier:
+  - 5star
+generate: false
+expect:
+  conflicts:
+  - C1

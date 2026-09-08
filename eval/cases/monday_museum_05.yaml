@@ -1,0 +1,28 @@
+id: monday_museum_05
+family: hard_constraint_trap
+input: 两个人 10月18号到21号在东京，喜欢博物馆和美术馆，住五星。
+slots:
+  destination_cities:
+  - 东京
+  date_start: '2026-10-18'
+  duration_days: 4
+  adults: 2
+  children: 0
+  child_ages: []
+  budget_amount: 100000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - 5star
+  dietary:
+  - none
+  accessibility: none
+  interests:
+  - art
+  - museum
+generate: true
+expect:
+  max_blocking_violations: 0
+  forbid_code_fail:
+  - H3
+note: T4：10-19 是周一，周一休馆的博物馆不得排在周一

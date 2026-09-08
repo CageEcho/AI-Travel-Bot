@@ -1,0 +1,13 @@
+id: extract_no_guess_19
+family: slot_extraction
+input: 客户想去日本玩几天，具体还没定。
+slots: {}
+generate: false
+expect:
+  slots_null:
+  - destination_cities
+  - date_start
+  - adults
+  - budget_amount
+  max_followups: 3
+note: 抽不到就留 null，不猜

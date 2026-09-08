@@ -1,0 +1,25 @@
+# 密钥与本地环境（手册 [A]：只提交 .env.example）
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# 数据库数据目录（Docker 卷 / 内嵌 PG）
+pgdata/
+.pgdata*/
+# 本地 LLM 响应缓存
+.llm_cache/
+# 非项目资产
+*.zip
+.DS_Store
+# 前端
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/test-results/
+frontend/playwright-report/
+frontend/.env
+# 测试误生成的嵌套目录（内嵌 PG 测试数据）
+Users/
+# 个人文件不进公开仓库
+简历*.md

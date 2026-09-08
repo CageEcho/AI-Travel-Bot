@@ -1,0 +1,26 @@
+id: null_reference_price_11
+family: null_handling
+input: 两个人东京 3 天，住精品酒店，不忌口。
+slots:
+  destination_cities:
+  - 东京
+  date_start: '2026-10-15'
+  duration_days: 3
+  adults: 2
+  children: 0
+  child_ages: []
+  budget_amount: 100000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - boutique
+  dietary:
+  - none
+  accessibility: none
+generate: true
+expect:
+  max_blocking_violations: 0
+  min_unknown: 1
+  checklist_codes_any:
+  - H11
+note: T9：参考价且超 90 天 → H11 UNKNOWN 进待核实

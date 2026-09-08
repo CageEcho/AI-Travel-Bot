@@ -1,0 +1,107 @@
+[
+ {
+  "supplier_id": "SUP-001",
+  "name": "樱和地接社",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 1,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-002",
+  "name": "东瀛尊享 DMC",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 1,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-003",
+  "name": "京都御用旅馆联盟",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 7,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-004",
+  "name": "箱根温泉组合",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 1,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-005",
+  "name": "帝都用车服务",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 1,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-006",
+  "name": "关西专车株式会社",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 7,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-007",
+  "name": "富士箱根观光巴士",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 3,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-008",
+  "name": "和食预约平台 Yoyaku",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 0,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-009",
+  "name": "东京餐饮直签组",
+  "contract_to": "2026-06-30",
+  "lead_time_days": 1,
+  "status": "expired"
+ },
+ {
+  "supplier_id": "SUP-010",
+  "name": "京料理会",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 1,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-011",
+  "name": "环球豪华酒店集团 APAC",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 3,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-012",
+  "name": "日本国立博物馆联票中心",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 3,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-013",
+  "name": "岚山观光协会",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 3,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-014",
+  "name": "箱根周游券事务所",
+  "contract_to": "2027-03-31",
+  "lead_time_days": 0,
+  "status": "active"
+ },
+ {
+  "supplier_id": "SUP-015",
+  "name": "老铺旅馆直签",
+  "contract_to": "2026-06-30",
+  "lead_time_days": 1,
+  "status": "expired"
+ }
+]

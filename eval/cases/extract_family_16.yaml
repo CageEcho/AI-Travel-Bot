@@ -1,0 +1,18 @@
+id: extract_family_16
+family: slot_extraction
+input: 张女士一家，两大一小，孩子 5 岁。想 10 月中旬去日本，7 天左右。住好一点的酒店，预算 15 万左右。老人肠胃不好这次不去。
+slots: {}
+generate: false
+expect:
+  slots:
+    adults: 2
+    children: 1
+    child_ages:
+    - 5
+    duration_days: 7
+    budget_amount: 150000
+  must_have_followup_slots:
+  - dietary
+  max_followups: 3
+  followup_slot_must_have_options: hotel_tier
+note: 「住好一点」应给选项而非开放题；「肠胃不好」应触发饮食追问

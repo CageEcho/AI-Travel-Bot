@@ -1,0 +1,18 @@
+id: room_pax_conflict_15
+family: budget_conflict
+input: 六个人一起去东京，住奢华酒店。
+slots:
+  destination_cities:
+  - 东京
+  duration_days: 5
+  adults: 4
+  children: 2
+  child_ages:
+  - 5
+  - 8
+  hotel_tier:
+  - luxury
+generate: false
+expect:
+  conflicts:
+  - C3

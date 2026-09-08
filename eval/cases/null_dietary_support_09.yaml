@@ -1,0 +1,31 @@
+id: null_dietary_support_09
+family: null_handling
+input: 两大一小京都 4 天，孩子5岁，忌生食，住五星。
+slots:
+  destination_cities:
+  - 京都
+  date_start: '2026-10-15'
+  duration_days: 4
+  adults: 2
+  children: 1
+  child_ages:
+  - 5
+  budget_amount: 100000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - 5star
+  - luxury
+  dietary:
+  - no_raw
+  accessibility: none
+generate: true
+expect:
+  max_blocking_violations: 0
+  min_unknown: 1
+  checklist_codes_any:
+  - H2
+  - H3
+  - H1
+  - H11
+note: dietary_support 为空的餐厅 / closed_days 为空的景点 → UNKNOWN，不得静默通过

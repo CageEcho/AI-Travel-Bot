@@ -1,0 +1,16 @@
+id: extract_locked_slots_20
+family: slot_extraction
+input: 改一下，酒店档次就按奢华来，另外他们不吃猪肉。
+slots:
+  adults: 2
+  children: 0
+  hotel_tier:
+  - 5star
+generate: false
+expect:
+  locked_slots_unchanged:
+  - hotel_tier
+  slots:
+    dietary:
+    - no_pork
+note: existing_slots 中 advisor_input 的槽位不得被改写（hotel_tier 保持 5star）

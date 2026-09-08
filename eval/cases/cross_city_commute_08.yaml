@@ -1,0 +1,31 @@
+id: cross_city_commute_08
+family: hard_constraint_trap
+input: 两大一小，10月15号起 7 天，东京、箱根、京都都想去，住五星或奢华，忌生食。
+slots:
+  destination_cities:
+  - 东京
+  - 箱根
+  - 京都
+  date_start: '2026-10-15'
+  duration_days: 7
+  adults: 2
+  children: 1
+  child_ages:
+  - 5
+  budget_amount: 150000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - 5star
+  - luxury
+  dietary:
+  - no_raw
+  accessibility: none
+generate: true
+expect:
+  max_blocking_violations: 0
+  forbid_code_fail:
+  - H5
+  min_days: 7
+  every_day_has_hotel: true
+note: T12：跨城资源不得排进同一天；7 天无空白天，每天有住宿

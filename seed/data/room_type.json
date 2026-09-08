@@ -1,0 +1,2623 @@
+[
+ {
+  "room_id": "RM-TYO-0001-1",
+  "hotel_id": "HTL-TYO-0001",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0001-2",
+  "hotel_id": "HTL-TYO-0001",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": null,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0001-3",
+  "hotel_id": "HTL-TYO-0001",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0002-1",
+  "hotel_id": "HTL-TYO-0002",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0002-2",
+  "hotel_id": "HTL-TYO-0002",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0002-3",
+  "hotel_id": "HTL-TYO-0002",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0003-1",
+  "hotel_id": "HTL-TYO-0003",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0003-2",
+  "hotel_id": "HTL-TYO-0003",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": null,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0003-3",
+  "hotel_id": "HTL-TYO-0003",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": null,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0004-1",
+  "hotel_id": "HTL-TYO-0004",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0004-2",
+  "hotel_id": "HTL-TYO-0004",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": null,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0004-3",
+  "hotel_id": "HTL-TYO-0004",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0005-1",
+  "hotel_id": "HTL-TYO-0005",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0005-2",
+  "hotel_id": "HTL-TYO-0005",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0005-3",
+  "hotel_id": "HTL-TYO-0005",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-T1-001-1",
+  "hotel_id": "HTL-TYO-T1-001",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-T1-001-2",
+  "hotel_id": "HTL-TYO-T1-001",
+  "name_zh": "精品大床房",
+  "bed_config": {
+   "queen": 1
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "design"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-T1-001-3",
+  "hotel_id": "HTL-TYO-T1-001",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0006-1",
+  "hotel_id": "HTL-TYO-0006",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0006-2",
+  "hotel_id": "HTL-TYO-0006",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0006-3",
+  "hotel_id": "HTL-TYO-0006",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0006-4",
+  "hotel_id": "HTL-TYO-0006",
+  "name_zh": "套房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 2,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "living_room",
+   "bathtub"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0007-1",
+  "hotel_id": "HTL-TYO-0007",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0007-2",
+  "hotel_id": "HTL-TYO-0007",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0007-3",
+  "hotel_id": "HTL-TYO-0007",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0007-4",
+  "hotel_id": "HTL-TYO-0007",
+  "name_zh": "套房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 2,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "living_room",
+   "bathtub"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-T1-002-1",
+  "hotel_id": "HTL-TYO-T1-002",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-T1-002-2",
+  "hotel_id": "HTL-TYO-T1-002",
+  "name_zh": "精品大床房",
+  "bed_config": {
+   "queen": 1
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "design"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-T1-002-3",
+  "hotel_id": "HTL-TYO-T1-002",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0008-1",
+  "hotel_id": "HTL-TYO-0008",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0008-2",
+  "hotel_id": "HTL-TYO-0008",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0008-3",
+  "hotel_id": "HTL-TYO-0008",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0009-1",
+  "hotel_id": "HTL-TYO-0009",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0009-2",
+  "hotel_id": "HTL-TYO-0009",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0009-3",
+  "hotel_id": "HTL-TYO-0009",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-T8-001-1",
+  "hotel_id": "HTL-TYO-T8-001",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-T8-001-2",
+  "hotel_id": "HTL-TYO-T8-001",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-T8-001-3",
+  "hotel_id": "HTL-TYO-T8-001",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0010-1",
+  "hotel_id": "HTL-TYO-0010",
+  "name_zh": "精品大床房",
+  "bed_config": {
+   "queen": 1
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "design"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0010-2",
+  "hotel_id": "HTL-TYO-0010",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0011-1",
+  "hotel_id": "HTL-TYO-0011",
+  "name_zh": "精品大床房",
+  "bed_config": {
+   "queen": 1
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "design"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0011-2",
+  "hotel_id": "HTL-TYO-0011",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0012-1",
+  "hotel_id": "HTL-TYO-0012",
+  "name_zh": "精品大床房",
+  "bed_config": {
+   "queen": 1
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "design"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0012-2",
+  "hotel_id": "HTL-TYO-0012",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0013-1",
+  "hotel_id": "HTL-TYO-0013",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0013-2",
+  "hotel_id": "HTL-TYO-0013",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0013-3",
+  "hotel_id": "HTL-TYO-0013",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0014-1",
+  "hotel_id": "HTL-TYO-0014",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0014-2",
+  "hotel_id": "HTL-TYO-0014",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0014-3",
+  "hotel_id": "HTL-TYO-0014",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0015-1",
+  "hotel_id": "HTL-TYO-0015",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0015-2",
+  "hotel_id": "HTL-TYO-0015",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-TYO-0015-3",
+  "hotel_id": "HTL-TYO-0015",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0001-1",
+  "hotel_id": "HTL-KYO-0001",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0001-2",
+  "hotel_id": "HTL-KYO-0001",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": null,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0001-3",
+  "hotel_id": "HTL-KYO-0001",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0002-1",
+  "hotel_id": "HTL-KYO-0002",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0002-2",
+  "hotel_id": "HTL-KYO-0002",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": null,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0002-3",
+  "hotel_id": "HTL-KYO-0002",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": null,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0002-4",
+  "hotel_id": "HTL-KYO-0002",
+  "name_zh": "套房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 2,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "living_room",
+   "bathtub"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T1-001-1",
+  "hotel_id": "HTL-KYO-T1-001",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T1-001-2",
+  "hotel_id": "HTL-KYO-T1-001",
+  "name_zh": "精品大床房",
+  "bed_config": {
+   "queen": 1
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "design"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T1-001-3",
+  "hotel_id": "HTL-KYO-T1-001",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0003-1",
+  "hotel_id": "HTL-KYO-0003",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0003-2",
+  "hotel_id": "HTL-KYO-0003",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0003-3",
+  "hotel_id": "HTL-KYO-0003",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0004-1",
+  "hotel_id": "HTL-KYO-0004",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0004-2",
+  "hotel_id": "HTL-KYO-0004",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": null,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0004-3",
+  "hotel_id": "HTL-KYO-0004",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0005-1",
+  "hotel_id": "HTL-KYO-0005",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0005-2",
+  "hotel_id": "HTL-KYO-0005",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0005-3",
+  "hotel_id": "HTL-KYO-0005",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0005-4",
+  "hotel_id": "HTL-KYO-0005",
+  "name_zh": "套房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 2,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "living_room",
+   "bathtub"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0006-1",
+  "hotel_id": "HTL-KYO-0006",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0006-2",
+  "hotel_id": "HTL-KYO-0006",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0006-3",
+  "hotel_id": "HTL-KYO-0006",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T8-001-1",
+  "hotel_id": "HTL-KYO-T8-001",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T8-001-2",
+  "hotel_id": "HTL-KYO-T8-001",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T8-001-3",
+  "hotel_id": "HTL-KYO-T8-001",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T2-001-1",
+  "hotel_id": "HTL-KYO-T2-001",
+  "name_zh": "和室（榻榻米）",
+  "bed_config": {
+   "tatami": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 3,
+  "max_children": 1,
+  "min_child_age": 7,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "garden_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T2-001-2",
+  "hotel_id": "HTL-KYO-T2-001",
+  "name_zh": "和洋室",
+  "bed_config": {
+   "tatami": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 7,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "private_bath"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T2-002-1",
+  "hotel_id": "HTL-KYO-T2-002",
+  "name_zh": "和室（榻榻米）",
+  "bed_config": {
+   "tatami": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 3,
+  "max_children": 1,
+  "min_child_age": 12,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "garden_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T2-002-2",
+  "hotel_id": "HTL-KYO-T2-002",
+  "name_zh": "和洋室",
+  "bed_config": {
+   "tatami": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 12,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "private_bath"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0007-1",
+  "hotel_id": "HTL-KYO-0007",
+  "name_zh": "和室（榻榻米）",
+  "bed_config": {
+   "tatami": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 3,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "garden_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0007-2",
+  "hotel_id": "HTL-KYO-0007",
+  "name_zh": "和洋室",
+  "bed_config": {
+   "tatami": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "private_bath"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0007-3",
+  "hotel_id": "HTL-KYO-0007",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0008-1",
+  "hotel_id": "HTL-KYO-0008",
+  "name_zh": "和室（榻榻米）",
+  "bed_config": {
+   "tatami": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 3,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "garden_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0008-2",
+  "hotel_id": "HTL-KYO-0008",
+  "name_zh": "和洋室",
+  "bed_config": {
+   "tatami": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "private_bath"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0008-3",
+  "hotel_id": "HTL-KYO-0008",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0009-1",
+  "hotel_id": "HTL-KYO-0009",
+  "name_zh": "和室（榻榻米）",
+  "bed_config": {
+   "tatami": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 3,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "garden_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0009-2",
+  "hotel_id": "HTL-KYO-0009",
+  "name_zh": "和洋室",
+  "bed_config": {
+   "tatami": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "private_bath"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0009-3",
+  "hotel_id": "HTL-KYO-0009",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T1-002-1",
+  "hotel_id": "HTL-KYO-T1-002",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T1-002-2",
+  "hotel_id": "HTL-KYO-T1-002",
+  "name_zh": "精品大床房",
+  "bed_config": {
+   "queen": 1
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "design"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-T1-002-3",
+  "hotel_id": "HTL-KYO-T1-002",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0010-1",
+  "hotel_id": "HTL-KYO-0010",
+  "name_zh": "精品大床房",
+  "bed_config": {
+   "queen": 1
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "design"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0010-2",
+  "hotel_id": "HTL-KYO-0010",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0011-1",
+  "hotel_id": "HTL-KYO-0011",
+  "name_zh": "精品大床房",
+  "bed_config": {
+   "queen": 1
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "design"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-KYO-0011-2",
+  "hotel_id": "HTL-KYO-0011",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-T2-001-1",
+  "hotel_id": "HTL-HKN-T2-001",
+  "name_zh": "和室（榻榻米）",
+  "bed_config": {
+   "tatami": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 3,
+  "max_children": 1,
+  "min_child_age": 7,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "tatami",
+   "garden_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-T2-001-2",
+  "hotel_id": "HTL-HKN-T2-001",
+  "name_zh": "和洋室",
+  "bed_config": {
+   "tatami": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 7,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "private_bath"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0001-1",
+  "hotel_id": "HTL-HKN-0001",
+  "name_zh": "和室（榻榻米）",
+  "bed_config": {
+   "tatami": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 3,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "tatami",
+   "garden_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0001-2",
+  "hotel_id": "HTL-HKN-0001",
+  "name_zh": "和洋室",
+  "bed_config": {
+   "tatami": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "private_bath"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0001-3",
+  "hotel_id": "HTL-HKN-0001",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-T2-002-1",
+  "hotel_id": "HTL-HKN-T2-002",
+  "name_zh": "和室（榻榻米）",
+  "bed_config": {
+   "tatami": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 3,
+  "max_children": 1,
+  "min_child_age": 12,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "garden_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-T2-002-2",
+  "hotel_id": "HTL-HKN-T2-002",
+  "name_zh": "和洋室",
+  "bed_config": {
+   "tatami": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 12,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "private_bath"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0002-1",
+  "hotel_id": "HTL-HKN-0002",
+  "name_zh": "和室（榻榻米）",
+  "bed_config": {
+   "tatami": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 3,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "tatami",
+   "garden_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0002-2",
+  "hotel_id": "HTL-HKN-0002",
+  "name_zh": "和洋室",
+  "bed_config": {
+   "tatami": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "private_bath"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0002-3",
+  "hotel_id": "HTL-HKN-0002",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-T1-001-1",
+  "hotel_id": "HTL-HKN-T1-001",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-T1-001-2",
+  "hotel_id": "HTL-HKN-T1-001",
+  "name_zh": "精品大床房",
+  "bed_config": {
+   "queen": 1
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "design"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-T1-001-3",
+  "hotel_id": "HTL-HKN-T1-001",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0003-1",
+  "hotel_id": "HTL-HKN-0003",
+  "name_zh": "和室（榻榻米）",
+  "bed_config": {
+   "tatami": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 3,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "garden_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0003-2",
+  "hotel_id": "HTL-HKN-0003",
+  "name_zh": "和洋室",
+  "bed_config": {
+   "tatami": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "tatami",
+   "private_bath"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0003-3",
+  "hotel_id": "HTL-HKN-0003",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0004-1",
+  "hotel_id": "HTL-HKN-0004",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0004-2",
+  "hotel_id": "HTL-HKN-0004",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0004-3",
+  "hotel_id": "HTL-HKN-0004",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0004-4",
+  "hotel_id": "HTL-HKN-0004",
+  "name_zh": "套房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 2,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 6000,
+   "min_age": 6
+  },
+  "features": [
+   "living_room",
+   "bathtub"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0005-1",
+  "hotel_id": "HTL-HKN-0005",
+  "name_zh": "标准双床房",
+  "bed_config": {
+   "twin": 2
+  },
+  "max_occupancy": 2,
+  "max_adults": 2,
+  "max_children": 0,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": false
+  },
+  "features": [
+   "city_view"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0005-2",
+  "hotel_id": "HTL-HKN-0005",
+  "name_zh": "豪华大床房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 1
+  },
+  "max_occupancy": 3,
+  "max_adults": 2,
+  "max_children": 1,
+  "min_child_age": null,
+  "extra_bed": {
+   "available": true,
+   "fee": 11000,
+   "min_age": 6
+  },
+  "features": [
+   "bathtub",
+   "sofa"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0005-3",
+  "hotel_id": "HTL-HKN-0005",
+  "name_zh": "家庭房",
+  "bed_config": {
+   "king": 1,
+   "twin": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 3,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "family",
+   "connecting_available"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ },
+ {
+  "room_id": "RM-HKN-0005-4",
+  "hotel_id": "HTL-HKN-0005",
+  "name_zh": "套房",
+  "bed_config": {
+   "king": 1,
+   "sofa_bed": 2
+  },
+  "max_occupancy": 4,
+  "max_adults": 2,
+  "max_children": 2,
+  "min_child_age": 0,
+  "extra_bed": {
+   "available": true,
+   "fee": 8000,
+   "min_age": 6
+  },
+  "features": [
+   "living_room",
+   "bathtub"
+  ],
+  "updated_at": "2026-08-18T09:00:00+00:00"
+ }
+]

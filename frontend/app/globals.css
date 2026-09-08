@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* 设计变量：暖灰底 + 墨绿主色（延续 M0 验收界面），8px 节奏，卡片圆角 12px */
+:root {
+  --color-bg: #f5f4f0;
+  --color-surface: #ffffff;
+  --color-surface-2: #faf9f6;
+  --color-border: #e4e1da;
+  --color-text: #1f1f1c;
+  --color-muted: #6f6c64;
+  --color-primary: #2f5d50;
+  --color-primary-hover: #26493f;
+  --color-primary-soft: #e3ece8;
+  --color-info: #2b5ea7;
+  --color-info-soft: #e3ecf9;
+  --color-success: #2e7d32;
+  --color-success-soft: #e8f5e9;
+  --color-warning: #9a6a12;
+  --color-warning-soft: #fff4e0;
+  --color-danger: #b3261e;
+  --color-danger-soft: #fbe9e7;
+  --color-ink: #1f2a26;
+  --radius-card: 12px;
+  --radius-control: 8px;
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-border: var(--color-border);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-soft: var(--color-primary-soft);
+  --color-info: var(--color-info);
+  --color-info-soft: var(--color-info-soft);
+  --color-success: var(--color-success);
+  --color-success-soft: var(--color-success-soft);
+  --color-warning: var(--color-warning);
+  --color-warning-soft: var(--color-warning-soft);
+  --color-danger: var(--color-danger);
+  --color-danger-soft: var(--color-danger-soft);
+  --color-ink: var(--color-ink);
+  --radius-card: var(--radius-card);
+  --radius-control: var(--radius-control);
+  /* 中文产品：正文走系统字体，不打包商业字体 */
+  --font-sans: ui-sans-serif, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+html, body { height: 100%; }
+body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); font-size: 14px; line-height: 1.5; }
+
+/* 焦点可见（键盘可达） */
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-info);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+dialog::backdrop { background: rgba(31, 42, 38, 0.45); }

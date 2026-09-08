@@ -1,0 +1,38 @@
+id: family_kyoto_01
+family: hard_constraint_trap
+input: 客户两大一小，孩子5岁，10月15到18号在京都，住奢华档，预算不限。老人肠胃不好这次不去，就他们三口。
+slots:
+  destination_cities:
+  - 京都
+  date_start: '2026-10-15'
+  duration_days: 4
+  adults: 2
+  children: 1
+  child_ages:
+  - 5
+  budget_amount: 100000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - luxury
+  - 5star
+  dietary:
+  - no_raw
+  accessibility: none
+generate: true
+expect:
+  slots:
+    adults: 2
+    children: 1
+    child_ages:
+    - 5
+  must_have_followup_slots:
+  - dietary
+  must_not_contain_resources:
+  - HTL-KYO-T1-001
+  - HTL-KYO-T1-002
+  - HTL-KYO-T2-001
+  - HTL-KYO-T2-002
+  - HTL-KYO-T8-001
+  max_blocking_violations: 0
+note: T1 房型只住 2 人 / T2 旅馆限龄 / T8 合约过期 的酒店绝不能出现

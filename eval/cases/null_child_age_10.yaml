@@ -1,0 +1,26 @@
+id: null_child_age_10
+family: null_handling
+input: 一家三口（孩子4岁）东京 4 天，住五星，忌生食。
+slots:
+  destination_cities:
+  - 东京
+  date_start: '2026-10-15'
+  duration_days: 4
+  adults: 2
+  children: 1
+  child_ages:
+  - 4
+  budget_amount: 100000
+  budget_basis: total
+  budget_incl_flight: 'no'
+  hotel_tier:
+  - 5star
+  dietary:
+  - no_raw
+  accessibility: none
+generate: true
+expect:
+  max_blocking_violations: 0
+  min_unknown: 1
+  checklist_has_verify_hint: true
+note: min_child_age IS NULL 的房型若被选中必须出现在待核实清单

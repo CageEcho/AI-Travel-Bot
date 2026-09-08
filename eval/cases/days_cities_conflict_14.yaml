@@ -1,0 +1,15 @@
+id: days_cities_conflict_14
+family: budget_conflict
+input: 两个人 4 天想把东京、箱根、京都都走一遍。
+slots:
+  destination_cities:
+  - 东京
+  - 箱根
+  - 京都
+  duration_days: 4
+  adults: 2
+  children: 0
+generate: false
+expect:
+  conflicts:
+  - C2

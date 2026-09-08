@@ -1,0 +1,194 @@
+[
+ {
+  "id": "budget_tier_conflict_13",
+  "family": "budget_conflict",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 0,
+  "pass": true,
+  "why": []
+ },
+ {
+  "id": "cross_city_commute_08",
+  "family": "hard_constraint_trap",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 7,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ },
+ {
+  "id": "days_cities_conflict_14",
+  "family": "budget_conflict",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 0,
+  "pass": true,
+  "why": []
+ },
+ {
+  "id": "extract_budget_basis_18",
+  "family": "slot_extraction",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 0,
+  "pass": null,
+  "why": []
+ },
+ {
+  "id": "extract_euphemism_17",
+  "family": "slot_extraction",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 0,
+  "pass": null,
+  "why": []
+ },
+ {
+  "id": "extract_family_16",
+  "family": "slot_extraction",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 0,
+  "pass": null,
+  "why": []
+ },
+ {
+  "id": "extract_locked_slots_20",
+  "family": "slot_extraction",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 0,
+  "pass": null,
+  "why": []
+ },
+ {
+  "id": "extract_no_guess_19",
+  "family": "slot_extraction",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 0,
+  "pass": null,
+  "why": []
+ },
+ {
+  "id": "family_kyoto_01",
+  "family": "hard_constraint_trap",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 4,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ },
+ {
+  "id": "family_ryokan_child_02",
+  "family": "hard_constraint_trap",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 4,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ },
+ {
+  "id": "hakone_family_03",
+  "family": "hard_constraint_trap",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 4,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ },
+ {
+  "id": "large_family_luggage_07",
+  "family": "hard_constraint_trap",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 4,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ },
+ {
+  "id": "monday_museum_05",
+  "family": "hard_constraint_trap",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 3,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ },
+ {
+  "id": "null_child_age_10",
+  "family": "null_handling",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 4,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ },
+ {
+  "id": "null_dietary_support_09",
+  "family": "null_handling",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 4,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ },
+ {
+  "id": "null_reference_price_11",
+  "family": "null_handling",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 3,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ },
+ {
+  "id": "null_vehicle_luggage_12",
+  "family": "null_handling",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 4,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ },
+ {
+  "id": "room_pax_conflict_15",
+  "family": "budget_conflict",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 0,
+  "pass": true,
+  "why": []
+ },
+ {
+  "id": "tokyo_couple_luxury_04",
+  "family": "hard_constraint_trap",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 1,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ },
+ {
+  "id": "tuesday_restaurant_06",
+  "family": "hard_constraint_trap",
+  "slots_f1": null,
+  "blocking": 0,
+  "unknown": 4,
+  "pass": true,
+  "why": [],
+  "rounds": 0
+ }
+]

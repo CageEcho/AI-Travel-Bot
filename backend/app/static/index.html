@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>行策 · M0 验收界面</title>
+<style>
+  :root{--bg:#f5f4f0;--panel:#fff;--line:#e4e1da;--ink:#1f1f1c;--muted:#7a776f;--accent:#2f5d50;--warn:#b7791f;--bad:#b3261e;--ok:#2e7d32;--info:#2b5ea7}
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.5 -apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);min-width:1440px}
+  header{display:flex;align-items:center;gap:16px;padding:10px 20px;background:#1f2a26;color:#fff}
+  header h1{font-size:16px;margin:0;font-weight:600}
+  header .meta{color:#b9c4bf;font-size:12px}
+  header .spacer{flex:1}
+  header button{background:#3b4f48;color:#fff;border:0;padding:6px 10px;border-radius:6px;cursor:pointer}
+  #alert{padding:8px 20px;font-size:13px;display:none}
+  #alert.bad{display:block;background:#fbe9e7;color:var(--bad);border-bottom:1px solid #f1c5c1}
+  #alert.ok{display:block;background:#e8f5e9;color:var(--ok);border-bottom:1px solid #c8e6c9}
+  #alert.warn{display:block;background:#fff4e0;color:var(--warn);border-bottom:1px solid #f4dcae}
+  main{display:grid;grid-template-columns:380px 420px 1fr;gap:12px;padding:12px 20px;height:calc(100vh - 92px)}
+  .col{background:var(--panel);border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column;min-height:0}
+  .col h2{font-size:13px;margin:0;padding:10px 14px;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600;letter-spacing:.5px}
+  .body{padding:12px 14px;overflow:auto;flex:1}
+  /* 对话 */
+  .msg{margin:0 0 10px;padding:8px 10px;border-radius:8px;max-width:92%;white-space:pre-wrap}
+  .msg.advisor{background:#e8efe9;margin-left:auto}
+  .msg.ai{background:#f1efe9}
+  .msg.sys{color:var(--muted);font-size:12px;background:none;padding:0}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+  .chip{border:1px solid var(--accent);color:var(--accent);background:#fff;border-radius:14px;padding:2px 10px;cursor:pointer;font-size:12px}
+  .chip:hover{background:#e8efe9}
+  .composer{border-top:1px solid var(--line);padding:10px 14px;display:flex;gap:8px}
+  textarea{flex:1;height:64px;border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit;resize:none}
+  button.primary{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit}
+  button.primary:disabled{background:#b9c4bf;cursor:not-allowed}
+  /* 需求卡 */
+  .bar{height:8px;background:#eee;border-radius:4px;overflow:hidden;margin:6px 0}
+  .bar i{display:block;height:100%;background:var(--accent)}
+  .slot{display:grid;grid-template-columns:96px 1fr auto;gap:8px;align-items:start;padding:6px 0;border-bottom:1px dashed var(--line);font-size:13px}
+  .slot .k{color:var(--muted)}
+  .slot .v{cursor:pointer;word-break:break-all}
+  .slot .v:hover{text-decoration:underline}
+  .slot .v.empty{color:#bbb;font-style:italic}
+  .badge{font-size:11px;padding:1px 6px;border-radius:9px;white-space:nowrap}
+  .b-client{background:#e8f5e9;color:var(--ok)}
+  .b-infer{background:#fff4e0;color:var(--warn)}
+  .b-advisor{background:#e3ecf9;color:var(--info)}
+  .b-conflict{background:#fbe9e7;color:var(--bad)}
+  .b-must{border:1px solid var(--bad);color:var(--bad);background:#fff}
+  .conflict{background:#fbe9e7;border-left:3px solid var(--bad);padding:6px 8px;margin:6px 0;font-size:12px;border-radius:4px}
+  .hint{color:var(--muted);font-size:12px;margin-top:8px}
+  .footer-btn{border-top:1px solid var(--line);padding:10px 14px}
+  /* 右栏 */
+  .tabs{display:flex;gap:2px;padding:6px 10px 0;border-bottom:1px solid var(--line)}
+  .tab{padding:6px 12px;border-radius:8px 8px 0 0;cursor:pointer;color:var(--muted);font-size:13px}
+  .tab.on{background:#f1efe9;color:var(--ink);font-weight:600}
+  .stages{display:flex;gap:8px;margin:8px 0 14px}
+  .stage{flex:1;text-align:center;padding:8px;border-radius:8px;background:#f1efe9;color:var(--muted);font-size:12px}
+  .stage.on{background:var(--accent);color:#fff}
+  .stage.done{background:#dfe9e4;color:var(--accent)}
+  .day{border:1px solid var(--line);border-radius:10px;margin-bottom:12px}
+  .day h3{margin:0;padding:8px 12px;font-size:13px;background:#faf9f6;border-bottom:1px solid var(--line);display:flex;gap:12px}
+  .day h3 .muted{color:var(--muted);font-weight:normal}
+  .item{display:grid;grid-template-columns:70px 60px 1fr auto;gap:10px;padding:7px 12px;border-bottom:1px dashed var(--line);font-size:13px;align-items:center}
+  .item:last-child{border-bottom:0}
+  .item .slotname{color:var(--muted)}
+  .item .type{font-size:11px;padding:1px 6px;border-radius:9px;background:#eef1ee;text-align:center}
+  .item.blocked{background:#fbe9e7}
+  .item .note{color:var(--muted);font-size:12px}
+  .info{position:relative;display:inline-block;width:18px;height:18px;border-radius:50%;border:1px solid var(--info);color:var(--info);text-align:center;font-size:11px;line-height:16px;cursor:help}
+  .info .tip{display:none;position:absolute;right:0;top:22px;z-index:10;width:340px;background:#1f2a26;color:#eef;padding:10px 12px;border-radius:8px;font-size:12px;text-align:left;white-space:pre-wrap}
+  .info:hover .tip{display:block}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+  th{color:var(--muted);font-weight:600;font-size:12px}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  details summary{cursor:pointer;color:var(--info)}
+  .kpi{display:flex;gap:12px;margin-bottom:12px}
+  .kpi div{flex:1;background:#faf9f6;border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+  .kpi b{display:block;font-size:18px}
+  .kpi span{color:var(--muted);font-size:12px}
+  .check{border-left:3px solid var(--warn);background:#fff8ec;padding:6px 10px;margin:6px 0;border-radius:4px;font-size:13px}
+  .funnel{display:flex;gap:6px;align-items:flex-end;height:90px;margin:8px 0 14px}
+  .funnel div{flex:1;background:var(--accent);color:#fff;font-size:11px;text-align:center;border-radius:4px 4px 0 0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px}
+  footer{position:fixed;bottom:0;left:0;right:0;padding:4px 20px;font-size:11px;color:var(--muted);background:var(--bg);text-align:right}
+  code{background:#f1efe9;padding:0 4px;border-radius:3px;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <h1>行策 · 高端旅行智能方案生成平台</h1>
+  <span class="meta">M0 最小可跑闭环 · 验收界面</span>
+  <span class="spacer"></span>
+  <span class="meta" id="convmeta"></span>
+  <button id="newconv">新建会话</button>
+</header>
+<div id="alert"></div>
+<main>
+  <!-- ① 对话 -->
+  <section class="col">
+    <h2>① 需求采集 · 对话</h2>
+    <div class="body" id="messages"></div>
+    <div class="composer">
+      <textarea id="input" placeholder="粘贴客户原话，例如：张女士一家，两大一小，孩子 5 岁。想 10 月中旬去日本，7 天左右。住好一点的酒店，预算 15 万左右。老人肠胃不好这次不去。"></textarea>
+      <button class="primary" id="send">发送</button>
+    </div>
+  </section>
+  <!-- ② 需求卡 -->
+  <section class="col">
+    <h2>② 需求卡 <span style="float:right;font-weight:normal" id="cardver"></span></h2>
+    <div class="body">
+      <div><span id="comp"></span><div class="bar"><i id="compbar" style="width:0"></i></div></div>
+      <div id="conflicts"></div>
+      <div id="slots"></div>
+      <div class="hint">角标：<span class="badge b-client">✓ 客户原话</span> <span class="badge b-infer">◐ 系统推断</span> <span class="badge b-advisor">✎ 顾问填写</span> <span class="badge b-conflict">⚠ 有冲突</span> <span class="badge b-must">● 必须确认</span>。点击值可手动修改（记为顾问填写，模型不会改写）。</div>
+    </div>
+    <div class="footer-btn">
+      <button class="primary" id="generate" style="width:100%">确认需求卡并生成方案</button>
+      <div class="hint" id="genhint"></div>
+    </div>
+  </section>
+  <!-- ③ 方案 / 资源面板 -->
+  <section class="col">
+    <div class="tabs">
+      <div class="tab on" data-tab="plan">方案</div>
+      <div class="tab" data-tab="cost">成本</div>
+      <div class="tab" data-tab="trace">检索过程</div>
+      <div class="tab" data-tab="check">待核实清单</div>
+      <div class="tab" data-tab="eval">评测框架</div>
+    </div>
+    <div class="body">
+      <div id="progress" style="display:none">
+        <div class="stages"><div class="stage" data-s="searching">检索中</div><div class="stage" data-s="planning">编排中</div><div class="stage" data-s="validating">校验中</div><div class="stage" data-s="costing">核算中</div></div>
+        <div class="hint" id="progtext"></div>
+      </div>
+      <div id="tab-plan"><div class="hint">确认需求卡并生成后，这里显示按天行程。悬停 ⓘ 查看溯源。</div></div>
+      <div id="tab-cost" style="display:none"></div>
+      <div id="tab-trace" style="display:none"></div>
+      <div id="tab-check" style="display:none"></div>
+      <div id="tab-eval" style="display:none">
+        <h3 style="margin-top:0">评测体系（设计，非运行时数据）</h3>
+        <p>20 条用例分四族：<b>硬约束陷阱</b>（8，要求 100% 通过）、<b>空值处理</b>（4，UNKNOWN 必须进待核实清单）、<b>冲突检测</b>（3）、<b>槽位抽取</b>（5，需真实模型）。</p>
+        <table><tr><th>门槛</th><th>可执行判定</th></tr>
+          <tr><td>G1 硬约束零违反</td><td>20 条用例 blocking 违规总数 = 0；陷阱族 100% 通过</td></tr>
+          <tr><td>G2 事实无编造</td><td>每个非 free_time 条目都有有效 resource_id；引用校验拦截数记入 trace</td></tr>
+          <tr><td>G3 成本核算一致</td><td>3 份方案手工核算 vs calc_cost() 逐分一致</td></tr>
+          <tr><td>G4 人工卡点有效</td><td>未 confirm 的 card 调 POST /plans 返回 409</td></tr>
+          <tr><td>G5 空值不静默通过</td><td>7 个 UNKNOWN 单测全绿；min_child_age IS NULL + 有儿童 → 待核实清单</td></tr>
+        </table>
+        <p class="hint">运行：<code>python eval/run.py --dry-run</code>（只测规则层）/ <code>python eval/run.py</code>（真实模型）。</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>资源数据为模拟数据集，非真实供应商信息（is_synthetic=true）。</footer>
+
+<script>
+const API = '/api/v1';
+const SLOT_ZH = {destination_cities:'目的地', date_start:'出发日期', date_end:'结束日期', duration_days:'天数', adults:'成人', children:'儿童',
+  child_ages:'儿童年龄', budget_amount:'预算（元）', budget_basis:'预算口径', budget_incl_flight:'含机票', hotel_tier:'酒店档次', dietary:'饮食禁忌',
+  accessibility:'无障碍', interests:'兴趣偏好', pace:'节奏'};
+const MUST_ASK = ['dietary','accessibility','budget_basis'];
+const SLOT_ITEM_ZH = {morning:'上午', lunch:'午餐', afternoon:'下午', dinner:'晚餐', evening:'晚间', accommodation:'住宿', transport:'交通'};
+const TYPE_ZH = {hotel:'酒店', restaurant:'餐厅', poi:'景点', vehicle:'用车', transfer:'转场', free_time:'自由活动'};
+const WEEK = ['周日','周一','周二','周三','周四','周五','周六'];
+const CAT_ZH = {accommodation:'住宿', transport:'交通', dining:'餐饮', tickets:'门票', service_fee:'服务费'};
+const $ = s => document.querySelector(s);
+let state = {conv: localStorage.getItem('conv'), card: null, plan: localStorage.getItem('plan'), poll: null};
+
+function alertBar(kind, text){ const a=$('#alert'); a.className = kind||''; a.textContent = text||''; }
+async function api(method, path, body){
+  const r = await fetch(API+path, {method, headers:{'Content-Type':'application/json'}, body: body?JSON.stringify(body):undefined});
+  const j = await r.json().catch(()=>({}));
+  if(!r.ok){ const e = new Error((j.error&&j.error.message)||('HTTP '+r.status)); e.code=j.error&&j.error.code; e.status=r.status; throw e; }
+  return j;
+}
+function fmtVal(v){ if(v===null||v===undefined) return ''; if(Array.isArray(v)) return v.join('、'); return String(v); }
+function msg(role, text){ const d=document.createElement('div'); d.className='msg '+role; d.textContent=text; $('#messages').appendChild(d); $('#messages').scrollTop=1e9; }
+
+// ───────── 会话 ─────────
+async function newConv(){
+  const j = await api('POST','/conversations'); state.conv=j.conv_id; localStorage.setItem('conv', j.conv_id);
+  localStorage.removeItem('plan'); state.plan=null; if(state.poll) clearInterval(state.poll);
+  $('#messages').innerHTML=''; msg('sys','已新建会话 '+j.conv_id+'。粘贴客户原话开始。');
+  $('#tab-plan').innerHTML='<div class="hint">确认需求卡并生成后，这里显示按天行程。</div>'; $('#tab-cost').innerHTML=''; $('#tab-trace').innerHTML=''; $('#tab-check').innerHTML='';
+  alertBar('', ''); await loadCard();
+}
+async function loadCard(){
+  try{ state.card = await api('GET', `/conversations/${state.conv}/card`); renderCard(); $('#convmeta').textContent='会话 '+state.conv; }
+  catch(e){ if(e.code==='CONV_NOT_FOUND'){ await newConv(); } else alertBar('bad', e.message); }
+}
+async function send(){
+  const text = $('#input').value.trim(); if(!text) return;
+  $('#send').disabled=true; msg('advisor', text); $('#input').value='';
+  try{
+    const j = await api('POST', `/conversations/${state.conv}/messages`, {text});
+    state.card = j.card; renderCard();
+    const fu = j.extraction.followups||[];
+    if(fu.length){ fu.forEach(f=>{ msg('ai', f.question); if(f.options&&f.options.length){ const c=document.createElement('div'); c.className='chips';
+        f.options.forEach(o=>{ const b=document.createElement('span'); b.className='chip'; b.textContent=o; b.onclick=()=>answer(f, o); c.appendChild(b); }); $('#messages').appendChild(c);} }); }
+    else msg('ai','需求已记录，没有需要追问的项。');
+    (j.warnings||[]).forEach(w=>msg('sys','⚠ '+w));
+    alertBar('', '');
+  }catch(e){ msg('sys','✗ '+(e.message||'请求失败')); alertBar('bad', `[${e.code||e.status}] ${e.message}`); }
+  $('#send').disabled=false;
+}
+function answer(f, option){
+  // 追问的选项 → 直接写入槽位（顾问填写），并作为对话记录
+  const OPT = {'五星':'5star','奢华':'luxury','高端旅馆':'ryokan','精品':'boutique','四星':'4star','总预算':'total','每人':'per_person','含机票':'yes','不含机票':'no','未定':'undecided','无':'none','忌生食':'no_raw','素食':'vegetarian','清真':'halal','不吃猪肉':'no_pork'};
+  let val = OPT[option] || option;
+  if(['dietary','destination_cities','hotel_tier','interests','child_ages'].includes(f.slot)) val = [val];
+  patchSlot(f.slot, val); msg('advisor', `${SLOT_ZH[f.slot]||f.slot}：${option}`);
+}
+// ───────── 需求卡 ─────────
+async function patchSlot(slot, value){
+  try{ state.card = await api('PATCH', `/conversations/${state.conv}/card`, {slot, value}); renderCard(); }
+  catch(e){ alertBar('bad', `[${e.code}] ${e.message}`); }
+}
+function renderCard(){
+  const c = state.card; if(!c) return;
+  $('#cardver').textContent = `v${c.version}${c.confirmed?' · 已确认（冻结）':' · 草稿'}`;
+  $('#comp').textContent = `完整度 ${(c.completeness*100).toFixed(0)}% / 阈值 ${(c.completeness_threshold*100).toFixed(0)}%`;
+  $('#compbar').style.width = (c.completeness*100)+'%';
+  $('#conflicts').innerHTML = (c.conflicts||[]).map(x=>`<div class="conflict"><b>${x.code}</b> ${x.message}<br><span style="color:var(--muted)">建议：${x.suggestion}</span></div>`).join('');
+  const conflictSlots = new Set((c.conflicts||[]).flatMap(x=>x.slots));
+  $('#slots').innerHTML = Object.keys(SLOT_ZH).map(k=>{
+    const sv = c.slots[k]; let badge='';
+    if(sv){ badge = sv.source==='client_verbatim'?'<span class="badge b-client">✓ 客户原话</span>': sv.source==='advisor_input'?'<span class="badge b-advisor">✎ 顾问填写</span>':`<span class="badge b-infer">◐ 系统推断 ${(sv.confidence*100).toFixed(0)}%</span>`; }
+    else if(MUST_ASK.includes(k) || c.missing_slots.includes(k)) badge = MUST_ASK.includes(k)?'<span class="badge b-must">● 必须确认</span>':'<span class="badge" style="color:#bbb">缺失</span>';
+    if(conflictSlots.has(k)) badge += ' <span class="badge b-conflict">⚠ 有冲突</span>';
+    const v = sv?fmtVal(sv.value):'';
+    return `<div class="slot"><span class="k">${SLOT_ZH[k]}</span><span class="v ${v?'':'empty'}" data-k="${k}" title="点击修改">${v||'（未填）'}</span><span>${badge}</span></div>`;
+  }).join('');
+  document.querySelectorAll('.slot .v').forEach(el=>el.onclick=()=>{
+    const k = el.dataset.k; const cur = state.card.slots[k]?fmtVal(state.card.slots[k].value):'';
+    const raw = prompt(`修改「${SLOT_ZH[k]}」（列表用逗号分隔；数字直接填；清空则删除）`, cur); if(raw===null) return;
+    let val = raw.trim(); if(val==='') val=null;
+    else if(['destination_cities','hotel_tier','dietary','interests'].includes(k)) val = val.split(/[,，、]/).map(s=>s.trim()).filter(Boolean);
+    else if(k==='child_ages') val = val.split(/[,，、]/).map(s=>parseInt(s.trim(),10)).filter(n=>!isNaN(n));
+    else if(['adults','children','duration_days','budget_amount'].includes(k)) val = Number(val.replace(/[^0-9.]/g,''))||val;
+    patchSlot(k, val);
+  });
+  const ok = c.completeness >= c.completeness_threshold;
+  $('#generate').disabled = !ok;
+  $('#genhint').textContent = ok ? (c.confirmed?'需求卡已确认，可再次生成':'点击后先确认需求卡（人工节点①），再开始生成') : `完整度不足，无法确认：还需补齐 ${c.missing_slots.map(m=>SLOT_ZH[m]||m).join('、')}`;
+}
+// ───────── 生成 ─────────
+async function generate(){
+  $('#generate').disabled = true;
+  try{
+    const conf = await api('POST', `/conversations/${state.conv}/card/confirm`);
+    const j = await api('POST', '/plans', {card_id: conf.card_id});
+    state.plan = j.plan_id; localStorage.setItem('plan', j.plan_id);
+    showTab('plan'); startPoll();
+  }catch(e){ alertBar('bad', `[${e.code||e.status}] ${e.message}`); $('#generate').disabled=false; }
+}
+function startPoll(){
+  if(state.poll) clearInterval(state.poll);
+  $('#progress').style.display='block'; $('#tab-plan').innerHTML='';
+  const tick = async ()=>{
+    try{
+      const st = await api('GET', `/plans/${state.plan}/status`);
+      const order = ['searching','planning','validating','costing'];
+      document.querySelectorAll('.stage').forEach(el=>{ const i=order.indexOf(el.dataset.s), cur=order.indexOf(st.status);
+        el.className='stage'+(st.status==='done'||i<cur?' done':(i===cur?' on':'')); });
+      $('#progtext').textContent = `状态 ${st.status} · 进度 ${(st.progress*100).toFixed(0)}%` + (st.replan_round?` · 回退重排第 ${st.replan_round} 轮`:'');
+      if(st.status==='done'){ clearInterval(state.poll); $('#progress').style.display='none'; await loadPlan(st.version||1); $('#generate').disabled=false; }
+      else if(st.status==='failed'){ clearInterval(state.poll); $('#progress').style.display='none'; $('#generate').disabled=false;
+        const err = st.error||{}; alertBar('bad', `生成失败 [${err.code}] ${err.message}`);
+        $('#tab-plan').innerHTML = `<div class="conflict">已失败：${err.message||''}<br>${err.code==='ORPHANED'?'服务曾重启，任务已被标记失败，请重新生成。':''}</div>`; }
+    }catch(e){ clearInterval(state.poll); alertBar('bad', e.message); }
+  };
+  tick(); state.poll = setInterval(tick, 2000);
+}
+async function loadPlan(version){
+  const p = await api('GET', `/plans/${state.plan}/versions/${version}`);
+  renderPlan(p); renderCost(p); renderCheck(p);
+  try{ renderTrace(await api('GET', `/trace/${state.plan}`), p); }catch(e){}
+  if(p.blocking_count>0) alertBar('bad', `硬约束 ${p.blocking_count} 项违反（已回退重排 ${p.replan_rounds} 轮仍未消除，需人工处理）· 待核实 ${p.unknown_count} 项`);
+  else alertBar('ok', `硬约束 0 项违反 · 待核实 ${p.unknown_count} 项 · 回退重排 ${p.replan_rounds} 轮`);
+}
+function tip(it){
+  const pv = it.provenance||{}; const f = it.facts||{};
+  return [`资源 ID：${pv.resource_id||it.resource_id}${it.room_id?'  房型：'+it.room_id:''}`,
+    `数据更新时间：${pv.updated_at?pv.updated_at.slice(0,19).replace('T',' '):'—'}`,
+    `命中需求：${(pv.matched_slots||[]).map(s=>SLOT_ZH[s]||s).join('、')||'—'}`,
+    `满足约束：${(pv.satisfied_constraints||[]).join(' ')||'—'}`,
+    `待核实约束：${(pv.unknown_constraints||[]).join(' ')||'无'}`,
+    `价格来源：${pv.price_source||'—'}${pv.rate_id?' ('+pv.rate_id+')':''}`,
+    `事实字段：${Object.entries(f).map(([k,v])=>k+'='+(v===null?'未记录':JSON.stringify(v))).join('，')}`].join('\n');
+}
+function renderPlan(p){
+  const days = p.structure.days;
+  let html = `<div class="kpi"><div><b>${days.length}</b><span>天</span></div><div><b style="color:${p.blocking_count?'var(--bad)':'var(--ok)'}">${p.blocking_count}</b><span>硬约束违反</span></div><div><b style="color:var(--warn)">${p.unknown_count}</b><span>待核实</span></div><div><b>${p.replan_rounds}</b><span>回退轮数</span></div></div>`;
+  if(p.structure.assumptions&&p.structure.assumptions.length) html += `<div class="check"><b>编排假设：</b>${p.structure.assumptions.join('；')}</div>`;
+  const vioByDay = {}; p.violations.filter(v=>v.blocking).forEach(v=>{ (vioByDay[v.day_index]=vioByDay[v.day_index]||[]).push(v); });
+  html += days.map(d=>`<div class="day"><h3><span>Day ${d.day_index}</span><span class="muted">${d.date} ${WEEK[d.weekday]}</span><span>${d.city}${d.is_transfer?' · 转场':''}</span><span class="muted">${d.theme}</span><span class="muted" style="margin-left:auto">通勤估算 ${d.commute_min_est??'—'} 分钟</span></h3>
+    ${(vioByDay[d.day_index]||[]).map(v=>`<div class="conflict">${v.code} ${v.message}</div>`).join('')}
+    ${d.items.map(it=>`<div class="item ${it.status==='blocked'?'blocked':''}"><span class="slotname">${SLOT_ITEM_ZH[it.slot]||it.slot}${it.start_time?'<br><small>'+it.start_time+'</small>':''}</span><span class="type">${TYPE_ZH[it.type]||it.type}</span>
+      <span>${it.status==='blocked'?'<b style="color:var(--bad)">已拦截</b> '+(it.block_reason||''):(it.name_zh?`<b>${it.name_zh}</b>${it.name_local?' <span class="note">'+it.name_local+'</span>':''}${it.facts&&it.facts.room_name?' · '+it.facts.room_name:''}${it.nights?' · 连住 '+it.nights+' 晚':''}`:(it.type==='free_time'?'自由活动':'—'))}<br><span class="note">${it.reason_note||''}</span></span>
+      <span>${it.provenance?`<span class="info">ⓘ<span class="tip">${tip(it)}</span></span>`:''}</span></div>`).join('')}</div>`).join('');
+  $('#tab-plan').innerHTML = html;
+}
+function renderCost(p){
+  const c = p.cost; const n = x=>Number(x).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
+  let html = `<div class="kpi"><div><b>¥${n(c.total)}</b><span>地面总计（JPY，含服务费）</span></div><div><b>￥${n(c.total_cny)}</b><span>折人民币（汇率 ${c.fx_rate}）</span></div><div><b>¥${n(c.per_person)}</b><span>人均（JPY）</span></div><div><b style="color:${c.variance_pct==null?'inherit':(Number(c.variance_pct)>0?'var(--bad)':'var(--ok)')}">${c.variance_pct==null?'—':(Number(c.variance_pct)>0?'+':'')+c.variance_pct+'%'}</b><span>相对预算 ${c.budget_target?'￥'+n(c.budget_target):'（未填）'}</span></div></div>`;
+  html += `<table><tr><th>类别</th><th class="num">金额（JPY）</th><th class="num">占比</th></tr>${Object.entries(c.breakdown).map(([k,v])=>`<tr><td>${CAT_ZH[k]||k}</td><td class="num">${n(v)}</td><td class="num">${(Number(v)/Number(c.total)*100).toFixed(1)}%</td></tr>`).join('')}</table>`;
+  html += `<h4>计算轨迹（点击展开）</h4><details><summary>${c.lines.length} 条明细 · 服务费率 ${c.service_fee_rate} · 汇率时间 ${c.fx_time}</summary><table><tr><th>Day</th><th>类别</th><th>资源</th><th>价格档</th><th>计算轨迹</th><th class="num">金额</th></tr>
+    ${c.lines.map(l=>`<tr><td>${l.day_index??''}</td><td>${CAT_ZH[l.category]}</td><td>${l.resource_id}</td><td>${l.rate_id}</td><td><code>${l.rule_trace}</code></td><td class="num">${n(l.amount)}</td></tr>`).join('')}</table></details>`;
+  if(c.missing_rates.length) html += `<div class="check">以下资源未找到价格档，未计入成本：${c.missing_rates.join('、')}</div>`;
+  $('#tab-cost').innerHTML = html;
+}
+function renderCheck(p){
+  const items = p.checklist||[];
+  $('#tab-check').innerHTML = items.length? `<p class="hint">以下 ${items.length} 项系统<b>无法判定</b>（字段未记录 / 非合约价），不等于通过，交付前必须人工核实。</p>` +
+    items.map(x=>`<div class="check"><b>${x.code}</b> Day ${x.day_index} ${x.resource_id||''}<br>要核实：${x.what_to_verify}<br><span style="color:var(--muted)">原因：${x.reason}</span></div>`).join('')
+    : '<p class="hint">没有待核实项。</p>';
+}
+function renderTrace(t, p){
+  const steps = t.steps||[]; let html = '';
+  const search = steps.find(s=>s.step==='search');
+  if(search){ const f = search.payload.funnels||{};
+    html += Object.entries(f).map(([city, fun])=>`<h4 style="margin:6px 0">${city} · 酒店硬过滤漏斗</h4><div class="funnel">${['city_active','tier','availability_h8','capacity_h1'].map(k=>`<div style="height:${Math.max(10, (fun[k]/Math.max(1,fun.city_active))*100)}%" title="${k}">${({city_active:'城市',tier:'档次',availability_h8:'可售期 H8',capacity_h1:'容量 H1'})[k]} ${fun[k]}</div>`).join('')}</div>`).join('');
+    html += `<p class="hint">候选池：酒店 ${search.payload.hotels} · 餐厅 ${search.payload.restaurants} · 景点 ${search.payload.pois} · 车辆 ${search.payload.vehicles}</p>`; }
+  html += `<table><tr><th>步骤</th><th>耗时 ms</th><th>输入 token</th><th>输出 token</th><th>说明</th></tr>${steps.map(s=>`<tr><td>${s.step}</td><td>${s.latency_ms??''}</td><td>${s.input_tokens??''}</td><td>${s.output_tokens??''}</td><td><code>${JSON.stringify(Object.fromEntries(Object.entries(s.payload||{}).filter(([k])=>!['funnels','relaxation_hints'].includes(k)))).slice(0,220)}</code></td></tr>`).join('')}</table>`;
+  $('#tab-trace').innerHTML = html;
+}
+function showTab(name){ document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.tab===name)); ['plan','cost','trace','check','eval'].forEach(n=>$('#tab-'+n).style.display = n===name?'block':'none'); }
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>showTab(t.dataset.tab));
+$('#send').onclick = send; $('#generate').onclick = generate; $('#newconv').onclick = newConv;
+$('#input').addEventListener('keydown', e=>{ if(e.key==='Enter' && (e.metaKey||e.ctrlKey)) send(); });
+(async ()=>{ if(!state.conv) await newConv(); else { await loadCard(); msg('sys','已恢复会话 '+state.conv); if(state.plan){ startPoll(); } } })();
+</script>
+</body>
+</html>
