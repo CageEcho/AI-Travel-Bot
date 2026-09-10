@@ -46,7 +46,7 @@ function SlotForm({ slot, current, saving, error, onSave, onClose }: Props & { s
         <fieldset className="grid grid-cols-2 gap-2">
           <legend className="sr-only">{SLOT_LABEL[slot]}</legend>
           {options.map((o) => (
-            <label key={o} className="flex items-center gap-2 rounded-(--radius-control) border border-border px-3 py-2 text-sm cursor-pointer has-checked:border-primary has-checked:bg-primary-soft min-h-[44px]">
+            <label key={o} className="flex items-center gap-2 rounded-(--radius-control) bg-surface-2 px-3 py-2 text-sm cursor-pointer hover:bg-[#eef1f5] has-checked:bg-primary-soft has-checked:text-primary has-checked:font-semibold transition-colors min-h-[44px]">
               <input type="checkbox" checked={multi.includes(o)} onChange={(e) => setMulti(e.target.checked ? [...multi, o] : multi.filter((x) => x !== o))} />
               {labelOf(o)}
             </label>
@@ -56,7 +56,7 @@ function SlotForm({ slot, current, saving, error, onSave, onClose }: Props & { s
       {kind === "enum" && (
         <div>
           <label htmlFor="slot-select" className="block text-xs text-muted mb-1">{SLOT_LABEL[slot]}</label>
-          <select id="slot-select" value={text} onChange={(e) => setText(e.target.value)} className="w-full rounded-(--radius-control) border border-border bg-surface px-3 py-2 text-sm min-h-[44px]">
+          <select id="slot-select" value={text} onChange={(e) => setText(e.target.value)} className="control text-sm">
             <option value="">（未填）</option>
             {options.map((o) => <option key={o} value={o}>{labelOf(o)}</option>)}
           </select>
@@ -69,7 +69,7 @@ function SlotForm({ slot, current, saving, error, onSave, onClose }: Props & { s
             {kind === "intList" && "（多个用逗号分隔，如 5, 8）"}{kind === "list" && "（多个用逗号分隔）"}{kind === "date" && "（YYYY-MM-DD）"}
           </label>
           <input id="slot-input" type={kind === "int" ? "number" : kind === "date" ? "date" : "text"} value={text} onChange={(e) => setText(e.target.value)}
-            className="w-full rounded-(--radius-control) border border-border bg-surface px-3 py-2 text-sm min-h-[44px]" autoFocus />
+            className="control text-sm" autoFocus />
         </div>
       )}
       {error && <p role="alert" className="text-sm text-danger">{error}</p>}

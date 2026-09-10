@@ -15,13 +15,14 @@ export interface TaskView {
   replanRound: number;
   version: number | null;
   errorCode: string | null;
+  errorMessage: string | null;
   headline: string;            // 现在发生了什么
   action: string;              // 我需要做什么
   next: string;                // 接下来会发生什么
 }
 
 export function mapPlanStatus(s: PlanStatus): TaskView {
-  const base = { progress: s.progress, replanRound: s.replan_round, version: s.version, errorCode: s.error?.code ?? null };
+  const base = { progress: s.progress, replanRound: s.replan_round, version: s.version, errorCode: s.error?.code ?? null, errorMessage: s.error?.message ?? null };
   const st = s.status;
   if (st === "queued") {
     return { ...base, state: "queued", stage: null, headline: "任务已受理，等待开始", action: "无需操作", next: "很快开始检索候选资源" };
@@ -41,11 +42,12 @@ export function mapPlanStatus(s: PlanStatus): TaskView {
   }
   if (st === "failed") {
     const orphaned = s.error?.code === "ORPHANED";
+    const stalled = s.error?.code === "STALLED";
     return {
       ...base, state: "failed", stage: null,
-      headline: orphaned ? "服务重启导致任务中断" : `生成失败：${s.error?.message ?? "未知原因"}`,
+      headline: orphaned ? "服务重启导致任务中断" : stalled ? "模型长时间无响应，任务已终止" : `生成失败：${s.error?.message ?? "未知原因"}`,
       action: "点击「重新生成」再试一次",
-      next: orphaned ? "需求卡未受影响，重新生成即可" : s.error?.code === "CANDIDATES_TOO_FEW" ? "按提示放宽条件后再生成" : "如果反复失败请联系管理员",
+      next: orphaned || stalled ? "需求卡未受影响，重新生成即可" : s.error?.code === "CANDIDATES_TOO_FEW" ? "按提示放宽条件后再生成" : "如果反复失败请联系管理员",
     };
   }
   return { ...base, state: "stale", stage: null, headline: `状态未知（${st}）`, action: "正在重新获取服务端状态", next: "刷新页面可强制同步" };

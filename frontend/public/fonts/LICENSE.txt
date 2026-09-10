@@ -1,0 +1,3 @@
+Cormorant Garamond (cormorant-garamond-v1.woff2) and Manrope (manrope-v1.woff2) are licensed under the
+SIL Open Font License 1.1 (https://scripts.sil.org/OFL). Files are self-hosted subsets taken from the
+Beyond Dream Travel website handoff bundle. Chinese glyphs fall back to system fonts (Songti SC / PingFang SC).

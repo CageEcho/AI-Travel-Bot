@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { AppShell } from "@/components/layout/app-shell";
 import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -27,10 +26,10 @@ export default function SearchPage() {
     try { setResult(await searchApi.hotels(q)); setState("done"); }
     catch (err) { setError(isAppError(err) ? err.userMessage : "检索失败"); setState("failed"); }
   }
-  const field = "rounded-(--radius-control) border border-border bg-surface px-3 py-2 text-sm min-h-[44px] w-full";
+  const field = "control text-sm";
 
   return (
-    <AppShell>
+    <>
       <div className="grid gap-3 lg:grid-cols-[360px_1fr]">
         <Card>
           <CardHeader>手动检索 · 硬过滤条件</CardHeader>
@@ -50,7 +49,7 @@ export default function SearchPage() {
               </div>
               <fieldset><legend className="text-xs text-muted mb-1">档次（不选 = 全部）</legend>
                 <div className="flex flex-wrap gap-1.5">{TIERS.map((t) => (
-                  <label key={t} className="flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs cursor-pointer has-checked:border-primary has-checked:bg-primary-soft">
+                  <label key={t} className="flex items-center gap-1 rounded-full bg-surface-2 px-3 py-1.5 text-xs cursor-pointer hover:bg-[#eef1f5] has-checked:bg-primary-soft has-checked:text-primary has-checked:font-semibold transition-colors">
                     <input type="checkbox" checked={q.tiers.includes(t)} onChange={(e) => setQ({ ...q, tiers: e.target.checked ? [...q.tiers, t] : q.tiers.filter((x) => x !== t) })} />{labelOf(t)}
                   </label>))}</div>
               </fieldset>
@@ -68,6 +67,7 @@ export default function SearchPage() {
             {state === "done" && result && (
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2 text-xs">{Object.entries(result.funnel).map(([k, v]) => <Badge key={k} tone="neutral">{FUNNEL_LABEL[k] ?? k} {v}</Badge>)}</div>
+                {!result.cost_visible && <Alert tone="warning">当前账号可查看匹配结果，但净价、价格档和加价信息已由后端过滤。</Alert>}
                 {result.candidates.length === 0 ? (
                   <Alert tone="warning">
                     <b>没有满足全部硬条件的酒店。</b>
@@ -76,14 +76,14 @@ export default function SearchPage() {
                 ) : (
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm min-w-[640px]">
-                      <thead><tr className="text-xs text-muted text-left"><th className="py-1.5 pr-2">酒店 / 房型</th><th className="px-2">档次</th><th className="px-2">容量</th><th className="px-2">最低入住年龄</th><th className="px-2 text-right">净价 / 晚</th><th className="px-2">价格来源</th></tr></thead>
-                      <tbody>{result.candidates.map((c) => (
-                        <tr key={c.rate_id} className="border-t border-border align-top">
+                      <thead><tr className="text-xs text-muted text-left"><th className="py-1.5 pr-2">酒店 / 房型</th><th className="px-2">档次</th><th className="px-2">容量</th><th className="px-2">最低入住年龄</th>{result.cost_visible && <><th className="px-2 text-right">净价 / 晚</th><th className="px-2">价格来源</th></>}</tr></thead>
+                      <tbody>{result.candidates.map((c, index) => (
+                        <tr key={c.rate_id ?? `${c.hotel_id}-${c.room_id}-${index}`} className="border-t border-border align-top">
                           <td className="py-2"><b>{c.name_zh}</b> <span className="text-xs text-muted">{c.name_local}</span><div className="text-xs">{c.room_name} · <code>{c.hotel_id}</code></div></td>
                           <td className="px-2">{labelOf(c.tier)}</td><td className="px-2">{c.max_occupancy} 人</td>
                           <td className="px-2">{c.min_child_age === null ? <Badge tone="warning">未记录</Badge> : `${c.min_child_age} 岁`}</td>
-                          <td className="px-2 text-right tabular-nums">¥{money(c.net_price, 0)}{Number(c.season_uplift) > 0 && <div className="text-xs text-muted">旺季 +{Math.round(Number(c.season_uplift) * 100)}%</div>}</td>
-                          <td className="px-2"><Badge tone={c.confidence === "contracted" ? "success" : "warning"}>{c.confidence}</Badge></td>
+                          {result.cost_visible && <><td className="px-2 text-right tabular-nums">¥{money(c.net_price ?? 0, 0)}{Number(c.season_uplift) > 0 && <div className="text-xs text-muted">旺季 +{Math.round(Number(c.season_uplift) * 100)}%</div>}</td>
+                          <td className="px-2"><Badge tone={c.confidence === "contracted" ? "success" : "warning"}>{c.confidence}</Badge></td></>}
                         </tr>))}</tbody>
                     </table>
                   </div>
@@ -93,6 +93,6 @@ export default function SearchPage() {
           </CardBody>
         </Card>
       </div>
-    </AppShell>
+    </>
   );
 }

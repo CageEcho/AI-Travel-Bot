@@ -86,6 +86,9 @@ def calc_cost(plan: RenderedPlan, ctx: TripContext, rates: dict[str, RateFacts])
     lines: list[CostLine] = []
     missing: list[str] = []
     vehicle_days: dict[str, int] = {}
+    # 住宿条目每天都出现，但 nights 只在入住日声明连住晚数。
+    # 记录同一房型已覆盖到哪一天，避免后续展示条目重复计费。
+    hotel_covered_through: dict[str, int] = {}
     for day in plan.days:
         for item in day.items:
             if item.status != "ok" or item.type in ("free_time", "transfer") or not item.resource_id:
@@ -99,7 +102,11 @@ def calc_cost(plan: RenderedPlan, ctx: TripContext, rates: dict[str, RateFacts])
                 missing.append(key)
                 continue
             if item.type == "hotel":
-                lines.append(line_accommodation(rate, item.nights or 1, ctx.rooms, day.day_index))
+                if day.day_index <= hotel_covered_through.get(key, 0):
+                    continue
+                nights = item.nights or 1
+                lines.append(line_accommodation(rate, nights, ctx.rooms, day.day_index))
+                hotel_covered_through[key] = day.day_index + nights - 1
             elif item.type == "restaurant":
                 lines.append(line_dining(rate, ctx.adults, ctx.children, day.day_index))
             elif item.type == "poi":

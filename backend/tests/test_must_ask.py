@@ -32,5 +32,5 @@ def test_missing_must_ask_filled_when_room():
 
 def test_known_or_advisor_confirmed_not_asked():
     existing = SlotSet(dietary=SlotValue(value=["none"], source="advisor_input", confidence=1.0))
-    out, _ = ensure_must_ask(_ext([], accessibility="none", budget_basis="total"), "肠胃不好", existing)
+    out, _ = ensure_must_ask(_ext([], accessibility="none", budget_basis="total", budget_incl_flight="no"), "肠胃不好", existing)
     assert out.followups == []

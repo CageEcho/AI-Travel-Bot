@@ -17,7 +17,7 @@ export function TraceView({ trace }: { trace: TraceResponse | null }) {
               {["city_active", "tier", "availability_h8", "capacity_h1"].map((k) => (
                 <li key={k} className="flex-1 flex flex-col justify-end text-center text-[11px]">
                   {/* 用像素高度：百分比高度在 flex 子项里不可靠 */}
-                  <div className="bg-primary text-white rounded-t flex items-end justify-center pb-0.5" style={{ height: `${Math.max(14, Math.round(((f[k] ?? 0) / max) * 72))}px` }}>{f[k] ?? 0}</div>
+                  <div className="bg-primary text-white rounded-t-lg flex items-end justify-center pb-0.5" style={{ height: `${Math.max(14, Math.round(((f[k] ?? 0) / max) * 72))}px` }}>{f[k] ?? 0}</div>
                   <span className="text-muted mt-0.5">{FUNNEL_LABEL[k]}</span>
                 </li>
               ))}

@@ -5,11 +5,36 @@
 from __future__ import annotations
 
 import re
-from typing import Any, Literal
+from datetime import date
+from typing import Annotated, Any, Generic, Literal, TypeVar
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import AfterValidator, BaseModel, ConfigDict, Field, StringConstraints, field_validator
 
 Source = Literal["client_verbatim", "advisor_input", "system_inferred"]
+DestinationCity = Literal["东京", "京都", "箱根"]
+BudgetBasis = Literal["total", "per_person"]
+FlightBudget = Literal["yes", "no", "undecided"]
+HotelTier = Literal["4star", "5star", "luxury", "ryokan", "boutique"]
+Dietary = Literal["no_raw", "vegetarian", "vegan", "halal", "no_pork", "no_beef", "gluten_free", "no_shellfish", "none"]
+Accessibility = Literal["none", "wheelchair", "elderly_slow", "stroller"]
+Pace = Literal["relaxed", "moderate", "packed"]
+T = TypeVar("T")
+
+
+def _validate_iso_date(v: str) -> str:
+    try:
+        date.fromisoformat(v)
+    except ValueError as e:
+        raise ValueError("日期必须是真实存在的 YYYY-MM-DD") from e
+    return v
+
+
+ISODate = Annotated[str, StringConstraints(pattern=r"^\d{4}-\d{2}-\d{2}$"), AfterValidator(_validate_iso_date)]
+PositiveDays = Annotated[int, Field(ge=1, le=30)]
+Adults = Annotated[int, Field(ge=1, le=30)]
+Children = Annotated[int, Field(ge=0, le=20)]
+ChildAge = Annotated[int, Field(ge=0, le=17)]
+BudgetAmount = Annotated[int | float, Field(ge=0, le=100_000_000)]
 
 _CN_NUM = {"一": 1, "二": 2, "两": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10}
 
@@ -31,8 +56,13 @@ def normalize_amount(v: Any) -> Any:
     return v
 
 
-class SlotValue(BaseModel):
-    value: str | int | float | bool | list[str] | list[int] | None
+class SlotValue(BaseModel, Generic[T]):
+    """单个槽位值的通用外壳。SlotSet 为每个字段绑定具体 T，
+    使模型输出的 JSON Schema 真正约束人数、枚举、日期和列表类型。
+    """
+    model_config = ConfigDict(extra="forbid", revalidate_instances="always")
+
+    value: T | None
     source: Source
     confidence: float = Field(ge=0, le=1)
 
@@ -49,21 +79,23 @@ class SlotValue(BaseModel):
 
 class SlotSet(BaseModel):
     """M0 核心槽位。字段名即槽位名，PATCH /card 用它校验 slot 是否存在。"""
-    destination_cities: SlotValue | None = None   # list[str]，如 ["东京","京都"]
-    date_start:         SlotValue | None = None   # "2026-10-15"
-    date_end:           SlotValue | None = None
-    duration_days:      SlotValue | None = None   # int
-    adults:             SlotValue | None = None   # int
-    children:           SlotValue | None = None   # int
-    child_ages:         SlotValue | None = None   # list[int]
-    budget_amount:      SlotValue | None = None   # 数值（CNY）
-    budget_basis:       SlotValue | None = None   # total | per_person
-    budget_incl_flight: SlotValue | None = None   # yes | no | undecided
-    hotel_tier:         SlotValue | None = None   # 4star|5star|luxury|ryokan|boutique 或其列表
-    dietary:            SlotValue | None = None   # list[str] 如 ["no_raw"]；明确无禁忌用 ["none"]
-    accessibility:      SlotValue | None = None   # "none" | "wheelchair" | "elderly_slow" ...
-    interests:          SlotValue | None = None   # list[str]
-    pace:               SlotValue | None = None   # relaxed | moderate | packed
+    model_config = ConfigDict(extra="forbid", validate_assignment=True)
+
+    destination_cities: SlotValue[list[DestinationCity]] | None = None
+    date_start:         SlotValue[ISODate] | None = None
+    date_end:           SlotValue[ISODate] | None = None
+    duration_days:      SlotValue[PositiveDays] | None = None
+    adults:             SlotValue[Adults] | None = None
+    children:           SlotValue[Children] | None = None
+    child_ages:         SlotValue[list[ChildAge]] | None = None
+    budget_amount:      SlotValue[BudgetAmount] | None = None
+    budget_basis:       SlotValue[BudgetBasis] | None = None
+    budget_incl_flight: SlotValue[FlightBudget] | None = None
+    hotel_tier:         SlotValue[HotelTier | list[HotelTier]] | None = None
+    dietary:            SlotValue[list[Dietary]] | None = None
+    accessibility:      SlotValue[Accessibility] | None = None
+    interests:          SlotValue[list[str]] | None = None
+    pace:               SlotValue[Pace] | None = None
 
     @classmethod
     def slot_names(cls) -> list[str]:
@@ -111,10 +143,20 @@ class MessageIn(BaseModel):
     text: str = Field(min_length=1, max_length=4000)
 
 
+class NextStepView(BaseModel):
+    """多轮引导：AI 对当前需求的分析 + 下一步要问客户的问题。"""
+    analysis: str
+    followups: list[Followup]
+    ready: bool
+    summary: str
+    source: Literal["llm", "rules"]
+
+
 class MessageOut(BaseModel):
     extraction: SlotExtraction
     card: RequirementCardView
     warnings: list[str] = []
+    next_step: NextStepView | None = None
 
 
 class SlotPatch(BaseModel):

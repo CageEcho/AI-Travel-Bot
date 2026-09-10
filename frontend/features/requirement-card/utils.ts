@@ -1,7 +1,7 @@
 import type { BadgeTone } from "@/components/ui/badge";
 import type { RequirementCardView, SlotName, SlotValue } from "@/lib/api/types";
 
-export const MUST_ASK: SlotName[] = ["dietary", "accessibility", "budget_basis"];
+export const MUST_ASK: SlotName[] = ["dietary", "accessibility", "budget_basis", "budget_incl_flight"];
 
 export interface SlotBadge { label: string; tone: BadgeTone }
 

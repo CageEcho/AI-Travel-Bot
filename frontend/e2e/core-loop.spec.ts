@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { stat } from "node:fs/promises";
 
 /** 核心闭环：建会话 → 需求卡补齐 → 确认并生成 → 看到 7 天方案 → 刷新后仍在。后端 PLANNER_MODE=heuristic，不需要模型 Key。 */
 const FULL: Record<string, unknown> = {
@@ -12,17 +13,18 @@ test.beforeEach(async ({ page }) => {
 });
 
 async function newConv(page: Page): Promise<string> {
-  await page.goto("/");
-  await page.getByRole("button", { name: "新建会话并开始" }).click();
-  await page.waitForURL(/\/c\/CNV-/);
-  return page.url().match(/\/c\/(CNV-[a-z0-9]+)/)![1];
+  const response = await page.request.post("http://localhost:8000/api/v1/conversations");
+  expect(response.ok()).toBeTruthy();
+  const { conv_id: convId } = await response.json() as { conv_id: string };
+  await page.goto(`/c/${convId}`);
+  return convId;
 }
 
 test("空需求卡：生成按钮禁用并说明缺失项", async ({ page }) => {
   await newConv(page);
   const btn = page.getByRole("button", { name: "确认需求卡并生成方案" });
   await expect(btn).toBeDisabled();
-  await expect(page.getByText(/完整度不足/)).toBeVisible();
+  await expect(page.getByText(/完整度不足|必问项未确认/)).toBeVisible();
   await expect(page.getByText("● 必须确认").first()).toBeVisible();
 });
 
@@ -32,10 +34,11 @@ test("手动编辑槽位对话框可保存并显示顾问填写角标", async ({
   const dialog = page.getByRole("dialog");
   await dialog.getByLabel("成人").fill("2");
   await dialog.getByRole("button", { name: "保存修改" }).click();
-  await expect(page.getByText("✎ 顾问填写")).toBeVisible();
+  await expect(page.getByText("✎ 顾问填写").first()).toBeVisible();
 });
 
 test("核心闭环：确认并生成 → 方案 → 刷新恢复 → 连点只创建一个任务", async ({ page, request }) => {
+  test.setTimeout(300_000);
   const convId = await newConv(page);
   for (const [slot, value] of Object.entries(FULL)) {
     const r = await request.patch(`http://localhost:8000/api/v1/conversations/${convId}/card`, { data: { slot, value } });
@@ -46,10 +49,15 @@ test("核心闭环：确认并生成 → 方案 → 刷新恢复 → 连点只�
   await expect(btn).toBeEnabled();
   let planPosts = 0;
   page.on("request", (req) => { if (req.method() === "POST" && req.url().endsWith("/api/v1/plans")) planPosts += 1; });
+  // 连点两次：第二次在按钮进入提交态 / 改名前后都不该再创建任务
   await btn.click();
-  await btn.click({ force: true }).catch(() => undefined);
-  await page.waitForURL(/plan=PLN-/);
-  await expect(page.getByText(/硬约束 .* 项违反/)).toBeVisible({ timeout: 60_000 });
+  await btn.click({ force: true, timeout: 1500 }).catch(() => undefined);
+  await expect(page).toHaveURL(/plan=PLN-/, { timeout: 30_000 });
+  // 真实模型模式下编排含回退重排可能超过 1 分钟
+  // 只看方案面板的结果条（侧栏会话列表里也可能出现「生成失败」字样，须限定作用域）
+  const outcome = page.locator('[role="status"], [role="alert"]').filter({ hasText: /硬约束 .* 项违反|生成失败|服务重启/ }).first();
+  await expect(outcome).toBeVisible({ timeout: 240_000 });
+  await expect(outcome).toHaveText(/硬约束 .* 项违反/);
   await expect(page.getByText("Day 7")).toBeVisible();
   expect(planPosts).toBe(1);
   // 刷新恢复：URL 里的 plan 是事实来源
@@ -58,7 +66,21 @@ test("核心闭环：确认并生成 → 方案 → 刷新恢复 → 连点只�
   await page.getByRole("tab", { name: /成本/ }).click();
   await expect(page.getByText("地面总计（JPY，含服务费）")).toBeVisible();
   await page.getByRole("tab", { name: /待核实清单/ }).click();
-  await expect(page.getByText(/待核实|没有待核实项/).first()).toBeVisible();
+  await expect(page.locator("main").getByText(/以下 \d+ 项系统|没有待核实项/)).toBeVisible();   // 限定主区域，帮助弹窗里也有「待核实」字样
+
+  // 客户版：预览内容不显示内部 ID，并能下载有效 PDF。
+  await page.getByRole("tab", { name: "方案" }).click();
+  await page.getByRole("button", { name: "客户版预览与导出" }).click();
+  const proposal = page.getByRole("dialog", { name: "客户版方案预览" });
+  await expect(proposal).toBeVisible();
+  await expect(proposal.getByText(/定制旅行方案/).first()).toBeVisible();
+  await expect(proposal).not.toContainText(/HTL-|POI-|RATE-/);
+  const downloadPromise = page.waitForEvent("download");
+  await proposal.getByRole("button", { name: "下载 PDF" }).click();
+  const download = await downloadPromise;
+  const pdfPath = test.info().outputPath("customer-proposal.pdf");
+  await download.saveAs(pdfPath);
+  expect((await stat(pdfPath)).size).toBeGreaterThan(50_000);
 });
 
 test("移动端 390px：底部切换可用，方案区域可达", async ({ page }) => {

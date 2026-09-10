@@ -10,16 +10,31 @@ const card: RequirementCardView = {
 };
 
 describe("CardPanel", () => {
-  it("完整度不足：生成按钮禁用并说明缺什么", () => {
+  it("必问项缺失：生成按钮禁用并说明缺什么", () => {
     render(<CardPanel card={card} loading={false} generating={false} onEdit={vi.fn()} onGenerate={vi.fn()} />);
     const btn = screen.getByRole("button", { name: "确认需求卡并生成方案" });
     expect(btn).toBeDisabled();
-    expect(screen.getByText(/还需补齐：饮食禁忌、预算口径/)).toBeInTheDocument();
+    expect(screen.getByText(/必问项未确认：饮食禁忌、预算口径/)).toBeInTheDocument();
     const row = (label: string) => within(screen.getByText(label).closest("li")!);
     expect(row("成人").getByText("✓ 客户原话")).toBeInTheDocument();
     expect(row("酒店档次").getByText("✎ 顾问填写")).toBeInTheDocument();
     expect(row("饮食禁忌").getByText("● 必须确认")).toBeInTheDocument();
     expect(row("预算口径").getByText("● 必须确认")).toBeInTheDocument();
+  });
+  it("存在冲突：即使完整度达标也不能生成", () => {
+    render(<CardPanel card={{
+      ...card,
+      completeness: 0.9,
+      missing_slots: [],
+      conflicts: [{
+        code: "DATE_DURATION_MISMATCH",
+        message: "日期与天数冲突",
+        slots: ["date_start", "date_end", "duration_days"],
+        suggestion: "调整结束日期或旅行天数",
+      }],
+    }} loading={false} generating={false} onEdit={vi.fn()} onGenerate={vi.fn()} />);
+    expect(screen.getByRole("button", { name: "确认需求卡并生成方案" })).toBeDisabled();
+    expect(screen.getByText(/存在未解决冲突，无法确认：DATE_DURATION_MISMATCH/)).toBeInTheDocument();
   });
   it("完整度达标：按钮可点；已确认时文案变为重新生成", () => {
     const onGenerate = vi.fn();

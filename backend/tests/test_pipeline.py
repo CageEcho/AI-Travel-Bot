@@ -34,6 +34,7 @@ def test_family_three_cities_seven_days(db):
     # 成本：只来自规则引擎；住宿行的 rule_trace 可下钻
     acc = [l for l in r.cost.lines if l.category == "accommodation"]
     assert acc and all("晚" in l.rule_trace for l in acc)
+    assert sum((l.qty for l in acc), 0) == 6, "7 天行程应只计 6 晚，连住展示条目不得重复计费"
     assert r.cost.total > 0 and r.cost.breakdown["service_fee"] > 0
     # G5：UNKNOWN 项进待核实清单，且每项写清要核实什么
     assert r.unknown_count == len([c for c in r.checklist if c.code != "COST"])

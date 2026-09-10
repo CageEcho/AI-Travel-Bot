@@ -8,6 +8,7 @@ from fastapi import APIRouter, Depends, Query
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
 
+from app.core.auth import Principal, current_principal
 from app.core.db import get_db
 from app.core.errors import AppError
 from app.schemas.search import HotelQuery, SearchResult
@@ -33,5 +34,11 @@ def hotel_query(city: str, checkin: date, checkout: date, adults: int = Query(1,
 
 
 @router.get("/hotels", response_model=SearchResult)
-def hotels(q: HotelQuery = Depends(hotel_query), db: Session = Depends(get_db)) -> SearchResult:
-    return search_hotels(db, q)
+def hotels(q: HotelQuery = Depends(hotel_query), db: Session = Depends(get_db),
+           principal: Principal = Depends(current_principal)) -> SearchResult:
+    result = search_hotels(db, q)
+    if principal.can_view_cost:
+        return result.model_copy(update={"cost_visible": True})
+    candidates = [c.model_copy(update={"rate_id": None, "net_price": None, "season_uplift": None,
+                                       "confidence": None, "rate_updated_at": None}) for c in result.candidates]
+    return result.model_copy(update={"candidates": candidates, "cost_visible": False})

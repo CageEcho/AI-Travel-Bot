@@ -42,6 +42,8 @@ class Settings(BaseSettings):
     max_replan_rounds: int = 3
     completeness_threshold: float = 0.85
     generation_timeout_sec: int = 300
+    llm_call_timeout_sec: int = 120           # 单次模型调用（含流式读取）超时；编排正常 20–40s
+    task_stall_timeout_sec: int = 180         # 心跳超过此秒数未更新 → 查询状态时判为卡死并标 failed/STALLED
     min_candidates_to_plan: int = 3           # 硬过滤后候选 < 3 → 先给放宽建议，不硬生成
     # 编排器：llm（默认，Claude 结构化输出）| heuristic（确定性编排器：eval --dry-run / 无 Key 降级路径）
     planner_mode: str = "llm"
@@ -59,6 +61,13 @@ class Settings(BaseSettings):
     # 服务
     api_port: int = 8000
     log_level: str = "INFO"
+
+    # 鉴权：本地演示默认关闭；生产开启后必须配置 API_KEYS_JSON，否则所有业务 API 失败关闭。
+    # 格式：{"key-1":{"user_id":"advisor-01","role":"advisor"},"key-2":{"user_id":"sales-01","role":"sales"}}
+    auth_enabled: bool = False
+    api_keys_json: str = "{}"
+    local_user_id: str = "local-advisor"
+    local_role: str = "advisor"
 
     @field_validator("w_commercial")
     @classmethod
@@ -79,6 +88,13 @@ class Settings(BaseSettings):
     def check_effort(cls, v: str) -> str:
         if v not in {"low", "medium", "high", "xhigh", "max"}:
             raise ValueError("PLAN_EFFORT 必须是 low/medium/high/xhigh/max")
+        return v
+
+    @field_validator("local_role")
+    @classmethod
+    def check_local_role(cls, v: str) -> str:
+        if v not in {"sales", "advisor", "supervisor", "procurement", "admin"}:
+            raise ValueError("LOCAL_ROLE 必须是 sales/advisor/supervisor/procurement/admin")
         return v
 
 

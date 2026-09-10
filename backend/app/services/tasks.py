@@ -16,6 +16,7 @@ from sqlalchemy.orm import Session
 from app.core.config import settings
 from app.core.db import get_sessionmaker
 from app.core.errors import AppError
+from app.core.llm import active_model
 from app.core.logging import write_trace
 from app.models import GenerationTask, PlanVersion, RequirementCard
 from app.schemas.common import ErrorBody, PlanStatus
@@ -106,7 +107,7 @@ def run_generation(task_id: str, mode: str | None = None) -> None:
                 write_trace(db, step="plan", plan_id=task.plan_id, conv_id=card.conv_id, latency_ms=call["latency_ms"],
                             input_tokens=call["input_tokens"], output_tokens=call["output_tokens"],
                             payload={"round": call["round"], "cache_read_tokens": call["cache_read_tokens"],
-                                     "retried": call["retried"], "model": settings.claude_model})
+                                     "retried": call["retried"], "model": active_model()})
             write_trace(db, step="cost", plan_id=task.plan_id, conv_id=card.conv_id,
                         payload={"total": str(result.cost.total), "total_cny": str(result.cost.total_cny),
                                  "missing_rates": result.cost.missing_rates})
@@ -116,6 +117,10 @@ def run_generation(task_id: str, mode: str | None = None) -> None:
                                cost=json.loads(result.cost.model_dump_json()),
                                violations=[json.loads(v.model_dump_json()) for v in result.violations],
                                checklist=[json.loads(c.model_dump_json()) for c in result.checklist]))
+            db.refresh(task)
+            if task.status == "failed":          # 已被状态查询判为卡死：结果保留在 plan_version，但不再复活任务
+                log.warning("task %s finished after being marked %s; leaving status", task_id, task.error_code)
+                return
             task.replan_round = result.rounds - 1
             task.finished_at = datetime.now(timezone.utc)
             _beat(db, task, "done", 1.0)
@@ -139,11 +144,30 @@ def run_generation(task_id: str, mode: str | None = None) -> None:
             db.commit()
 
 
+STALLED_MESSAGE = "模型调用长时间无响应，任务已终止，请重新生成"
+
+
+def mark_stalled(db: Session, task: GenerationTask, stall_sec: int | None = None) -> bool:
+    """运行中的任务心跳超时 → failed/STALLED（不等服务重启才补偿）。返回是否改了状态。"""
+    if task.status in ("done", "failed"):
+        return False
+    limit = stall_sec if stall_sec is not None else settings.task_stall_timeout_sec
+    hb = task.heartbeat_at if task.heartbeat_at.tzinfo else task.heartbeat_at.replace(tzinfo=timezone.utc)
+    if (datetime.now(timezone.utc) - hb).total_seconds() <= limit:
+        return False
+    task.status, task.error_code, task.error_message = "failed", "STALLED", STALLED_MESSAGE
+    task.finished_at = datetime.now(timezone.utc)
+    db.commit()
+    log.warning("task %s stalled (heartbeat %s), marked failed", task.task_id, hb.isoformat())
+    return True
+
+
 def status_of(db: Session, plan_id: str) -> PlanStatus:
     task = db.execute(select(GenerationTask).where(GenerationTask.plan_id == plan_id)
                       .order_by(GenerationTask.created_at.desc())).scalars().first()
     if task is None:
         raise AppError("PLAN_NOT_FOUND", "方案不存在")
+    mark_stalled(db, task)
     version = None
     if task.status == "done":
         pv = db.execute(select(PlanVersion.version).where(PlanVersion.plan_id == plan_id)

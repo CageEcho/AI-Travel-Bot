@@ -1,26 +1,110 @@
-import Link from "next/link";
-import type { ReactNode } from "react";
-import { Compass } from "lucide-react";
+"use client";
 
-export function AppShell({ children, right }: { children: ReactNode; right?: ReactNode }) {
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState, type ReactNode } from "react";
+import { Clock3, Menu, Plus, X } from "lucide-react";
+import { AuthRedirect } from "@/components/auth/auth-redirect";
+import { Button } from "@/components/ui/button";
+import { Dialog } from "@/components/ui/dialog";
+import { ConversationList } from "@/features/conversation/components/conversation-list";
+import { useConversations } from "@/features/conversation/hooks/use-conversations";
+import { conversationApi } from "@/features/conversation/api";
+import { isAppError } from "@/lib/api/client";
+import type { MetaInfo } from "@/lib/api/types";
+import { cn } from "@/lib/utils/cn";
+import { HelpDialog } from "./help-dialog";
+
+const NAV = [
+  { href: "/", label: "工作台", match: (path: string) => path === "/" || path.startsWith("/c/") },
+  { href: "/search", label: "旅行灵感", match: (path: string) => path.startsWith("/search") },
+] as const;
+
+/** 顶部常驻导航：保留最近会话、帮助与模型状态，同时与新版首页共用同一栅格。 */
+export function AppShell({ children }: { children: ReactNode }) {
+  const pathname = usePathname() ?? "/";
+  const router = useRouter();
+  const activeId = pathname.match(/^\/c\/([^/?]+)/)?.[1] ?? null;
+  const [conversationsOpen, setConversationsOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [creating, setCreating] = useState(false);
+  const [meta, setMeta] = useState<MetaInfo | null>(null);
+  const conversations = useConversations(conversationsOpen ? `${pathname}#recent` : "closed");
+
+  useEffect(() => {
+    let alive = true;
+    conversationApi.meta().then((value) => { if (alive) setMeta(value); }).catch(() => { if (alive) setMeta(null); });
+    return () => { alive = false; };
+  }, []);
+
+  async function createConversation() {
+    if (creating) return;
+    setCreating(true);
+    try {
+      const result = await conversationApi.create();
+      setConversationsOpen(false);
+      router.push(`/c/${result.conv_id}` as never);
+    } catch (error) {
+      alert(isAppError(error) ? error.userMessage : "创建会话失败");
+    } finally {
+      setCreating(false);
+    }
+  }
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="bg-ink text-white">
-        <div className="mx-auto max-w-[1600px] px-4 lg:px-6 h-12 flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-2 font-semibold text-[15px]">
-            <Compass className="size-5" aria-hidden="true" />
-            行策
+    <div className="min-h-screen bg-bg text-text">
+      <AuthRedirect />
+      <header className="site-header">
+        <div className="site-container flex h-[68px] items-center gap-5">
+          <Link href="/" aria-label="Beyond Dream Travel 行策首页" className="flex shrink-0 items-center gap-2.5">
+            <Image src="/brand/bdt-icon.png" alt="" width={36} height={36} priority className="size-9 object-contain" />
+            <span className="hidden text-[17px] font-bold tracking-[-0.025em] text-[#171a1f] sm:inline">BEYOND DREAM TRAVEL <span className="font-semibold">· 行程</span></span>
           </Link>
-          <span className="hidden sm:inline text-xs text-white/60">高端旅行智能方案生成平台 · M0</span>
-          <nav className="ml-4 hidden md:flex items-center gap-1 text-sm">
-            <Link href="/" className="px-2 py-1 rounded hover:bg-white/10">工作台</Link>
-            <Link href="/search" className="px-2 py-1 rounded hover:bg-white/10">手动检索</Link>
+
+          <nav className="ml-auto hidden items-center gap-7 md:flex" aria-label="主导航">
+            {NAV.map((item) => (
+              <Link key={item.href} href={item.href} aria-current={item.match(pathname) ? "page" : undefined}
+                className="site-nav-link">{item.label}</Link>
+            ))}
+            <button type="button" onClick={() => setHelpOpen(true)} className="site-nav-link">帮助中心</button>
           </nav>
-          <div className="ml-auto flex items-center gap-2 text-xs text-white/80">{right}</div>
+
+          <div className="ml-auto hidden items-center gap-3 md:flex">
+            <button type="button" onClick={() => setConversationsOpen(true)} className="top-utility" aria-label="打开最近会话">
+              <Clock3 className="size-4" aria-hidden="true" />最近会话
+            </button>
+            <button type="button" onClick={() => setHelpOpen(true)} className="inline-flex items-center gap-2 whitespace-nowrap text-[12px] font-semibold text-[#1e9f45]">
+              <span className={cn("size-2 rounded-full", meta?.llm_configured === false ? "bg-warning" : "bg-[#20bf55]")} aria-hidden="true" />
+              AI 行程设计·内测
+            </button>
+            <Link href="/login" className="inline-flex h-10 items-center rounded-lg bg-[#101214] px-5 text-[13px] font-semibold text-white transition hover:bg-black">登录 / 注册</Link>
+          </div>
+
+          <button type="button" onClick={() => setMobileOpen((value) => !value)} className="ml-auto inline-flex size-10 items-center justify-center rounded-lg border border-border bg-white md:hidden" aria-label={mobileOpen ? "关闭导航" : "打开导航"}>
+            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
         </div>
+        {mobileOpen && (
+          <div className="border-t border-border bg-white px-4 pb-4 md:hidden">
+            <nav className="site-container grid gap-1 py-2" aria-label="移动端导航">
+              {NAV.map((item) => <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="rounded-lg px-3 py-3 text-sm font-semibold hover:bg-surface-2">{item.label}</Link>)}
+              <button type="button" onClick={() => { setMobileOpen(false); setConversationsOpen(true); }} className="rounded-lg px-3 py-3 text-left text-sm font-semibold hover:bg-surface-2">最近会话</button>
+              <button type="button" onClick={() => { setMobileOpen(false); setHelpOpen(true); }} className="rounded-lg px-3 py-3 text-left text-sm font-semibold hover:bg-surface-2">帮助中心</button>
+            </nav>
+          </div>
+        )}
       </header>
-      <main className="flex-1 min-h-0 mx-auto w-full max-w-[1600px] px-3 lg:px-6 py-3">{children}</main>
-      <footer className="px-4 py-1.5 text-[11px] text-muted text-right">资源数据为模拟数据集，非真实供应商信息。</footer>
+
+      <main className={cn("min-h-[calc(100vh-68px)]", pathname === "/" ? "" : "px-3 py-4 lg:px-6")}>{children}</main>
+
+      <Dialog open={conversationsOpen} onClose={() => setConversationsOpen(false)} title="最近会话">
+        <Button className="mb-4 w-full" onClick={createConversation} loading={creating}><Plus className="size-4" />新建会话</Button>
+        <ConversationList items={conversations.items} loading={conversations.loading} error={conversations.error?.userMessage ?? null}
+          activeId={activeId} onNavigate={() => setConversationsOpen(false)} onRetry={conversations.refresh} />
+      </Dialog>
+      <HelpDialog open={helpOpen} onClose={() => setHelpOpen(false)} meta={meta} />
     </div>
   );
 }

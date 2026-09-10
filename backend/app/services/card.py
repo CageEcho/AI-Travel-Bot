@@ -10,8 +10,8 @@ WEIGHTS: dict[str, float] = {
     "child_ages": 0.05, "budget_amount": 0.10, "budget_basis": 0.08, "budget_incl_flight": 0.05,
     "hotel_tier": 0.08, "dietary": 0.08, "accessibility": 0.06,
 }
-# 缺失时必须追问、不得静默假设为「无」的三项（PRD）
-MUST_ASK = ("dietary", "accessibility", "budget_basis")
+# 缺失时必须追问、不得静默假设为「无」的项（预算口径包含是否含机票）
+MUST_ASK = ("dietary", "accessibility", "budget_basis", "budget_incl_flight")
 
 
 def merge_slots(existing: SlotSet, extracted: SlotSet) -> SlotSet:
@@ -28,8 +28,12 @@ def merge_slots(existing: SlotSet, extracted: SlotSet) -> SlotSet:
 
 
 def set_slot(slots: SlotSet, name: str, value) -> SlotSet:
+    """顾问写入：先归一化（同义词→规范值、数字/日期校验），不合法抛 ValueError。"""
+    from app.services.slot_values import normalize_slot_value
+
     if name not in SlotSet.slot_names():
         raise KeyError(name)
+    value = normalize_slot_value(name, value)
     out = slots.model_copy(deep=True)
     setattr(out, name, None if value is None else SlotValue(value=value, source="advisor_input", confidence=1.0))
     return out
@@ -54,9 +58,22 @@ def completeness(slots: SlotSet) -> tuple[float, list[str]]:
     return round(min(score, 1.0), 3), missing
 
 
-def can_confirm(slots: SlotSet) -> tuple[bool, float]:
-    c, _ = completeness(slots)
-    return c >= settings.completeness_threshold, c
+def confirmation_blockers(slots: SlotSet, conflicts: list | None = None) -> tuple[float, list[str], list[str]]:
+    """返回（完整度，必问缺失项，冲突码）。确认门禁由服务端统一判定。"""
+    comp, missing = completeness(slots)
+    must_missing = [name for name in MUST_ASK if name in missing]
+    conflict_codes = [
+        getattr(conflict, "code", None)
+        or (conflict.get("code") if isinstance(conflict, dict) else None)
+        or "UNKNOWN"
+        for conflict in (conflicts or [])
+    ]
+    return comp, must_missing, conflict_codes
+
+
+def can_confirm(slots: SlotSet, conflicts: list | None = None) -> tuple[bool, float]:
+    comp, must_missing, conflict_codes = confirmation_blockers(slots, conflicts)
+    return comp >= settings.completeness_threshold and not must_missing and not conflict_codes, comp
 
 
 DIETARY_HINTS = ("肠胃", "吃不惯", "生冷", "清淡", "忌口", "素食", "吃素", "清真", "过敏", "不吃", "不能吃", "海鲜")
@@ -64,6 +81,7 @@ DEFAULT_FOLLOWUP: dict[str, Followup] = {
     "dietary": Followup(slot="dietary", question="一家人饮食上有什么禁忌或偏好需要安排吗？", options=["忌生食", "素食", "清真", "无禁忌"]),
     "accessibility": Followup(slot="accessibility", question="同行人是否有无障碍或慢行需求？", options=["无", "轮椅", "老人慢行", "婴儿车"]),
     "budget_basis": Followup(slot="budget_basis", question="预算是全家总预算还是每人？", options=["总预算", "每人"]),
+    "budget_incl_flight": Followup(slot="budget_incl_flight", question="预算是否包含国际机票？", options=["含机票", "不含机票", "还没定"]),
 }
 
 
@@ -75,7 +93,7 @@ def ensure_must_ask(extraction: SlotExtraction, text: str, existing: SlotSet | N
                     limit: int = 3) -> tuple[SlotExtraction, list[str]]:
     """确定性兜底（不靠模型自觉）：
     1) 原话含饮食暗示且 dietary 未知 → dietary 追问必须排第一；
-    2) 必问三项（dietary / accessibility / budget_basis）缺失且本轮还有名额 → 补上默认追问。
+    2) 必问项（饮食 / 无障碍 / 预算口径 / 是否含机票）缺失且本轮还有名额 → 补上默认追问。
     已由顾问确认或已抽到值的槽位不追问。"""
     warnings: list[str] = []
     fus = list(extraction.followups)

@@ -19,6 +19,10 @@ frontend/out/
 frontend/test-results/
 frontend/playwright-report/
 frontend/.env
+# 本地预览、导出样本与视觉 QA 中间文件
+frontend/tmp/
+tmp/
+output/
 # 测试误生成的嵌套目录（内嵌 PG 测试数据）
 Users/
 # 个人文件不进公开仓库

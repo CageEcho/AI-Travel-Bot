@@ -8,13 +8,16 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { SLOT_NAMES, type RequirementCardView, type SlotName } from "@/lib/api/types";
 import { SLOT_LABEL, formatSlotValue, percent } from "@/lib/utils/format";
 import { cn } from "@/lib/utils/cn";
-import { slotBadges } from "../utils";
+import { MUST_ASK, slotBadges } from "../utils";
 
-export function CardPanel({ card, loading, generating, onEdit, onGenerate, className }: {
+export function CardPanel({ card, loading, generating, onEdit, onGenerate, className, highlight = [] }: {
   card: RequirementCardView | null; loading: boolean; generating: boolean;
   onEdit: (slot: SlotName) => void; onGenerate: () => void; className?: string;
+  /** 需要顾问回头修改的槽位：高亮显示 */
+  highlight?: SlotName[];
 }) {
-  const canGenerate = !!card && card.completeness >= card.completeness_threshold;
+  const unresolvedMustAsk = card?.missing_slots.filter((name) => MUST_ASK.includes(name as SlotName)) ?? [];
+  const canGenerate = !!card && card.completeness >= card.completeness_threshold && card.conflicts.length === 0 && unresolvedMustAsk.length === 0;
   const missingLabels = card?.missing_slots.map((m) => SLOT_LABEL[m as SlotName] ?? m).join("、");
   return (
     <Card className={cn("flex flex-col min-h-0", className)}>
@@ -31,8 +34,8 @@ export function CardPanel({ card, loading, generating, onEdit, onGenerate, class
               <div className="flex justify-between text-xs text-muted">
                 <span>完整度 {percent(card.completeness)}</span><span>阈值 {percent(card.completeness_threshold)}</span>
               </div>
-              <div className="h-2 mt-1 rounded bg-border/60 overflow-hidden" role="progressbar" aria-valuenow={Math.round(card.completeness * 100)} aria-valuemin={0} aria-valuemax={100} aria-label="需求卡完整度">
-                <div className={cn("h-full", canGenerate ? "bg-primary" : "bg-warning")} style={{ width: percent(card.completeness) }} />
+              <div className="h-2 mt-1.5 rounded-full bg-surface-2 overflow-hidden" role="progressbar" aria-valuenow={Math.round(card.completeness * 100)} aria-valuemin={0} aria-valuemax={100} aria-label="需求卡完整度">
+                <div className={cn("h-full rounded-full transition-[width] duration-[360ms]", canGenerate ? "bg-primary" : "bg-warning")} style={{ width: percent(card.completeness) }} />
               </div>
             </div>
             {card.conflicts.map((c) => (
@@ -45,10 +48,12 @@ export function CardPanel({ card, loading, generating, onEdit, onGenerate, class
                 const sv = card.slots[name];
                 const v = formatSlotValue(sv?.value);
                 return (
-                  <li key={name} className="grid grid-cols-[88px_1fr_auto] gap-2 items-start py-2 text-sm">
+                  <li key={name} id={`slot-${name}`}
+                    className={cn("grid grid-cols-[88px_1fr_auto] gap-2 items-start py-2 text-sm transition-colors",
+                      highlight.includes(name) && "bg-warning-soft ring-2 ring-warning -mx-2 px-2 rounded-xl")}>
                     <span className="text-muted">{SLOT_LABEL[name]}</span>
                     <button type="button" onClick={() => onEdit(name)} aria-label={`修改${SLOT_LABEL[name]}`}
-                      className={cn("text-left inline-flex items-start gap-1 rounded hover:bg-surface-2 -mx-1 px-1 break-all min-h-[28px]", !v && "text-muted/70 italic")}>
+                      className={cn("text-left inline-flex items-start gap-1 hover:bg-surface-2 -mx-1 px-1 break-all min-h-[28px]", !v && "text-muted/70 italic")}>
                       {v || "（未填）"}<Pencil className="size-3 mt-1 text-muted shrink-0" aria-hidden="true" />
                     </button>
                     <span className="flex flex-wrap gap-1 justify-end">
@@ -64,14 +69,18 @@ export function CardPanel({ card, loading, generating, onEdit, onGenerate, class
           </>
         )}
       </div>
-      <div className="border-t border-border p-3">
+      <div className="p-4 pt-2">
         <Button className="w-full" disabled={!canGenerate || generating} loading={generating} onClick={onGenerate}>
           {card?.confirmed ? "重新生成方案" : "确认需求卡并生成方案"}
         </Button>
         <p className="mt-1.5 text-xs text-muted" id="generate-hint">
           {!card ? "" : canGenerate
             ? (card.confirmed ? "需求卡已确认，可再次生成新方案" : "点击后先确认需求卡（人工节点①），再开始生成，约需 30–60 秒")
-            : `完整度不足，无法确认。还需补齐：${missingLabels}`}
+            : card.conflicts.length
+              ? `存在未解决冲突，无法确认：${card.conflicts.map((c) => c.code).join("、")}`
+              : unresolvedMustAsk.length
+                ? `必问项未确认：${unresolvedMustAsk.map((m) => SLOT_LABEL[m as SlotName] ?? m).join("、")}`
+                : `完整度不足，无法确认。还需补齐：${missingLabels}`}
         </p>
       </div>
     </Card>

@@ -16,7 +16,7 @@ export function ProvenancePopover({ item }: { item: RenderedItem }) {
         className="inline-flex size-7 items-center justify-center rounded-full text-info hover:bg-info-soft focus:bg-info-soft">
         <Info className="size-4" aria-hidden="true" />
       </button>
-      <div role="tooltip" className="hidden group-hover:block group-focus-within:block absolute right-0 top-8 z-20 w-[340px] max-w-[80vw] rounded-lg bg-ink text-white/90 p-3 text-xs leading-5 shadow-xl whitespace-pre-wrap text-left">
+      <div role="tooltip" className="hidden group-hover:block group-focus-within:block absolute right-0 top-8 z-20 w-[340px] max-w-[80vw] rounded-2xl bg-ink text-white/90 p-3.5 shadow-(--shadow-float) text-xs leading-5 shadow-xl whitespace-pre-wrap text-left">
         <div>资源 ID：<code>{p.resource_id}</code>{item.room_id && <> · 房型 <code>{item.room_id}</code></>}</div>
         <div>数据更新时间：{shortTime(p.updated_at)}</div>
         <div>命中需求：{p.matched_slots.length ? p.matched_slots.map((s) => SLOT_LABEL[s as SlotName] ?? s).join("、") : "—"}</div>

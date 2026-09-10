@@ -44,12 +44,25 @@ PLANNER_MODE=llm
 
 DeepSeek 走其 Anthropic 兼容端点，复用同一个 SDK；因该端点不支持 Claude 的 `output_format`，后端改用「强制调用唯一工具（input_schema 即 Pydantic JSON Schema）」拿结构化结果。DeepSeek 对 schema 的遵循弱于 Claude：偶尔多包一层 `result`、用同义词、或工具参数为空，后端有通用解包、别名归一化、`DEEPSEEK_MAX_ATTEMPTS`（默认 3）次重试兜底；回退 3 轮仍有违规时再做一次确定性资源替换。切换后跑 `python eval/smoke_real_model.py` 记录两种契约的结构合规率、耗时与 token。
 
+## 身份认证与角色权限
+
+本地演示默认 `AUTH_ENABLED=false`，以 `local-advisor` 身份运行。部署环境应在 `.env` 开启鉴权并为每位用户生成独立高熵 Key：
+
+```bash
+AUTH_ENABLED=true
+API_KEYS_JSON={"至少16位的随机Key":{"user_id":"advisor-01","role":"advisor"}}
+```
+
+角色支持 `sales / advisor / supervisor / procurement / admin`。开启后，未登录或配置错误均失败关闭；浏览器访问 `/login` 输入 Key，凭证只保存在当前标签页的 `sessionStorage`。销售和普通顾问只能访问本人创建的会话、需求卡、任务与方案；主管、管理员可访问全部，采购可只读全部。销售角色的酒店检索与方案响应会由后端删除净价、价格档、加价和价格来源，且无权访问生成轨迹。执行 `alembic upgrade head` 后，历史 M0 会话会安全归到 `local-advisor`，如需转交应由管理员后续显式调整归属。
+
 ## 正式前端（Next.js）
 
 ```bash
-cd frontend && npm install && npm run dev      # http://localhost:3000，需后端在 8000
+cd frontend && npm install --legacy-peer-deps && npm run dev      # http://localhost:3000，需后端在 8000
 npm run lint && npm run typecheck && npm run test && npm run build && npm run e2e
 ```
+
+方案生成完成且硬约束违规为 0 时，方案面板会出现「客户版预览与导出」。客户版采用固定 A4 图文排版，支持多页 PDF 与微信长图下载；导出内容不会包含内部成本轨迹、资源 ID、价格档 ID 或模型信息。M0 使用模拟资源，因此每一页都会保留演示数据声明。
 
 详见 `frontend/README.md` 与 `docs/前端技术适配声明与第一阶段前端开发文档.md`。`backend/app/static/index.html` 保留为 API 冒烟兜底。
 
@@ -90,6 +103,8 @@ docs/              PRD 与阶段文档副本
 - **金额只来自 `services/cost.py`。** 模型输出 schema（`PlannedItem`）里没有价格、名称、营业时间等事实字段；任何从 LLM 响应读金额的代码都是 bug。
 - **三道防线。** ① schema 限定模型只输出 `resource_id`；② `render.py` 校验 ID 必须在本次候选池内；③ 回填后逐字段与库值比对。拦截项标 `blocked` 并触发重排，绝不静默丢弃。
 - **人工节点①。** 需求卡未 confirm 时 `POST /api/v1/plans` 返回 409 `CARD_NOT_CONFIRMED`；完整度低于阈值不允许 confirm。
+- **客户 PII 最小化。** 顾问原话中的姓名、电话、邮箱、微信、证件号和地址在入库及发送模型前统一脱敏；trace 只记录脱敏文本摘要与是否发生脱敏，不保存原文。
+- **模型输入按不可信数据处理。** 所有结构化模型调用都会注入稳定的安全边界，客户文本、槽位与资源文本中的越权指令不得改变角色、规则或输出契约。
 - **任务可恢复。** 生成状态落 `generation_task` 表并带心跳；服务启动时把僵死任务标 `failed/ORPHANED`。
 - **Opus 5 参数。** 不传 `temperature` / `top_p` / `budget_tokens`；深度用 `output_config.effort`；结构化输出用 `messages.parse()`，不用 prefill。
 - **编排器模式。** `PLANNER_MODE=llm`（默认）| `heuristic`（确定性编排器，供 `eval --dry-run`、测试与 LLM 不可用时的降级）。

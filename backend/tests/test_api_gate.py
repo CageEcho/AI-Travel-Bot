@@ -67,3 +67,24 @@ def test_advisor_input_not_overwritten_and_confirm_freezes_version(client):
     card2 = _fill(client, conv, pace="relaxed")
     assert card2["version"] == 2 and not card2["confirmed"]
     assert client.get(f"/api/v1/conversations/{conv}/card").json()["version"] == 2
+
+
+def test_missing_must_ask_cannot_confirm_even_above_threshold(client):
+    conv = _conv(client)
+    values = {k: v for k, v in FULL.items() if k != "accessibility"}
+    card = _fill(client, conv, **values)
+    assert card["completeness"] >= 0.85
+    r = client.post(f"/api/v1/conversations/{conv}/card/confirm")
+    assert r.status_code == 409 and r.json()["error"]["code"] == "CARD_NOT_READY"
+    assert r.json()["error"]["details"]["must_ask_missing"] == ["accessibility"]
+
+
+def test_conflicted_card_cannot_confirm(client):
+    conv = _conv(client)
+    values = {**FULL, "duration_days": 10, "adults": 4, "children": 0, "child_ages": [],
+              "budget_amount": 80000, "hotel_tier": ["5star"]}
+    card = _fill(client, conv, **values)
+    assert card["completeness"] >= 0.85 and any(c["code"] == "C1" for c in card["conflicts"])
+    r = client.post(f"/api/v1/conversations/{conv}/card/confirm")
+    assert r.status_code == 409 and r.json()["error"]["code"] == "CARD_NOT_READY"
+    assert "C1" in r.json()["error"]["details"]["conflicts"]

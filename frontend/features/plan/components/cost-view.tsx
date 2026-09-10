@@ -7,7 +7,7 @@ export function CostView({ cost }: { cost: CostSummary }) {
   const variance = cost.variance_pct === null ? null : Number(cost.variance_pct);
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+      <div className="grid grid-cols-2 gap-3">
         <Kpi label="地面总计（JPY，含服务费）" value={`¥${money(cost.total)}`} />
         <Kpi label={`折人民币（汇率 ${cost.fx_rate}）`} value={`￥${money(cost.total_cny)}`} />
         <Kpi label="人均（JPY）" value={`¥${money(cost.per_person)}`} />
@@ -22,7 +22,7 @@ export function CostView({ cost }: { cost: CostSummary }) {
           ))}
         </tbody>
       </table>
-      <details className="rounded-(--radius-control) border border-border">
+      <details className="rounded-(--radius-control) bg-surface-2">
         <summary className="cursor-pointer px-3 py-2 text-sm text-info">计算轨迹 · {cost.lines.length} 条明细 · 服务费率 {cost.service_fee_rate} · 汇率时间 {cost.fx_time.slice(0, 19).replace("T", " ")}</summary>
         <div className="overflow-x-auto">
           <table className="w-full text-xs min-w-[640px]">
@@ -44,8 +44,8 @@ export function CostView({ cost }: { cost: CostSummary }) {
 
 function Kpi({ label, value, tone }: { label: string; value: string; tone?: "danger" | "success" }) {
   return (
-    <div className="rounded-(--radius-control) border border-border bg-surface-2 px-3 py-2">
-      <b className={cn("block text-lg tabular-nums", tone === "danger" && "text-danger", tone === "success" && "text-success")}>{value}</b>
+    <div className="rounded-(--radius-control) bg-surface-2 px-4 py-3">
+      <b className={cn("block text-[22px] tabular-nums type-editorial", tone === "danger" && "text-danger", tone === "success" && "text-success")}>{value}</b>
       <span className="text-xs text-muted">{label}</span>
     </div>
   );

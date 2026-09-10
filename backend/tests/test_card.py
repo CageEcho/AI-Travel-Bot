@@ -1,4 +1,6 @@
-"""需求卡逻辑：合并优先级、完整度、追问截取、金额归一化。"""
+"""需求卡逻辑：合并优先级、完整度、追问截取、金额归一化与强类型边界。"""
+import pytest
+from pydantic import ValidationError
 from app.schemas.slots import Followup, SlotExtraction, SlotSet, SlotValue, normalize_amount
 from app.services.card import cap_followups, completeness, merge_slots
 
@@ -37,3 +39,15 @@ def test_followups_capped_not_rejected():
     ext = SlotExtraction(slots=SlotSet(), followups=[Followup(slot=f"s{i}", question="q") for i in range(5)])
     capped, warnings = cap_followups(ext)
     assert len(capped.followups) == 3 and warnings and "5 个追问" in warnings[0]
+
+
+@pytest.mark.parametrize("slot,value", [
+    ("adults", "很多"),
+    ("destination_cities", 42),
+    ("budget_basis", "banana"),
+    ("child_ages", ["five"]),
+    ("date_start", "2026-02-30"),
+])
+def test_slot_set_rejects_wrong_field_types_and_values(slot, value):
+    with pytest.raises(ValidationError):
+        SlotSet(**{slot: SlotValue(value=value, source="client_verbatim", confidence=0.9)})

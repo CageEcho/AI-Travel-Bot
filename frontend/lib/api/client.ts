@@ -10,11 +10,13 @@ export interface AppError {
 }
 
 const BASE = "/api/v1";
+const API_KEY_STORAGE = "travel_api_key";
 const RETRYABLE_CODES = new Set(["LLM_FAILED", "LLM_INVALID_OUTPUT", "INTERNAL", "NETWORK", "TIMEOUT"]);
 
 const USER_MESSAGES: Record<string, string> = {
   CARD_NOT_CONFIRMED: "需求卡还没有确认，请先确认需求卡再生成方案。",
   COMPLETENESS_TOO_LOW: "需求卡信息还不够完整，补齐必填项后才能确认。",
+  CARD_NOT_READY: "需求卡仍有必问项未确认或冲突未解决，暂时不能生成。",
   CANDIDATES_TOO_FEW: "按当前条件筛出的酒店太少，暂不生成。请按建议放宽档次、预算或日期。",
   LLM_FAILED: "模型服务暂时不可用，请稍后重试。你输入的内容已保留。",
   LLM_INVALID_OUTPUT: "模型返回的结果不符合约定格式，已自动重试仍失败，请再试一次。",
@@ -24,7 +26,21 @@ const USER_MESSAGES: Record<string, string> = {
   NETWORK: "网络连接失败，请检查后端服务是否在运行。",
   TIMEOUT: "请求超时，请重试。",
   INTERNAL: "服务内部错误，请稍后重试。",
+  AUTH_REQUIRED: "请先登录后继续。",
+  AUTH_INVALID: "登录凭证无效或已失效，请重新登录。",
+  FORBIDDEN: "当前账号没有执行此操作的权限。",
+  AUTH_CONFIG_INVALID: "服务端鉴权配置无效，请联系管理员。",
 };
+
+export function setApiKey(value: string): void {
+  if (typeof window === "undefined") return;
+  if (value) window.sessionStorage.setItem(API_KEY_STORAGE, value);
+  else window.sessionStorage.removeItem(API_KEY_STORAGE);
+}
+
+export function getApiKey(): string {
+  return typeof window === "undefined" ? "" : window.sessionStorage.getItem(API_KEY_STORAGE) ?? "";
+}
 
 export function isAppError(e: unknown): e is AppError {
   return typeof e === "object" && e !== null && "code" in e && "userMessage" in e;
@@ -58,7 +74,7 @@ export async function apiFetch<T>(path: string, init: RequestInit & { timeoutMs?
     res = await fetch(BASE + path, {
       ...init,
       signal: controller.signal,
-      headers: { "Content-Type": "application/json", ...(init.headers ?? {}) },
+      headers: { "Content-Type": "application/json", ...(getApiKey() ? { "X-API-Key": getApiKey() } : {}), ...(init.headers ?? {}) },
     });
   } catch (e) {
     clearTimeout(timer);
@@ -66,7 +82,13 @@ export async function apiFetch<T>(path: string, init: RequestInit & { timeoutMs?
   }
   clearTimeout(timer);
   const body: unknown = await res.json().catch(() => null);
-  if (!res.ok) throw normalizeError(res.status, body);
+  if (!res.ok) {
+    const error = normalizeError(res.status, body);
+    if (res.status === 401 && typeof window !== "undefined" && window.location.pathname !== "/login") {
+      window.dispatchEvent(new Event("travel:auth-required"));
+    }
+    throw error;
+  }
   return body as T;
 }
 

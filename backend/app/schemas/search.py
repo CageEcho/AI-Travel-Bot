@@ -36,7 +36,7 @@ class HotelQuery(BaseModel):
 class HotelCandidate(BaseModel):
     hotel_id: str
     room_id: str
-    rate_id: str
+    rate_id: str | None
     name_zh: str
     name_local: str | None
     city: str
@@ -52,10 +52,10 @@ class HotelCandidate(BaseModel):
     min_child_age: int | None
     child_age_unknown: bool
     extra_bed: dict | None
-    net_price: Decimal
-    season_uplift: Decimal
-    confidence: str
-    rate_updated_at: str
+    net_price: Decimal | None
+    season_uplift: Decimal | None
+    confidence: str | None
+    rate_updated_at: str | None
     hotel_updated_at: str
     score: float = 0.0
 
@@ -71,3 +71,4 @@ class SearchResult(BaseModel):
     relaxation_hints: list[RelaxationHint] = []
     total_before_filter: int | None = None
     funnel: dict[str, int] = {}
+    cost_visible: bool = True

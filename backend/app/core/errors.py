@@ -11,6 +11,10 @@ log = logging.getLogger("app.errors")
 
 # 错误码表（集中定义）
 ERROR_STATUS: dict[str, int] = {
+    "AUTH_REQUIRED": 401,
+    "AUTH_INVALID": 401,
+    "FORBIDDEN": 403,
+    "AUTH_CONFIG_INVALID": 503,
     "CONV_NOT_FOUND": 404,
     "CARD_NOT_FOUND": 404,
     "PLAN_NOT_FOUND": 404,
@@ -19,6 +23,7 @@ ERROR_STATUS: dict[str, int] = {
     "VALUE_INVALID": 400,
     "PARAM_INVALID": 400,
     "COMPLETENESS_TOO_LOW": 409,   # 人工节点①前置：完整度不足不得确认
+    "CARD_NOT_READY": 409,         # 必问项未确认或存在冲突
     "CARD_NOT_CONFIRMED": 409,     # 人工节点①：未确认不得生成（G4）
     "CANDIDATES_TOO_FEW": 409,     # 硬过滤后候选不足，先返回放宽建议
     "LLM_FAILED": 502,

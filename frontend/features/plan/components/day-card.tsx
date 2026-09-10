@@ -5,8 +5,8 @@ import { ProvenancePopover } from "./provenance-popover";
 
 export function DayCard({ day, blocking }: { day: RenderedDay; blocking: Violation[] }) {
   return (
-    <article className="rounded-(--radius-card) border border-border mb-3 overflow-hidden">
-      <header className="flex flex-wrap items-baseline gap-x-3 gap-y-1 bg-surface-2 px-3 py-2 text-sm border-b border-border">
+    <article className="rounded-(--radius-control) mb-3 overflow-hidden bg-surface-2">
+      <header className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-4 py-2.5 text-sm">
         <b>Day {day.day_index}</b>
         <span className="text-muted">{day.date} {WEEKDAY[day.weekday]}</span>
         <span>{day.city}{day.is_transfer && " · 转场"}</span>
@@ -18,10 +18,10 @@ export function DayCard({ day, blocking }: { day: RenderedDay; blocking: Violati
       ))}
       <ul>
         {day.items.map((it, i) => (
-          <li key={i} className={cn("grid grid-cols-[64px_56px_1fr_32px] gap-2 items-center px-3 py-2 text-sm border-b border-dashed border-border last:border-b-0",
+          <li key={i} className={cn("grid grid-cols-[64px_56px_1fr_32px] gap-2 items-center mx-2 mb-2 px-3 py-2.5 text-sm rounded-xl bg-surface",
             it.status === "blocked" && "bg-danger-soft")}>
             <span className="text-muted text-xs">{ITEM_SLOT_LABEL[it.slot] ?? it.slot}{it.start_time && <><br />{it.start_time}</>}</span>
-            <span className="rounded-full bg-surface-2 text-center text-[11px] py-0.5">{ITEM_TYPE_LABEL[it.type] ?? it.type}</span>
+            <span className="rounded-full bg-surface text-muted text-center text-[10.5px] font-semibold py-0.5 shadow-(--shadow-card)">{ITEM_TYPE_LABEL[it.type] ?? it.type}</span>
             <span className="min-w-0">
               {it.status === "blocked" ? (
                 <><b className="text-danger">已拦截</b> <span className="text-xs">{it.block_reason}</span></>

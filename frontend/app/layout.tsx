@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { AppShell } from "@/components/layout/app-shell";
+import { RouteTransition } from "@/components/layout/route-transition";
 
 export const metadata: Metadata = {
   title: "行策 · 高端旅行智能方案生成平台",
@@ -11,7 +13,12 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1 };
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="zh-CN" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {/* 外壳放在根布局：跨路由常驻，切页只换内容层 */}
+        <AppShell>
+          <RouteTransition>{children}</RouteTransition>
+        </AppShell>
+      </body>
     </html>
   );
 }

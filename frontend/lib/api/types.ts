@@ -33,10 +33,19 @@ export interface RequirementCardView {
   confirmed_at: string | null;
 }
 
+export interface NextStep {
+  analysis: string;
+  followups: Followup[];
+  ready: boolean;
+  summary: string;
+  source: "llm" | "rules";
+}
+
 export interface MessageOut {
   extraction: { slots: SlotSet; followups: Followup[]; notes: string };
   card: RequirementCardView;
   warnings: string[];
+  next_step: NextStep | null;
 }
 
 export type BackendTaskStatus = "queued" | "searching" | "planning" | "validating" | "costing" | "done" | "failed";
@@ -87,7 +96,7 @@ export interface CostSummary {
 }
 
 export interface PlanVersionView {
-  plan_id: string; version: number; card_id: string; status: string; structure: RenderedPlan; cost: CostSummary;
+  plan_id: string; version: number; card_id: string; status: string; structure: RenderedPlan; cost: CostSummary | null; cost_visible: boolean;
   violations: Violation[]; checklist: ChecklistItem[]; blocking_count: number; unknown_count: number; replan_rounds: number;
   created_at: string; synthetic_notice: string;
 }
@@ -99,9 +108,20 @@ export interface TraceStep {
 export interface TraceResponse { plan_id: string; task: { status: string; replan_round: number; error_code: string | null }; steps: TraceStep[] }
 
 export interface HotelCandidate {
-  hotel_id: string; room_id: string; rate_id: string; name_zh: string; name_local: string | null; city: string; district: string | null;
+  hotel_id: string; room_id: string; rate_id: string | null; name_zh: string; name_local: string | null; city: string; district: string | null;
   tier: string; tags: string[]; room_name: string; max_occupancy: number; max_children: number; min_child_age: number | null;
-  child_age_unknown: boolean; net_price: string; season_uplift: string; confidence: string; score: number;
+  child_age_unknown: boolean; net_price: string | null; season_uplift: string | null; confidence: string | null; score: number;
 }
 export interface RelaxationHint { field: string; suggestion: string; would_yield: number }
-export interface SearchResult { candidates: HotelCandidate[]; relaxation_hints: RelaxationHint[]; total_before_filter: number | null; funnel: Record<string, number> }
+export interface SearchResult { candidates: HotelCandidate[]; relaxation_hints: RelaxationHint[]; total_before_filter: number | null; funnel: Record<string, number>; cost_visible: boolean }
+
+export interface ConversationSummary {
+  conv_id: string; title: string; created_at: string; last_activity_at: string; completeness: number; confirmed: boolean;
+  plan_id: string | null; plan_status: string | null;
+}
+export type UserRole = "sales" | "advisor" | "supervisor" | "procurement" | "admin";
+export interface MetaInfo {
+  provider: string; model: string; planner_mode: string; llm_configured: boolean; milestone: string;
+  auth_enabled: boolean; user_id: string; role: UserRole; cost_visible: boolean;
+}
+export interface CurrentUser { user_id: string; role: UserRole; cost_visible: boolean }

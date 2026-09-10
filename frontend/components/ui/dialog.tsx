@@ -3,7 +3,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { X } from "lucide-react";
 
-/** 原生 <dialog>：自带焦点约束、Esc 关闭、遮罩。 */
+/** 原生 <dialog>：自带焦点约束、Esc 关闭、遮罩。视觉：白色大圆角浮层。 */
 export function Dialog({ open, onClose, title, children }: { open: boolean; onClose: () => void; title: string; children: ReactNode }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -18,15 +18,15 @@ export function Dialog({ open, onClose, title, children }: { open: boolean; onCl
       onClose={onClose}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
       aria-labelledby="dialog-title"
-      className="m-auto w-[min(92vw,480px)] rounded-(--radius-card) border border-border bg-surface p-0 text-text shadow-xl max-h-[90vh] overflow-auto"
+      className="m-auto w-[min(92vw,480px)] rounded-(--radius-card) border-0 bg-surface p-0 text-text shadow-(--shadow-float) max-h-[90vh] overflow-auto"
     >
-      <div className="flex items-center justify-between px-5 py-3 border-b border-border">
-        <h2 id="dialog-title" className="text-sm font-semibold">{title}</h2>
-        <button type="button" onClick={onClose} aria-label="关闭" className="p-1 rounded hover:bg-surface-2 min-h-[36px] min-w-[36px] inline-flex items-center justify-center">
+      <div className="flex items-center justify-between px-6 pt-5 pb-3">
+        <h2 id="dialog-title" className="text-[17px] font-bold tracking-tight">{title}</h2>
+        <button type="button" onClick={onClose} aria-label="关闭" className="icon-btn !w-9 !h-9 !shadow-none bg-surface-2">
           <X className="size-4" aria-hidden="true" />
         </button>
       </div>
-      <div className="p-5">{children}</div>
+      <div className="px-6 pb-6">{children}</div>
     </dialog>
   );
 }

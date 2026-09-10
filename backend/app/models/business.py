@@ -16,6 +16,7 @@ from app.core.db import Base
 class Conversation(Base):
     __tablename__ = "conversation"
     conv_id: Mapped[str] = mapped_column(Text, primary_key=True)
+    owner_id: Mapped[str] = mapped_column(Text, nullable=False, server_default="local-advisor", index=True)
     created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False,
                                                  server_default=func.now())
 

@@ -165,7 +165,8 @@ class PlanVersionView(BaseModel):
     card_id: str
     status: str
     structure: RenderedPlan
-    cost: CostSummary
+    cost: CostSummary | None
+    cost_visible: bool = True
     violations: list[Violation]
     checklist: list[ChecklistItem]
     blocking_count: int
