@@ -42,6 +42,12 @@ DEEPSEEK_MODEL=deepseek-v4-pro     # 或 deepseek-v4-flash
 PLANNER_MODE=llm
 ```
 
+若开发机通过企业代理或本地调试代理访问 HTTPS，后端会在检测到 `SSL_CERT_FILE` 时自动把代理 CA 与系统 `/etc/ssl/cert.pem` 合并，并保持证书校验开启。只有系统证书位于其它路径时才需要显式设置 `LLM_CA_BUNDLE=/path/to/ca-bundle.pem`；不要通过关闭 TLS 校验绕过证书问题。
+
+本地 M0 默认 `DEMO_MODE=true`：某个目的地没有顾问所选酒店档次时，只为该城市自动扩展到其它档次的兼容住宿，并在方案假设与 trace 中明确记录；日期可售、人数容量、儿童政策和资源引用校验仍然生效。生产环境必须设置 `DEMO_MODE=false`。
+
+真实输入若因日期、酒店档次或目的地组合导致候选不足，任务状态会保存结构化恢复建议。前端提供可执行的一键修改，选择后自动创建新需求卡版本、重新确认并生成；历史失败任务在首次查询时也会补算建议，避免停在不可继续的错误页。
+
 DeepSeek 走其 Anthropic 兼容端点，复用同一个 SDK；因该端点不支持 Claude 的 `output_format`，后端改用「强制调用唯一工具（input_schema 即 Pydantic JSON Schema）」拿结构化结果。DeepSeek 对 schema 的遵循弱于 Claude：偶尔多包一层 `result`、用同义词、或工具参数为空，后端有通用解包、别名归一化、`DEEPSEEK_MAX_ATTEMPTS`（默认 3）次重试兜底；回退 3 轮仍有违规时再做一次确定性资源替换。切换后跑 `python eval/smoke_real_model.py` 记录两种契约的结构合规率、耗时与 token。
 
 ## 身份认证与角色权限

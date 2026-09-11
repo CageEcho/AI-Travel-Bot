@@ -36,6 +36,7 @@ class ChecklistItem(BaseModel):
 class ErrorBody(BaseModel):
     code: str
     message: str
+    details: dict | None = None
 
 
 TaskStatus = Literal["queued", "searching", "planning", "validating", "costing", "done", "failed"]

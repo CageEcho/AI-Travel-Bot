@@ -13,4 +13,8 @@ describe("problemSlotsFor", () => {
     expect(needsCardFix("CANDIDATES_TOO_FEW")).toBe(true);
     expect(needsCardFix("LLM_FAILED")).toBe(false);
   });
+  it("优先使用后端明确返回的问题字段", () => {
+    const details = { kind: "candidate_recovery" as const, problem_slots: ["date_start" as const, "hotel_tier" as const], missing_cities: ["东京"], candidate_counts: { 东京: 0 }, actions: [] };
+    expect(problemSlotsFor("CANDIDATES_TOO_FEW", "酒店不足", [], details)).toEqual(["date_start", "hotel_tier"]);
+  });
 });

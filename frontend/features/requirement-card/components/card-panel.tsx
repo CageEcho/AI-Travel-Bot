@@ -63,9 +63,10 @@ export function CardPanel({ card, loading, generating, onEdit, onGenerate, class
                 );
               })}
             </ul>
-            <p className="mt-3 text-xs text-muted">
-              角标：<Badge tone="success">✓ 客户原话</Badge> <Badge tone="warning">◐ 系统推断</Badge> <Badge tone="info">✎ 顾问填写</Badge> <Badge tone="danger">⚠ 有冲突</Badge> <Badge tone="outline-danger">● 必须确认</Badge>
-            </p>
+            <div className="mt-3 text-xs text-muted">
+              <span>角标：</span> <Badge tone="success">✓ 客户原话</Badge> <Badge tone="warning">◐ 系统推断</Badge> <Badge tone="info">✎ 顾问填写</Badge> <Badge tone="danger">⚠ 有冲突</Badge>
+              <span className="mt-2 block"><Badge tone="outline-danger">● 必须确认</Badge></span>
+            </div>
           </>
         )}
       </div>

@@ -182,7 +182,7 @@ function ProposalFooter({ page, notice }: { page: string; notice: string }) {
 }
 
 function Brand({ light = false }: { light?: boolean }) {
-  return <div className={cn("flex items-center gap-2.5 text-[13px] font-bold", light ? "text-white" : "text-[#151a20]")}><Image src="/brand/bdt-icon.png" alt="" width={28} height={28} className="size-7 object-contain" /><span>BEYOND DREAM TRAVEL</span></div>;
+  return <div className={cn("flex items-center gap-2.5 text-[13px] font-bold", light ? "text-white" : "text-[#151a20]")}><Image src="/brand/bdt-icon.png" alt="" width={28} height={28} className="brand-icon-clip size-7 object-contain" /><span>BEYOND DREAM TRAVEL</span></div>;
 }
 
 function CoverFact({ icon: Icon, label, value }: { icon: typeof CalendarDays; label: string; value: string }) {

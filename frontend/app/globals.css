@@ -113,6 +113,7 @@ body {
 .nav-link[aria-current="page"] { background: var(--color-primary-soft); color: var(--color-primary); }
 .brand-mark-crop { position: relative; display: inline-block; flex: none; width: 36px; height: 36px; overflow: hidden; border-radius: 50%; background: #fff; box-shadow: var(--shadow-card); }
 .brand-mark-crop img { position: absolute; top: -0.55rem; left: -0.95rem; width: 4.4rem; max-width: none; height: auto; }
+.brand-icon-clip { clip-path: circle(49% at 50% 50%); }
 
 /* 表单控件：浅灰填充、圆角、无边框、聚焦环 */
 .control {
@@ -231,6 +232,118 @@ dialog::backdrop { background: rgba(31, 41, 55, 0.35); backdrop-filter: blur(2px
 }
 .proposal-toolbar-button:hover { background: rgba(255, 255, 255, 0.16); }
 .proposal-toolbar-button:disabled { cursor: wait; opacity: 0.55; }
+
+/* 方案生成等待态：真实进度控制路线位置，微动画只提供持续反馈。 */
+@keyframes journey-float {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0) rotate(4deg); }
+  50% { transform: translate(-50%, -50%) translateY(-4px) rotate(1deg); }
+}
+@keyframes journey-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(82, 214, 107, 0.32); }
+  50% { box-shadow: 0 0 0 7px rgba(82, 214, 107, 0); }
+}
+@keyframes journey-shimmer {
+  from { transform: translateX(-130%); }
+  to { transform: translateX(230%); }
+}
+@keyframes journey-spin-soft {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.journey-loader {
+  overflow: hidden;
+  border: 1px solid #e2e8e4;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #f7fbf8 0%, #f7f9fc 100%);
+  padding: 18px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+.journey-percent {
+  display: inline-flex;
+  width: 56px;
+  height: 56px;
+  flex: none;
+  align-items: baseline;
+  justify-content: center;
+  padding-top: 14px;
+  border: 1px solid #d9e5dc;
+  border-radius: 50%;
+  background: conic-gradient(#52d66b var(--journey-progress), #e6ebe8 0);
+  color: #1c2a21;
+  box-shadow: inset 0 0 0 5px #f8fbf9;
+}
+.journey-percent strong { font-size: 16px; line-height: 1; }
+.journey-percent span { margin-left: 1px; font-size: 9px; }
+.journey-route {
+  position: relative;
+  height: 3px;
+  border-radius: 999px;
+  background: #dfe5e2;
+}
+.journey-route-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--journey-progress);
+  border-radius: inherit;
+  background: linear-gradient(90deg, #3f5f83, #52d66b);
+  transition: width 700ms var(--ease-luxury);
+}
+.journey-plane {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: var(--journey-progress);
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #cae8d1;
+  border-radius: 50%;
+  background: #fff;
+  color: #2ba04b;
+  box-shadow: 0 6px 15px rgba(39, 107, 58, 0.15);
+  animation: journey-float 1.7s ease-in-out infinite;
+  transition: left 700ms var(--ease-luxury);
+}
+.journey-node-wrap { position: absolute; top: 50%; transform: translate(-50%, -50%); }
+.journey-node {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #cbd3d8;
+  box-shadow: 0 0 0 1px #cbd3d8;
+}
+.journey-node.is-done { background: #4dc968; box-shadow: 0 0 0 1px #4dc968; }
+.journey-node.is-active { background: #3f5f83; box-shadow: 0 0 0 1px #3f5f83; animation: journey-pulse 1.8s ease-in-out infinite; }
+.journey-node-label {
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  width: 76px;
+  transform: translateX(-50%);
+  color: #8a95a2;
+  font-size: 9px;
+  font-style: normal;
+  text-align: center;
+  white-space: nowrap;
+}
+.journey-node-label.edge { width: 62px; }
+.journey-node-wrap:first-of-type .journey-node-label { left: 0; transform: none; text-align: left; }
+.journey-node-wrap:last-of-type .journey-node-label { right: 0; left: auto; transform: none; text-align: right; }
+.journey-skeleton { position: relative; overflow: hidden; }
+.journey-skeleton::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.84) 48%, transparent 76%);
+  content: "";
+  animation: journey-shimmer 2.2s ease-in-out infinite;
+  animation-delay: calc(var(--skeleton-delay, 0) * 180ms);
+}
+.journey-stage-icon { animation: journey-spin-soft 4s linear infinite; }
+.journey-live-dot { animation: journey-pulse 1.8s ease-in-out infinite; }
 
 @media (min-width: 1024px) {
   .site-container { width: min(1200px, calc(100% - 96px)); }

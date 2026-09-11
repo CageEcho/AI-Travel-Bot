@@ -25,6 +25,8 @@ class Settings(BaseSettings):
     deepseek_api_key: str = ""
     deepseek_base_url: str = "https://api.deepseek.com/anthropic"
     deepseek_model: str = "deepseek-v4-pro"
+    # 可选的模型 HTTPS CA 包。留空时若检测到 SSL_CERT_FILE 代理证书，会自动与系统 /etc/ssl/cert.pem 合并。
+    llm_ca_bundle: str = ""
     # DeepSeek 思考模式与强制 tool_choice 互斥（400）。False：关思考 + 强制调用结果工具（默认，可靠）；True：开思考 + tool_choice=auto（靠指令与重试兜底）
     deepseek_thinking: bool = False
     deepseek_max_attempts: int = 3          # DeepSeek 对 schema 的遵循弱于 Claude 原生结构化输出，多给一次重试
@@ -45,6 +47,8 @@ class Settings(BaseSettings):
     llm_call_timeout_sec: int = 120           # 单次模型调用（含流式读取）超时；编排正常 20–40s
     task_stall_timeout_sec: int = 180         # 心跳超过此秒数未更新 → 查询状态时判为卡死并标 failed/STALLED
     min_candidates_to_plan: int = 3           # 硬过滤后候选 < 3 → 先给放宽建议，不硬生成
+    demo_mode: bool = True                     # M0 演示：缺城市酒店时自动扩大档次；生产必须设为 false
+    demo_safe_date: str = "2026-10-15"         # DEMO 资源覆盖充分的推荐出发日；失败恢复按钮使用
     # 编排器：llm（默认，Claude 结构化输出）| heuristic（确定性编排器：eval --dry-run / 无 Key 降级路径）
     planner_mode: str = "llm"
 

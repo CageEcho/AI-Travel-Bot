@@ -1,10 +1,11 @@
-import type { Conflict, SlotName } from "./types";
+import type { Conflict, RecoveryDetails, SlotName } from "./types";
 
 /** 生成失败 / 需求卡冲突 → 顾问应回头修改的槽位（去重、按出现顺序）。 */
-export function problemSlotsFor(errorCode: string | null, errorMessage: string | null, conflicts: Conflict[]): SlotName[] {
+export function problemSlotsFor(errorCode: string | null, errorMessage: string | null, conflicts: Conflict[], details?: RecoveryDetails | null): SlotName[] {
   const out: SlotName[] = [];
   const add = (s: string) => { if (!out.includes(s as SlotName)) out.push(s as SlotName); };
   if (errorCode === "CANDIDATES_TOO_FEW") {
+    for (const slot of details?.problem_slots ?? []) add(slot);
     const msg = errorMessage ?? "";
     if (/档|星|奢华|旅馆|精品/.test(msg)) add("hotel_tier");
     if (/价|预算/.test(msg)) add("budget_amount");

@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils/cn";
 
 const SAMPLE = "张女士一家，两大一小，孩子 5 岁。想 10 月中旬去日本，7 天左右。住好一点的酒店，预算 15 万左右。老人肠胃不好这次不去。";
 
-export function ChatPanel({ messages, sending, thinking, onSend, onAnswer, onSkip, onGenerate, generating, notice, onFixCard, className }: {
+export function ChatPanel({ messages, sending, thinking, onSend, onAnswer, onSkip, onGenerate, generating, notice, onFixCard, noticeActionLabel, className }: {
   messages: ChatMessage[];
   sending: boolean;
   thinking: boolean;                       // 正在分析下一步
@@ -22,6 +22,7 @@ export function ChatPanel({ messages, sending, thinking, onSend, onAnswer, onSki
   /** 派生自任务状态的提示（如生成失败需回头改需求卡），不入消息列表 */
   notice?: string | null;
   onFixCard?: () => void;
+  noticeActionLabel?: string;
   className?: string;
 }) {
   const [text, setText] = useState("");
@@ -79,7 +80,7 @@ export function ChatPanel({ messages, sending, thinking, onSend, onAnswer, onSki
         {notice && (
           <div role="alert" className="max-w-[94%] rounded-2xl bg-danger-soft px-3.5 py-2.5 text-sm text-danger whitespace-pre-wrap">
             {notice}
-            {onFixCard && <div className="mt-2"><Button size="sm" onClick={onFixCard}>回到需求卡修改</Button></div>}
+            {onFixCard && <div className="mt-2"><Button size="sm" onClick={onFixCard}>{noticeActionLabel ?? "回到需求卡修改"}</Button></div>}
           </div>
         )}
         {sending && <div className="text-xs text-muted" role="status">AI 正在抽取需求…</div>}

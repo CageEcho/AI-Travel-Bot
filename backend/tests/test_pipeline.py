@@ -3,6 +3,8 @@ from datetime import date, timedelta
 
 from app.schemas.facts import TripContext
 from app.schemas.slots import SlotSet, SlotValue
+from app.core.errors import AppError
+from app.services import planner
 from app.services.planner import generate_with_validation, trip_dates
 from app.services.retrieval import build_pool
 
@@ -55,3 +57,21 @@ def test_replan_when_only_trap_hotels(db):
     assert r.blocking_count >= 1 and r.ref_blocked >= 1
     # 第 1 轮被防线②拦截（REF）；后续轮次该房型被禁用 → 无住宿 → 结构校验 S1 仍是 blocking，显式交人工，不静默通过
     assert any(v.code in ("REF", "S1") and v.blocking for v in r.violations)
+
+
+def test_llm_failure_falls_back_to_heuristic_without_losing_plan(db, monkeypatch):
+    slots = SlotSet(destination_cities=sv(["东京", "箱根", "京都"]), date_start=sv("2026-10-15"), duration_days=sv(7), adults=sv(2),
+                    children=sv(1), child_ages=sv([5]), budget_amount=sv(150000), budget_basis=sv("total"), hotel_tier=sv(["5star", "luxury"]),
+                    dietary=sv(["no_raw"]), accessibility=sv("none"))
+    ctx = TripContext.from_slots(slots)
+    start, days = trip_dates(slots)
+    pool = build_pool(db, ["东京", "箱根", "京都"], start, start + timedelta(days=days - 1), ctx, ["5star", "luxury"])
+    monkeypatch.setattr(planner, "plan_itinerary_llm", lambda *args, **kwargs: (_ for _ in ()).throw(AppError("LLM_FAILED", "temporary")))
+    traces: list[tuple[str, dict]] = []
+
+    result = generate_with_validation(db, slots, pool, ctx, mode="llm", trace=lambda step, payload: traces.append((step, payload)))
+
+    assert len(result.rendered.days) == 7
+    assert result.blocking_count == 0
+    assert any("确定性规则" in item for item in result.rendered.assumptions)
+    assert ("fallback", {"from": "llm", "to": "heuristic", "reason": "LLM_FAILED"}) in traces

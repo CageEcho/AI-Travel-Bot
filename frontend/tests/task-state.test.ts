@@ -29,6 +29,17 @@ describe("mapPlanStatus", () => {
     expect(v.headline).toContain("服务重启");
     expect(v.action).toContain("重新生成");
   });
+  it("候选不足时保留后端结构化恢复建议", () => {
+    const details = {
+      kind: "candidate_recovery" as const,
+      problem_slots: ["date_start" as const],
+      missing_cities: ["东京"],
+      candidate_counts: { 东京: 0 },
+      actions: [{ id: "date", label: "修改日期", description: "使用可用日期", patches: [{ slot: "date_start" as const, value: "2026-10-15" }] }],
+    };
+    const v = mapPlanStatus({ ...base, status: "failed", error: { code: "CANDIDATES_TOO_FEW", message: "酒店不足", details } });
+    expect(v.errorDetails).toEqual(details);
+  });
   it("未知状态 → stale，不当成功或失败", () => {
     const v = mapPlanStatus({ ...base, status: "embedding" });
     expect(v.state).toBe("stale");

@@ -20,6 +20,17 @@ async function newConv(page: Page): Promise<string> {
   return convId;
 }
 
+test("首页空输入：不跳转；蓝色示例可填入多轮需求文案", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: /AI 为我生成方案/ }).click();
+  await expect(page).toHaveURL("/");
+  await expect(page.getByText("请先填写客户需求，或点击输入框中的蓝色示例快速填入。")).toBeVisible();
+  await expect(page.getByText(/请先填写客户原话/)).toHaveCount(0);
+  await page.getByRole("button", { name: /一家三口十月去日本/ }).click();
+  await expect(page.getByLabel("告诉我们需求")).toHaveValue(/一家三口，2 位成人和 1 名 5 岁儿童/);
+  await expect(page).toHaveURL("/");
+});
+
 test("空需求卡：生成按钮禁用并说明缺失项", async ({ page }) => {
   await newConv(page);
   const btn = page.getByRole("button", { name: "确认需求卡并生成方案" });
@@ -35,6 +46,33 @@ test("手动编辑槽位对话框可保存并显示顾问填写角标", async ({
   await dialog.getByLabel("成人").fill("2");
   await dialog.getByRole("button", { name: "保存修改" }).click();
   await expect(page.getByText("✎ 顾问填写").first()).toBeVisible();
+});
+
+test("真实条件无候选：显示精确建议，一键修改后自动继续生成", async ({ page, request }) => {
+  const convId = await newConv(page);
+  const values = {
+    ...FULL,
+    destination_cities: ["东京"], date_start: "2030-02-15", duration_days: 3,
+    children: 0, child_ages: [], hotel_tier: ["luxury"], dietary: ["none"],
+  };
+  for (const [slot, value] of Object.entries(values)) {
+    const response = await request.patch(`http://localhost:8000/api/v1/conversations/${convId}/card`, { data: { slot, value } });
+    expect(response.ok()).toBeTruthy();
+  }
+  const confirmation = await request.post(`http://localhost:8000/api/v1/conversations/${convId}/card/confirm`);
+  expect(confirmation.ok()).toBeTruthy();
+  const { card_id: cardId } = await confirmation.json() as { card_id: string };
+  const creation = await request.post("http://localhost:8000/api/v1/plans", { data: { card_id: cardId } });
+  const { plan_id: failedPlanId } = await creation.json() as { plan_id: string };
+  await page.goto(`/c/${convId}?plan=${failedPlanId}&tab=plan`);
+
+  const recovery = page.getByRole("button", { name: /改为 2026-10-15 出发/ });
+  await expect(recovery).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText("本次酒店候选：东京 0 家")).toBeVisible();
+  await recovery.click();
+  await expect(page).not.toHaveURL(new RegExp(`plan=${failedPlanId}`), { timeout: 30_000 });
+  await expect(page.locator('[role="status"]').filter({ hasText: /硬约束 0 项违反/ })).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByRole("button", { name: "客户版预览与导出" })).toBeEnabled();
 });
 
 test("核心闭环：确认并生成 → 方案 → 刷新恢复 → 连点只创建一个任务", async ({ page, request }) => {

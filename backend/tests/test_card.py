@@ -2,7 +2,7 @@
 import pytest
 from pydantic import ValidationError
 from app.schemas.slots import Followup, SlotExtraction, SlotSet, SlotValue, normalize_amount
-from app.services.card import cap_followups, completeness, merge_slots
+from app.services.card import cap_followups, completeness, merge_slots, set_slot
 
 
 def sv(v, source="client_verbatim"):
@@ -22,6 +22,18 @@ def test_advisor_input_wins_over_model():
     extracted = SlotSet(adults=sv(3), children=sv(2), pace=sv("relaxed"))
     m = merge_slots(existing, extracted)
     assert m.adults.value == 2 and m.children.value == 2 and m.pace.value == "relaxed"
+
+
+def test_date_end_is_derived_from_start_and_duration():
+    merged = merge_slots(SlotSet(), SlotSet(date_start=sv("2026-02-15"), duration_days=sv(3)))
+    assert merged.date_end.value == "2026-02-17"
+    assert merged.date_end.source == "system_inferred"
+
+
+def test_advisor_date_end_is_not_overwritten_by_later_date_change():
+    slots = SlotSet(date_start=sv("2026-02-15"), duration_days=sv(3), date_end=sv("2026-02-20", "advisor_input"))
+    updated = set_slot(slots, "duration_days", 5)
+    assert updated.date_end.value == "2026-02-20"
 
 
 def test_completeness_child_ages_only_required_with_children():

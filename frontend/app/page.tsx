@@ -6,17 +6,18 @@ import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import { CalendarDays, CarFront, FileCheck2, HeartPulse, Hotel, MapPin, Sparkles, TicketCheck, UsersRound, type LucideIcon } from "lucide-react";
 import { Alert } from "@/components/ui/alert";
 import { conversationApi } from "@/features/conversation/api";
+import { AUTO_REQUEST } from "@/features/conversation/auto-request";
 import { saveInitialMessage } from "@/features/conversation/bootstrap";
 import { isAppError } from "@/lib/api/client";
 import { useRouter } from "next/navigation";
 
-const EXAMPLE_REQUEST = "一家三口计划十月去日本，行程七天左右，希望住好一点的酒店，预算十五万元左右。孩子五岁，不吃生食。";
 const STRUCTURED_TEMPLATE = "出行人：\n目的地：\n预计日期与天数：\n预算：\n酒店偏好：\n特别需求：";
 
 export default function HomePage() {
   const router = useRouter();
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [requestText, setRequestText] = useState("");
+  const [emptyHint, setEmptyHint] = useState(false);
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -25,7 +26,7 @@ export default function HomePage() {
     if (creating) return;
     const text = requestText.trim();
     if (!text) {
-      setError("请先填写客户原话，再让 AI 生成方案。");
+      setEmptyHint(true);
       inputRef.current?.focus();
       return;
     }
@@ -43,6 +44,7 @@ export default function HomePage() {
 
   function fill(value: string) {
     setRequestText(value);
+    setEmptyHint(false);
     setError(null);
     requestAnimationFrame(() => inputRef.current?.focus());
   }
@@ -61,9 +63,17 @@ export default function HomePage() {
           <form onSubmit={analyze} className="home-request-panel mt-7">
             <label htmlFor="customer-request" className="block text-[15px] font-bold text-[#14191f]">告诉我们需求</label>
             <div className="relative mt-2">
+              {!requestText && (
+                <div id="customer-request-example" className="pointer-events-none absolute left-4 right-20 top-3 z-10 text-[14px] leading-6">
+                  <span className="text-[#929ba8]">例如：</span>
+                  <button type="button" onClick={() => fill(AUTO_REQUEST)} className="pointer-events-auto ml-1 text-left font-medium text-[#3d5f91] underline decoration-[#9bacc4] underline-offset-4 transition hover:text-[#24466f]">
+                    一家三口十月去日本，偏好亲子、自然，想住得好一点……
+                  </button>
+                </div>
+              )}
               <textarea ref={inputRef} id="customer-request" value={requestText} maxLength={2000} rows={3}
-                onChange={(event) => { setRequestText(event.target.value); if (error) setError(null); }}
-                placeholder="例如：一家三口十月去北海道，偏好亲子、自然，想要 2–3 家特色住宿……"
+                onChange={(event) => { setRequestText(event.target.value); setEmptyHint(false); if (error) setError(null); }}
+                aria-describedby="customer-request-example customer-request-hint"
                 className="min-h-[108px] w-full resize-y rounded-lg border border-[#dce2ea] bg-[#f7f9fc] px-4 py-3 pr-20 text-[14px] leading-6 text-text outline-none transition focus:border-[#54d66d] focus:bg-white focus:ring-4 focus:ring-[#54d66d]/12" />
               <span className="absolute bottom-3 right-4 text-[12px] tabular-nums text-[#8792a3]">{requestText.length} / 2000</span>
             </div>
@@ -72,9 +82,11 @@ export default function HomePage() {
                 {creating ? "正在创建…" : "AI 为我生成方案"}<span aria-hidden="true">→</span>
               </button>
               <button type="button" disabled title="内测阶段即将开放" className="home-secondary-action">真人咨询</button>
-              <button type="button" onClick={() => fill(EXAMPLE_REQUEST)} className="home-text-action">查看灵感示例</button>
               <button type="button" onClick={() => fill(STRUCTURED_TEMPLATE)} className="home-text-action">如何写更清晰</button>
             </div>
+            <p id="customer-request-hint" className={`mt-2 text-[11px] ${emptyHint ? "font-semibold text-[#3d5f91]" : "text-[#8792a3]"}`}>
+              {emptyHint ? "请先填写客户需求，或点击输入框中的蓝色示例快速填入。" : "点击蓝色示例可填入完整演示需求，确认内容后再生成。"}
+            </p>
             {error && <Alert tone="danger" className="mt-3">{error}</Alert>}
           </form>
         </div>

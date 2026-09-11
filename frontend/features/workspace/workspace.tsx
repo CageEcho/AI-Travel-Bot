@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Alert } from "@/components/ui/alert";
 import { isAppError, type AppError } from "@/lib/api/client";
-import type { Followup, NextStep, RequirementCardView, SlotName, SlotPrimitive } from "@/lib/api/types";
+import type { Followup, NextStep, RecoveryAction, RequirementCardView, SlotName, SlotPrimitive } from "@/lib/api/types";
 import { SLOT_LABEL, formatSlotValue } from "@/lib/utils/format";
 import { conversationApi } from "@/features/conversation/api";
 import { takeInitialMessage } from "@/features/conversation/bootstrap";
@@ -43,6 +43,7 @@ export function Workspace({ convId }: { convId: string }) {
   const [thinking, setThinking] = useState(false);
   const queue = useRef<Followup[]>([]);          // 本轮待问的问题（一次只展示第一个）
   const [generating, setGenerating] = useState(false);
+  const [recovering, setRecovering] = useState(false);
   const [banner, setBanner] = useState<AppError | null>(null);
   const [editing, setEditing] = useState<SlotName | null>(null);
   const [saving, setSaving] = useState(false);
@@ -167,8 +168,8 @@ export function Workspace({ convId }: { convId: string }) {
     finally { setSaving(false); }
   }, [patch, advance]);
 
-  const generate = useCallback(async () => {
-    if (generateLock.current || !card) return;      // 防重复提交：锁 + 按钮禁用
+  const startGeneration = useCallback(async () => {
+    if (generateLock.current) return false;         // 防重复提交：锁 + 按钮禁用
     generateLock.current = true;
     setGenerating(true); setBanner(null);
     try {
@@ -177,13 +178,45 @@ export function Workspace({ convId }: { convId: string }) {
       const res = await planApi.create(conf.card_id);
       setQuery({ plan: res.plan_id, tab: "plan" });
       setSection("plan");
-    } catch (e) { if (isAppError(e)) setBanner(e); }
+      return true;
+    } catch (e) {
+      if (isAppError(e)) setBanner(e);
+      return false;
+    }
     finally { setGenerating(false); generateLock.current = false; }
-  }, [card, convId, setQuery]);
+  }, [convId, setQuery]);
+
+  const generate = useCallback(async () => {
+    if (!card) return;
+    await startGeneration();
+  }, [card, startGeneration]);
+
+  /** 一键恢复：应用后端给出的精确字段补丁，然后自动重新确认并生成。 */
+  const recover = useCallback(async (action: RecoveryAction) => {
+    if (recovering || generateLock.current) return;
+    setRecovering(true);
+    setBanner(null);
+    try {
+      let latest: RequirementCardView | null = card;
+      for (const item of action.patches) {
+        latest = await conversationApi.patchSlot(convId, item.slot, item.value);
+      }
+      if (latest) setCard(latest);
+      setMessages((current) => current.concat({
+        id: mid(), role: "system", text: `已应用恢复建议「${action.label}」，正在重新确认需求并生成方案。`,
+      }));
+      await startGeneration();
+    } catch (e) {
+      if (isAppError(e)) setBanner(e);
+    } finally {
+      setRecovering(false);
+    }
+  }, [card, convId, recovering, startGeneration]);
 
   /** 生成失败 / 有冲突时需要回头改的槽位（派生，不存状态） */
   const problemSlots = useMemo(
-    () => problemSlotsFor(task.view?.state === "failed" ? task.view.errorCode : null, task.view?.errorMessage ?? null, card?.conflicts ?? []),
+    () => problemSlotsFor(task.view?.state === "failed" ? task.view.errorCode : null, task.view?.errorMessage ?? null,
+      card?.conflicts ?? [], task.view?.errorDetails),
     [task.view, card?.conflicts]);
 
   /** 回到需求卡：切区域、滚动到第一个问题槽位、高亮 4 秒、直接打开编辑框 */
@@ -201,12 +234,14 @@ export function Workspace({ convId }: { convId: string }) {
   }, [problemSlots]);
 
   const failedNotice = task.view?.state === "failed" && needsCardFix(task.view.errorCode)
-    ? `生成失败：${task.view.errorMessage ?? ""}\n需要修改：${problemSlots.map((s) => SLOT_LABEL[s]).join("、")}`
+    ? task.view.errorDetails
+      ? `生成暂未完成：${task.view.errorMessage ?? ""}\n系统已经准备好可执行的修改建议，选择后会自动继续。`
+      : `生成失败：${task.view.errorMessage ?? ""}\n需要修改：${problemSlots.map((s) => SLOT_LABEL[s]).join("、")}`
     : null;
 
   // 提交态：确认/创建请求进行中，或任务仍在服务端运行（queued/running）——此时「重新生成」无意义，按钮保持禁用，天然防连点
   const taskRunning = !!task.view && !isTerminal(task.view.state);
-  const submitting = generating || (planId !== null && task.loading) || taskRunning;
+  const submitting = generating || recovering || (planId !== null && task.loading) || taskRunning;
 
   if (notFound) {
     return (
@@ -227,10 +262,14 @@ export function Workspace({ convId }: { convId: string }) {
       </div>
       <div className="grid gap-3 lg:grid-cols-[380px_400px_1fr] h-[calc(100vh-140px)] lg:h-[calc(100vh-112px)] min-h-[480px]">
         <ChatPanel messages={messages} sending={sending} thinking={thinking} onSend={send} onAnswer={answer} onSkip={skip}
-          onGenerate={generate} generating={submitting} notice={failedNotice} onFixCard={fixCard} className={cn(section !== "chat" && "hidden lg:flex")} />
+          onGenerate={generate} generating={submitting} notice={failedNotice}
+          onFixCard={task.view?.errorDetails ? () => setSection("plan") : fixCard}
+          noticeActionLabel={task.view?.errorDetails ? "查看可继续的修改建议" : undefined}
+          className={cn(section !== "chat" && "hidden lg:flex")} />
         <CardPanel card={card} loading={cardLoading} generating={submitting} onEdit={(s) => { setSaveError(null); setEditing(s); }} onGenerate={generate}
           highlight={highlight} className={cn(section !== "card" && "hidden lg:flex")} />
         <PlanPanel task={task} card={card} hasPlanId={!!planId} tab={tab} onTab={(t) => setQuery({ tab: t })} onRegenerate={generate} onFixCard={fixCard}
+          onRecover={recover} recovering={recovering}
           canRegenerate={!!card && card.completeness >= card.completeness_threshold && card.conflicts.length === 0
             && !card.missing_slots.some((name) => MUST_ASK.includes(name as SlotName))} className={cn(section !== "plan" && "hidden lg:flex")} />
       </div>

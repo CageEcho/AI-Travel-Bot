@@ -20,6 +20,8 @@ Opus 5 的三个硬性注意点（写在这里，避免反复踩）：
 from __future__ import annotations
 
 import logging
+import os
+import ssl
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, TypeVar
@@ -49,10 +51,32 @@ def active_model() -> str:
     return settings.deepseek_model if settings.llm_provider == "deepseek" else settings.claude_model
 
 
+def _model_ssl_context() -> ssl.SSLContext | None:
+    """合并系统根证书与本机代理 CA，并始终保持证书校验开启。"""
+    env_ca = os.getenv("SSL_CERT_FILE", "").strip()
+    configured = settings.llm_ca_bundle.strip()
+    system_ca = Path("/etc/ssl/cert.pem")
+    primary = Path(configured).expanduser() if configured else (system_ca if env_ca and system_ca.is_file() else None)
+    if primary is None:
+        return None
+    if not primary.is_file():
+        raise AppError("LLM_FAILED", f"模型 CA 证书文件不存在：{primary}")
+    context = ssl.create_default_context(cafile=str(primary))
+    if env_ca:
+        extra = Path(env_ca).expanduser()
+        if extra.is_file() and extra.resolve() != primary.resolve():
+            context.load_verify_locations(cafile=str(extra))
+    return context
+
+
 def get_client() -> anthropic.Anthropic:
     global _client
     if _client is None:
-        kwargs: dict[str, Any] = {"max_retries": 2, "timeout": float(settings.llm_call_timeout_sec)}
+        timeout = float(settings.llm_call_timeout_sec)
+        kwargs: dict[str, Any] = {"max_retries": 2, "timeout": timeout}
+        verify = _model_ssl_context()
+        if verify is not None:
+            kwargs["http_client"] = anthropic.DefaultHttpxClient(verify=verify, trust_env=True, timeout=timeout)
         if settings.llm_provider == "deepseek":
             if not settings.deepseek_api_key:
                 raise AppError("LLM_FAILED", "未配置 DEEPSEEK_API_KEY")
@@ -68,6 +92,8 @@ def get_client() -> anthropic.Anthropic:
 def reset_client() -> None:
     """切换提供方 / key 后重建客户端（测试与热更新用）。"""
     global _client
+    if _client is not None:
+        _client.close()
     _client = None
 
 

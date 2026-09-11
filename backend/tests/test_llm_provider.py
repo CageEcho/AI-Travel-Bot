@@ -138,6 +138,28 @@ def test_deepseek_client_uses_compat_base_url(monkeypatch):
     llm.reset_client()
 
 
+def test_model_ssl_context_merges_configured_bundle_and_proxy_ca(monkeypatch, tmp_path):
+    primary = tmp_path / "system-ca.pem"
+    proxy = tmp_path / "proxy-ca.pem"
+    primary.write_text("system", encoding="utf-8")
+    proxy.write_text("proxy", encoding="utf-8")
+    loaded: list[str] = []
+    fake_context = SimpleNamespace(load_verify_locations=lambda *, cafile: loaded.append(cafile))
+    monkeypatch.setattr(settings, "llm_ca_bundle", str(primary))
+    monkeypatch.setenv("SSL_CERT_FILE", str(proxy))
+    monkeypatch.setattr(llm.ssl, "create_default_context", lambda *, cafile: fake_context)
+
+    assert llm._model_ssl_context() is fake_context
+    assert loaded == [str(proxy)]
+
+
+def test_model_ssl_context_rejects_missing_configured_bundle(monkeypatch, tmp_path):
+    monkeypatch.setattr(settings, "llm_ca_bundle", str(tmp_path / "missing.pem"))
+    with pytest.raises(AppError) as exc:
+        llm._model_ssl_context()
+    assert exc.value.code == "LLM_FAILED"
+
+
 def test_unwrap_tool_input_handles_result_wrapper():
     inner = {"slots": {}, "followups": [], "notes": ""}
     assert llm.unwrap_tool_input({"result": inner}, SlotExtraction) == inner

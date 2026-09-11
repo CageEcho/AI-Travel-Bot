@@ -49,7 +49,16 @@ export interface MessageOut {
 }
 
 export type BackendTaskStatus = "queued" | "searching" | "planning" | "validating" | "costing" | "done" | "failed";
-export interface ErrorBody { code: string; message: string }
+export interface RecoveryPatch { slot: SlotName; value: SlotPrimitive }
+export interface RecoveryAction { id: string; label: string; description: string; patches: RecoveryPatch[] }
+export interface RecoveryDetails {
+  kind: "candidate_recovery";
+  problem_slots: SlotName[];
+  missing_cities: string[];
+  candidate_counts: Record<string, number>;
+  actions: RecoveryAction[];
+}
+export interface ErrorBody { code: string; message: string; details?: RecoveryDetails | Record<string, unknown> | null }
 export interface PlanStatus {
   plan_id: string;
   task_id: string;

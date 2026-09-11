@@ -1,5 +1,5 @@
 /** 后端 generation_task 状态 → 前端统一任务状态（手册 §9）。未知值不当成功或失败，映射为 stale。 */
-import type { PlanStatus } from "./types";
+import type { PlanStatus, RecoveryDetails } from "./types";
 
 export type UnifiedState =
   | "idle" | "submitting" | "queued" | "running" | "succeeded" | "failed" | "disconnected" | "stale";
@@ -16,13 +16,16 @@ export interface TaskView {
   version: number | null;
   errorCode: string | null;
   errorMessage: string | null;
+  errorDetails: RecoveryDetails | null;
   headline: string;            // 现在发生了什么
   action: string;              // 我需要做什么
   next: string;                // 接下来会发生什么
 }
 
 export function mapPlanStatus(s: PlanStatus): TaskView {
-  const base = { progress: s.progress, replanRound: s.replan_round, version: s.version, errorCode: s.error?.code ?? null, errorMessage: s.error?.message ?? null };
+  const rawDetails = s.error?.details;
+  const errorDetails = rawDetails && "kind" in rawDetails && rawDetails.kind === "candidate_recovery" ? rawDetails as RecoveryDetails : null;
+  const base = { progress: s.progress, replanRound: s.replan_round, version: s.version, errorCode: s.error?.code ?? null, errorMessage: s.error?.message ?? null, errorDetails };
   const st = s.status;
   if (st === "queued") {
     return { ...base, state: "queued", stage: null, headline: "任务已受理，等待开始", action: "无需操作", next: "很快开始检索候选资源" };

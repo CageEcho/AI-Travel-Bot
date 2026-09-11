@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import date, timedelta
@@ -18,6 +19,7 @@ from typing import Any
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
+from app.core.errors import AppError
 from app.core.llm import LLMResult, load_prompt, parse_structured
 from app.schemas.common import ChecklistItem, Violation
 from app.schemas.cost import CostSummary
@@ -31,6 +33,7 @@ from app.schemas.search import HotelCandidate
 from app.services.retrieval import CandidatePool
 
 CITY_ORDER = ["东京", "箱根", "京都"]   # 地理顺序：东京 → 箱根 → 京都（或反向）
+log = logging.getLogger("app.planner")
 
 
 # ───────────────────────── 需求卡 → 行程骨架 ─────────────────────────
@@ -329,6 +332,7 @@ def generate_with_validation(db: Session, slots: SlotSet, pool: CandidatePool, c
     violations: list[Violation] = []
     rates: dict[str, RateFacts] = {}
     llm_calls: list[dict] = []
+    fallback_used = False
     ref_blocked = 0
     rounds = 0
     for round_i in range(settings.max_replan_rounds):
@@ -336,9 +340,20 @@ def generate_with_validation(db: Session, slots: SlotSet, pool: CandidatePool, c
         if on_stage:
             on_stage("planning", 0.35 + 0.15 * round_i, round_i)
         if mode == "llm":
-            plan, res = plan_itinerary_llm(slots, pool, brief, skeleton)
-            llm_calls.append({"round": rounds, "latency_ms": res.latency_ms, "input_tokens": res.input_tokens,
-                              "output_tokens": res.output_tokens, "cache_read_tokens": res.cache_read_tokens, "retried": res.retried})
+            try:
+                plan, res = plan_itinerary_llm(slots, pool, brief, skeleton)
+                llm_calls.append({"round": rounds, "latency_ms": res.latency_ms, "input_tokens": res.input_tokens,
+                                  "output_tokens": res.output_tokens, "cache_read_tokens": res.cache_read_tokens, "retried": res.retried})
+            except AppError as error:
+                if error.code not in {"LLM_FAILED", "LLM_INVALID_OUTPUT"}:
+                    raise
+                # 模型网络/格式故障不应让完整需求卡失去生成能力；显式降级并留 trace / assumptions。
+                fallback_used = True
+                mode = "heuristic"
+                log.warning("planner llm unavailable, fallback to heuristic: %s", error.code)
+                if trace:
+                    trace("fallback", {"from": "llm", "to": "heuristic", "reason": error.code})
+                plan = plan_itinerary_heuristic(slots, pool, ctx, start, seq, banned)
         else:
             plan = plan_itinerary_heuristic(slots, pool, ctx, start, seq, banned)
         if on_stage:
@@ -359,6 +374,8 @@ def generate_with_validation(db: Session, slots: SlotSet, pool: CandidatePool, c
                 banned.add((date_of.get(v.day_index, ""), v.resource_id))
         brief = build_constraint_brief(ctx, slots, previous=blocking, rendered=rendered)
     assert rendered is not None
+    if fallback_used:
+        rendered.assumptions = ["本次模型服务不可用，已使用确定性规则完成编排；请顾问重点复核体验节奏。", *rendered.assumptions]
     blocking = [v for v in violations if v.blocking]
     if blocking and mode == "llm":
         # 回退用尽仍有违规：确定性修补一次；仍失败的显式交人工，不静默通过

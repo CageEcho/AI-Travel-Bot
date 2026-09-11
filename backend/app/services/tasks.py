@@ -23,10 +23,90 @@ from app.schemas.common import ErrorBody, PlanStatus
 from app.schemas.facts import TripContext
 from app.schemas.slots import SlotSet
 from app.services.planner import generate_with_validation, trip_dates
-from app.services.retrieval import build_pool
+from app.services.retrieval import CandidatePool, TIER_ORDER, TIER_ZH, build_pool
 from datetime import timedelta
 
 log = logging.getLogger("app.tasks")
+
+
+def expand_demo_hotel_coverage(db: Session, pool: CandidatePool, cities: list[str], start, end,
+                               ctx: TripContext, requested_tiers: list[str]) -> list[str]:
+    """DEMO 专用：只为完全没有住宿候选的城市补充其它档次，保留全部硬约束过滤。"""
+    if not settings.demo_mode:
+        return []
+    covered = {hotel.city for hotel in pool.hotels}
+    missing = [city for city in cities if city not in covered]
+    if not missing:
+        return []
+    expanded = build_pool(db, missing, start, end, ctx, list(TIER_ORDER))
+    added_cities: list[str] = []
+    for city in missing:
+        additions = [hotel for hotel in expanded.hotels if hotel.city == city]
+        if not additions:
+            continue
+        pool.hotels.extend(additions)
+        pool.funnels[city] = expanded.funnels.get(city, pool.funnels.get(city, {}))
+        pool.hotel_hints.pop(city, None)
+        added_cities.append(city)
+    if added_cities:
+        log.info("demo hotel tiers expanded for cities=%s requested=%s", added_cities, requested_tiers)
+    return added_cities
+
+
+def candidate_recovery_details(slots: SlotSet, cities: list[str], pool: CandidatePool,
+                               requested_tiers: list[str]) -> dict:
+    """把候选不足转成前端可直接执行的修复动作；只建议真正影响检索的字段。"""
+    covered = {hotel.city for hotel in pool.hotels}
+    missing = [city for city in cities if city not in covered]
+    actions: list[dict] = []
+    current_start = str(slots.get("date_start") or "")
+    if settings.demo_mode and current_start != settings.demo_safe_date:
+        actions.append({
+            "id": "use_demo_date",
+            "label": f"改为 {settings.demo_safe_date} 出发",
+            "description": "使用演示资源覆盖充分的日期，保留当前天数和目的地",
+            "patches": [
+                {"slot": "date_start", "value": settings.demo_safe_date},
+                {"slot": "date_end", "value": None},
+            ],
+        })
+    if set(requested_tiers) != set(TIER_ORDER):
+        actions.append({
+            "id": "expand_hotel_tiers",
+            "label": "放宽酒店档次",
+            "description": "增加四星、五星、奢华、高端旅馆和精品酒店",
+            "patches": [{"slot": "hotel_tier", "value": list(TIER_ORDER)}],
+        })
+    available_cities = [city for city in cities if city in covered]
+    if available_cities and len(available_cities) < len(cities):
+        actions.append({
+            "id": "keep_available_cities",
+            "label": "只保留当前可用城市",
+            "description": "移除没有合规住宿的目的地，天数保持不变",
+            "patches": [{"slot": "destination_cities", "value": available_cities}],
+        })
+    return {
+        "kind": "candidate_recovery",
+        "problem_slots": ["date_start", "hotel_tier", "destination_cities"],
+        "missing_cities": missing,
+        "candidate_counts": {city: len({hotel.hotel_id for hotel in pool.hotels if hotel.city == city}) for city in cities},
+        "actions": actions,
+    }
+
+
+def recovery_details_for_card(db: Session, card: RequirementCard) -> dict:
+    """供历史失败任务补算恢复建议；需求卡已冻结，因此刷新后结果稳定。"""
+    slots = SlotSet.model_validate(card.slots)
+    ctx = TripContext.from_slots(slots)
+    start, days = trip_dates(slots)
+    cities = slots.get("destination_cities") or ["东京"]
+    if isinstance(cities, str):
+        cities = [cities]
+    tiers = slots.get("hotel_tier") or ["5star", "luxury", "ryokan"]
+    if isinstance(tiers, str):
+        tiers = [tiers]
+    pool = build_pool(db, cities, start, start + timedelta(days=days - 1), ctx, tiers)
+    return candidate_recovery_details(slots, cities, pool, tiers)
 
 
 def recover_orphans(db: Session, timeout_sec: int | None = None) -> int:
@@ -35,7 +115,7 @@ def recover_orphans(db: Session, timeout_sec: int | None = None) -> int:
     res = db.execute(text("""
         UPDATE generation_task
         SET status='failed', error_code='ORPHANED',
-            error_message='服务重启导致任务中断，请重新生成', finished_at=now()
+            error_message='服务重启导致任务中断，请重新生成', error_details=NULL, finished_at=now()
         WHERE status NOT IN ('done','failed')
           AND heartbeat_at < now() - make_interval(secs => :t)
     """), {"t": timeout_sec})
@@ -88,13 +168,23 @@ def run_generation(task_id: str, mode: str | None = None) -> None:
             if isinstance(tiers, str):
                 tiers = [tiers]
             pool = build_pool(db, cities, start, start + timedelta(days=days - 1), ctx, tiers)
+            demo_relaxed_cities = expand_demo_hotel_coverage(
+                db, pool, cities, start, start + timedelta(days=days - 1), ctx, tiers,
+            )
             write_trace(db, step="search", plan_id=task.plan_id, conv_id=card.conv_id,
                         payload={"funnels": pool.funnels, "hotels": len({h.hotel_id for h in pool.hotels}),
                                  "restaurants": len(pool.restaurants), "pois": len(pool.pois), "vehicles": len(pool.vehicles),
+                                 "requested_tiers": tiers, "demo_relaxed_cities": demo_relaxed_cities,
                                  "relaxation_hints": {c: [h.model_dump() for h in hs] for c, hs in pool.hotel_hints.items()}})
-            if len({h.hotel_id for h in pool.hotels}) < settings.min_candidates_to_plan:
-                hints = "；".join(h.suggestion for hs in pool.hotel_hints.values() for h in hs) or "请放宽档次 / 预算 / 日期"
-                raise AppError("CANDIDATES_TOO_FEW", f"硬过滤后可用酒店不足 {settings.min_candidates_to_plan} 家，暂不生成。建议：{hints}")
+            missing_hotel_cities = [city for city in cities if not any(hotel.city == city for hotel in pool.hotels)]
+            if len({h.hotel_id for h in pool.hotels}) < settings.min_candidates_to_plan or missing_hotel_cities:
+                details = candidate_recovery_details(slots, cities, pool, tiers)
+                missing_text = "、".join(missing_hotel_cities) if missing_hotel_cities else "当前组合"
+                raise AppError(
+                    "CANDIDATES_TOO_FEW",
+                    f"{missing_text}缺少可用酒店。请选择建议修改后继续生成。",
+                    details=details,
+                )
 
             def on_stage(status: str, progress: float, rnd: int) -> None:
                 _beat(db, task, status, progress, rnd)
@@ -103,6 +193,13 @@ def run_generation(task_id: str, mode: str | None = None) -> None:
                 write_trace(db, step=step, plan_id=task.plan_id, conv_id=card.conv_id, payload=payload)
 
             result = generate_with_validation(db, slots, pool, ctx, on_stage=on_stage, mode=mode, trace=trace)
+            if demo_relaxed_cities:
+                requested = "、".join(TIER_ZH.get(tier, tier) for tier in tiers)
+                cities_zh = "、".join(demo_relaxed_cities)
+                result.rendered.assumptions.insert(
+                    0,
+                    f"DEMO 自动适配：{cities_zh}没有“{requested}”可用住宿，已扩大到其它档次完成演示；实际交付前需由顾问确认。",
+                )
             for call in result.llm_calls:
                 write_trace(db, step="plan", plan_id=task.plan_id, conv_id=card.conv_id, latency_ms=call["latency_ms"],
                             input_tokens=call["input_tokens"], output_tokens=call["output_tokens"],
@@ -130,7 +227,7 @@ def run_generation(task_id: str, mode: str | None = None) -> None:
         except AppError as e:
             db.rollback()
             task = db.get(GenerationTask, task_id)
-            task.status, task.error_code, task.error_message = "failed", e.code, e.message
+            task.status, task.error_code, task.error_message, task.error_details = "failed", e.code, e.message, e.details or None
             task.finished_at = datetime.now(timezone.utc)
             task.heartbeat_at = task.finished_at
             db.commit()
@@ -138,7 +235,7 @@ def run_generation(task_id: str, mode: str | None = None) -> None:
             log.exception("generation failed: %s", type(e).__name__)
             db.rollback()
             task = db.get(GenerationTask, task_id)
-            task.status, task.error_code, task.error_message = "failed", "INTERNAL", "生成过程发生内部错误，请重试"
+            task.status, task.error_code, task.error_message, task.error_details = "failed", "INTERNAL", "生成过程发生内部错误，请重试", None
             task.finished_at = datetime.now(timezone.utc)
             task.heartbeat_at = task.finished_at
             db.commit()
@@ -155,7 +252,7 @@ def mark_stalled(db: Session, task: GenerationTask, stall_sec: int | None = None
     hb = task.heartbeat_at if task.heartbeat_at.tzinfo else task.heartbeat_at.replace(tzinfo=timezone.utc)
     if (datetime.now(timezone.utc) - hb).total_seconds() <= limit:
         return False
-    task.status, task.error_code, task.error_message = "failed", "STALLED", STALLED_MESSAGE
+    task.status, task.error_code, task.error_message, task.error_details = "failed", "STALLED", STALLED_MESSAGE, None
     task.finished_at = datetime.now(timezone.utc)
     db.commit()
     log.warning("task %s stalled (heartbeat %s), marked failed", task.task_id, hb.isoformat())
@@ -168,6 +265,15 @@ def status_of(db: Session, plan_id: str) -> PlanStatus:
     if task is None:
         raise AppError("PLAN_NOT_FOUND", "方案不存在")
     mark_stalled(db, task)
+    if task.status == "failed" and task.error_code == "CANDIDATES_TOO_FEW" and not task.error_details:
+        card = db.get(RequirementCard, task.card_id)
+        if card is not None:
+            try:
+                task.error_details = recovery_details_for_card(db, card)
+                db.commit()
+            except Exception as error:  # 历史数据异常时仍返回原始失败，不让状态接口再次失败
+                db.rollback()
+                log.warning("failed to backfill recovery details for %s: %s", task.task_id, type(error).__name__)
     version = None
     if task.status == "done":
         pv = db.execute(select(PlanVersion.version).where(PlanVersion.plan_id == plan_id)
@@ -175,4 +281,4 @@ def status_of(db: Session, plan_id: str) -> PlanStatus:
         version = pv
     return PlanStatus(plan_id=plan_id, task_id=task.task_id, status=task.status, progress=float(task.progress),
                       replan_round=task.replan_round, version=version,
-                      error=ErrorBody(code=task.error_code, message=task.error_message or "") if task.error_code else None)
+                      error=ErrorBody(code=task.error_code, message=task.error_message or "", details=task.error_details) if task.error_code else None)

@@ -59,7 +59,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <header className="site-header">
         <div className="site-container flex h-[68px] items-center gap-5">
           <Link href="/" aria-label="Beyond Dream Travel 行策首页" className="flex shrink-0 items-center gap-2.5">
-            <Image src="/brand/bdt-icon.png" alt="" width={36} height={36} priority className="size-9 object-contain" />
+            <Image src="/brand/bdt-icon.png" alt="" width={36} height={36} priority className="brand-icon-clip size-9 object-contain" />
             <span className="hidden text-[17px] font-bold tracking-[-0.025em] text-[#171a1f] sm:inline">BEYOND DREAM TRAVEL <span className="font-semibold">· 行程</span></span>
           </Link>
 
@@ -79,7 +79,6 @@ export function AppShell({ children }: { children: ReactNode }) {
               <span className={cn("size-2 rounded-full", meta?.llm_configured === false ? "bg-warning" : "bg-[#20bf55]")} aria-hidden="true" />
               AI 行程设计·内测
             </button>
-            <Link href="/login" className="inline-flex h-10 items-center rounded-lg bg-[#101214] px-5 text-[13px] font-semibold text-white transition hover:bg-black">登录 / 注册</Link>
           </div>
 
           <button type="button" onClick={() => setMobileOpen((value) => !value)} className="ml-auto inline-flex size-10 items-center justify-center rounded-lg border border-border bg-white md:hidden" aria-label={mobileOpen ? "关闭导航" : "打开导航"}>

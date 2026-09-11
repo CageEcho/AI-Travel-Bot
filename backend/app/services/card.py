@@ -1,6 +1,8 @@
 """需求卡：槽位合并、完整度、缺失项。确定性代码。"""
 from __future__ import annotations
 
+from datetime import date, timedelta
+
 from app.core.config import settings
 from app.schemas.slots import Followup, SlotExtraction, SlotSet, SlotValue
 
@@ -24,7 +26,7 @@ def merge_slots(existing: SlotSet, extracted: SlotSet) -> SlotSet:
             continue
         if new is not None and new.value not in (None, "", []):
             setattr(merged, name, new)
-    return merged
+    return derive_date_end(merged)
 
 
 def set_slot(slots: SlotSet, name: str, value) -> SlotSet:
@@ -36,6 +38,24 @@ def set_slot(slots: SlotSet, name: str, value) -> SlotSet:
     value = normalize_slot_value(name, value)
     out = slots.model_copy(deep=True)
     setattr(out, name, None if value is None else SlotValue(value=value, source="advisor_input", confidence=1.0))
+    return derive_date_end(out)
+
+
+def derive_date_end(slots: SlotSet) -> SlotSet:
+    """由出发日期和天数推导结束日期；客户/顾问明确填写的结束日期永远优先。"""
+    start = slots.get("date_start")
+    days = slots.get("duration_days")
+    current = slots.date_end
+    if not start or not days:
+        return slots
+    if current is not None and current.source in ("client_verbatim", "advisor_input") and current.value:
+        return slots
+    try:
+        end = date.fromisoformat(str(start)) + timedelta(days=int(days) - 1)
+    except (TypeError, ValueError):
+        return slots
+    out = slots.model_copy(deep=True)
+    out.date_end = SlotValue(value=end.isoformat(), source="system_inferred", confidence=1.0)
     return out
 
 
