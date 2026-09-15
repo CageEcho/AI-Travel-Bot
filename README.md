@@ -1,120 +1,283 @@
-# 行策 · 高端旅行智能方案生成平台 — M0 最小可跑闭环
+# zAI Travel Bot · 行策
 
-面向高端旅行顾问的 AI 行程方案生成工作台。M0 验证的是一条完整链路：
+> 将客户的一段旅行原话，转化为可追溯、可核验、可交付的高端定制旅行方案。
 
-```
-客户原话 → [槽位抽取] → 需求卡 → [人工确认①] → [硬过滤检索] → [编排]
-   → [引用校验] → [约束校验(三态)] → 违规则回退重排(≤3) → [成本核算] → 方案可视化
-```
+zAI Travel Bot 是为旅行顾问设计的 AI 行程方案工作台。它不是只产出泛化文案的聊天机器人：系统会把需求拆解为结构化需求卡、在人机确认后从资源池中筛选与编排行程、进行约束与成本校验，并输出可直接给客户查看的图文 PDF 或长图。
 
-设计依据见 `docs/`（PRD-v2 / PRD-v3 / 技术适配声明与第一阶段技术开发文档）。
+> 当前资源数据均为演示用模拟数据，不代表真实供应商库存、价格或可售状态。
+
+## 在线预览
+
+本地启动后可访问：
+
+- 前端工作台：<http://localhost:3000>
+- 后端 API 文档：<http://localhost:8000/docs>
+
+## 界面预览
+
+### 从客户原话开始
+
+首页提供自然语言输入与可点击的演示需求。顾问可以先粘贴客户原话，再由 AI 提取信息并进行多轮补问。
+
+![zAI Travel Bot 首页：从客户原话生成定制行程](docs/screenshots/home.png)
+
+### 顾问工作台：对话、需求卡、方案同步呈现
+
+工作台将需求采集、结构化需求卡和行程方案放在同一视图。每项需求都有来源标记，生成过程保留约束校验、待核实项和重排次数；演示模式下对酒店档次的兼容放宽也会明确标记。
+
+![zAI Travel Bot 顾问工作台](docs/screenshots/workbench.png)
+
+### 客户版交付预览与导出
+
+当硬约束全部通过后，顾问可打开客户版方案预览并下载多页 PDF 或长图。交付版本自动隐藏内部成本轨迹、资源 ID、价格档 ID 和模型信息。
+
+![zAI Travel Bot 客户版方案预览](docs/screenshots/customer-proposal.png)
+
+## 核心能力
+
+| 能力 | 说明 |
+| --- | --- |
+| 自然语言需求采集 | 从客户原话提取目的地、日期、天数、同行人、预算、酒店档次、饮食禁忌、无障碍需求、偏好和节奏等槽位。 |
+| 多轮 AI 引导 | 信息不足时，AI 以顾问可直接转述的方式继续提问；必问项不能被静默默认。 |
+| 结构化需求卡 | 每一个字段标明客户原话、顾问填写或系统推断及置信度；冻结后的修改会生成新版本，保留溯源。 |
+| 自动推导日期 | 已填写出发日期和天数时，系统自动计算结束日期，避免需求卡信息断裂。 |
+| 人工确认关卡 | 需求完整度达到阈值且必问项、冲突项处理完成后才允许生成方案。 |
+| 资源检索与编排 | 依据目的地、日期、人数、儿童政策、酒店档次与偏好筛选资源，再生成逐日行程。 |
+| 三道事实防线 | 模型只选择资源 ID；服务端校验 ID 在候选池中、回填数据库事实、再次比对字段，避免捏造资源事实或价格。 |
+| 约束与成本校验 | 对日期、容量、儿童、饮食、无障碍、行李等进行通过、拦截、待核实三态校验，并通过规则引擎计算成本。 |
+| 可恢复生成 | 日期、目的地或酒店档次造成候选不足时，界面会给出可一键应用的明确修改建议，而不是卡在失败页。 |
+| 演示友好模式 | DEMO_MODE=true 下，某城市没有所选酒店档次时，只兼容其它档次；日期、容量、儿童政策和资源引用校验仍然生效。 |
+| 客户交付物 | 支持客户版预览、A4 多页 PDF 和长图导出；自动移除内部资源 ID、净价线索、价格档与模型信息。 |
+| DeepSeek / Claude | 支持 DeepSeek 与 Anthropic Claude；模型异常时可降级到确定性编排器，保障演示流程连续。 |
+
+## 工作流
+
+~~~
+客户原话
+  ↓ 槽位抽取 / PII 脱敏
+多轮需求引导
+  ↓
+带来源标记的需求卡
+  ↓ 顾问确认：完整度、必问项、冲突项
+资源硬过滤与候选池构建
+  ↓
+AI / 确定性编排行程
+  ↓
+资源引用校验 → 约束校验 → 必要时重排
+  ↓
+成本核算与待核实清单
+  ↓
+客户版 PDF / 长图交付
+~~~
+
+## 技术架构
+
+| 层级 | 技术与职责 |
+| --- | --- |
+| 前端 | Next.js 16、React 19、TypeScript、Tailwind CSS；三栏顾问工作台、任务轮询、客户版方案渲染与 PDF/长图导出。 |
+| 后端 | FastAPI、Pydantic、SQLAlchemy；提供会话、需求卡、检索、生成任务、方案与溯源 API。 |
+| 数据 | PostgreSQL 16；资源、价格计划、会话、需求卡、方案版本、生成任务和日志独立建模。 |
+| AI | Anthropic Messages API 或 DeepSeek Anthropic 兼容接口；Pydantic JSON Schema 约束结构化输出。 |
+| 可靠性 | 后台任务状态落库、心跳与孤儿任务恢复、模型重试、模型失败后确定性编排回退。 |
+| 安全 | 客户 PII 脱敏后才持久化或发送模型；角色权限、API Key 鉴权、服务端成本权限控制。 |
+
+## 项目结构
+
+~~~
+zAI-Travel-Bot/
+├── backend/
+│   ├── app/
+│   │   ├── api/v1/          # conversations / plans / search / trace
+│   │   ├── core/            # 配置、鉴权、LLM、错误、隐私与数据库
+│   │   ├── models/          # 资源与业务 SQLAlchemy 模型
+│   │   ├── schemas/         # Pydantic 槽位、方案、成本与 API Schema
+│   │   └── services/        # 抽取、需求卡、检索、编排、校验、成本、任务
+│   ├── alembic/             # 数据库迁移
+│   └── tests/               # 后端单元与集成测试
+├── frontend/
+│   ├── app/                 # Next.js 路由与首页
+│   ├── components/          # 共享 UI、导航、帮助与过渡
+│   ├── features/            # 会话、需求卡、方案、工作台功能模块
+│   ├── e2e/                 # Playwright 端到端测试
+│   └── tests/               # Vitest 组件与逻辑测试
+├── seed/                    # 演示资源数据生成与装载脚本
+├── eval/                    # 规则层评测与真实模型冒烟
+├── docs/                    # PRD、技术适配文档与 README 截图
+└── docker-compose.yml       # PostgreSQL 开发环境
+~~~
 
 ## 快速开始
 
-```bash
-# 1. 数据库（二选一）
-docker compose up -d                       # A. PostgreSQL 16（pgvector 镜像），占用 5432
-#   或：无 Docker 时把 .env 里的 DATABASE_URL 改为 embedded:///.pgdata（内嵌 PostgreSQL 16，随进程启动）
+### 1. 环境要求
 
-# 2. Python 3.11 环境
-python3.11 -m venv .venv && source .venv/bin/activate     # 或 uv venv -p 3.11 .venv
+- Node.js 20+
+- Python 3.11+
+- Docker Desktop（推荐，用于 PostgreSQL）或可用的 PostgreSQL 16
+
+### 2. 配置数据库和 Python 环境
+
+~~~bash
+git clone https://github.com/CageEcho/zAI-Travel-Bot.git
+cd zAI-Travel-Bot
+
+# 推荐：启动 PostgreSQL 16
+docker compose up -d
+
+# 创建 Python 虚拟环境并安装依赖
+python3.11 -m venv .venv
+source .venv/bin/activate
 pip install -r backend/requirements.txt
-cp .env.example .env                       # 填 ANTHROPIC_API_KEY（留空则由 ant auth profile 解析）
 
-# 3. 建表 + 种子数据
+# 创建本地配置，不要提交 .env
+cp .env.example .env
+
+# 执行迁移并导入演示资源
 (cd backend && alembic upgrade head)
-python seed/generate.py                    # 末行应为「约束陷阱校验：12/12 通过」
-python seed/load.py                        # 各表入库条数（酒店 42）
+python seed/generate.py
+python seed/load.py
+~~~
 
-# 4. 启动
-(cd backend && uvicorn app.main:app --reload --port 8000)
-# 浏览器打开 http://localhost:8000 （验收界面）；http://localhost:8000/docs（Swagger）
-```
+不使用 Docker 时，可在 .env 将 DATABASE_URL 配置为 embedded:///.pgdata，由应用启动内嵌 PostgreSQL。
 
-## 接模型：Claude 或 DeepSeek
+### 3. 配置模型
 
-默认 `LLM_PROVIDER=anthropic`（Claude Opus 5，原生结构化输出）。切到 DeepSeek 只改 `.env`：
+在根目录 .env 中配置 DeepSeek：
 
-```bash
+~~~dotenv
 LLM_PROVIDER=deepseek
-DEEPSEEK_API_KEY=sk-...            # https://platform.deepseek.com 申请
-DEEPSEEK_MODEL=deepseek-v4-pro     # 或 deepseek-v4-flash
+DEEPSEEK_API_KEY=sk-你的密钥
+DEEPSEEK_MODEL=deepseek-v4-pro
 PLANNER_MODE=llm
-```
+DEMO_MODE=true
+DEMO_SAFE_DATE=2026-10-15
+~~~
 
-若开发机通过企业代理或本地调试代理访问 HTTPS，后端会在检测到 `SSL_CERT_FILE` 时自动把代理 CA 与系统 `/etc/ssl/cert.pem` 合并，并保持证书校验开启。只有系统证书位于其它路径时才需要显式设置 `LLM_CA_BUNDLE=/path/to/ca-bundle.pem`；不要通过关闭 TLS 校验绕过证书问题。
+密钥只保存在本机 .env，该文件已被 .gitignore 排除；不要把 API Key 提交到 GitHub 或发送到公开渠道。
 
-本地 M0 默认 `DEMO_MODE=true`：某个目的地没有顾问所选酒店档次时，只为该城市自动扩展到其它档次的兼容住宿，并在方案假设与 trace 中明确记录；日期可售、人数容量、儿童政策和资源引用校验仍然生效。生产环境必须设置 `DEMO_MODE=false`。
+也可以切换 Claude：
 
-真实输入若因日期、酒店档次或目的地组合导致候选不足，任务状态会保存结构化恢复建议。前端提供可执行的一键修改，选择后自动创建新需求卡版本、重新确认并生成；历史失败任务在首次查询时也会补算建议，避免停在不可继续的错误页。
+~~~dotenv
+LLM_PROVIDER=anthropic
+ANTHROPIC_API_KEY=你的密钥
+PLANNER_MODE=llm
+~~~
 
-DeepSeek 走其 Anthropic 兼容端点，复用同一个 SDK；因该端点不支持 Claude 的 `output_format`，后端改用「强制调用唯一工具（input_schema 即 Pydantic JSON Schema）」拿结构化结果。DeepSeek 对 schema 的遵循弱于 Claude：偶尔多包一层 `result`、用同义词、或工具参数为空，后端有通用解包、别名归一化、`DEEPSEEK_MAX_ATTEMPTS`（默认 3）次重试兜底；回退 3 轮仍有违规时再做一次确定性资源替换。切换后跑 `python eval/smoke_real_model.py` 记录两种契约的结构合规率、耗时与 token。
+如果暂时没有模型密钥，可使用确定性编排模式完成界面与规则层测试：
 
-## 身份认证与角色权限
+~~~dotenv
+PLANNER_MODE=heuristic
+DEMO_MODE=true
+~~~
 
-本地演示默认 `AUTH_ENABLED=false`，以 `local-advisor` 身份运行。部署环境应在 `.env` 开启鉴权并为每位用户生成独立高熵 Key：
+### 4. 启动服务
 
-```bash
-AUTH_ENABLED=true
-API_KEYS_JSON={"至少16位的随机Key":{"user_id":"advisor-01","role":"advisor"}}
-```
+打开两个终端：
 
-角色支持 `sales / advisor / supervisor / procurement / admin`。开启后，未登录或配置错误均失败关闭；浏览器访问 `/login` 输入 Key，凭证只保存在当前标签页的 `sessionStorage`。销售和普通顾问只能访问本人创建的会话、需求卡、任务与方案；主管、管理员可访问全部，采购可只读全部。销售角色的酒店检索与方案响应会由后端删除净价、价格档、加价和价格来源，且无权访问生成轨迹。执行 `alembic upgrade head` 后，历史 M0 会话会安全归到 `local-advisor`，如需转交应由管理员后续显式调整归属。
+~~~bash
+# 终端 A：后端
+cd backend
+../.venv/bin/uvicorn app.main:app --reload --port 8000
 
-## 正式前端（Next.js）
+# 终端 B：前端
+cd frontend
+npm install --legacy-peer-deps
+npm run dev
+~~~
 
-```bash
-cd frontend && npm install --legacy-peer-deps && npm run dev      # http://localhost:3000，需后端在 8000
-npm run lint && npm run typecheck && npm run test && npm run build && npm run e2e
-```
+访问：
 
-方案生成完成且硬约束违规为 0 时，方案面板会出现「客户版预览与导出」。客户版采用固定 A4 图文排版，支持多页 PDF 与微信长图下载；导出内容不会包含内部成本轨迹、资源 ID、价格档 ID 或模型信息。M0 使用模拟资源，因此每一页都会保留演示数据声明。
+- http://localhost:3000：产品界面
+- http://localhost:8000/docs：API 文档
 
-详见 `frontend/README.md` 与 `docs/前端技术适配声明与第一阶段前端开发文档.md`。`backend/app/static/index.html` 保留为 API 冒烟兜底。
+## 常用配置
 
-## 测试与评测
+| 配置 | 默认或示例 | 用途 |
+| --- | --- | --- |
+| LLM_PROVIDER | deepseek / anthropic | 选择模型供应商。 |
+| DEEPSEEK_API_KEY | sk-... | DeepSeek 密钥。 |
+| DEEPSEEK_MODEL | deepseek-v4-pro | DeepSeek 模型名。 |
+| ANTHROPIC_API_KEY | sk-ant-... | Claude 密钥。 |
+| PLANNER_MODE | llm / heuristic | LLM 编排或确定性编排。 |
+| DEMO_MODE | true | 演示时允许有限的酒店档次兼容，不跳过核心约束。生产必须设为 false。 |
+| DEMO_SAFE_DATE | 2026-10-15 | 演示恢复建议使用的稳定日期。 |
+| AUTH_ENABLED | false | 本地演示关闭；生产环境应开启。 |
+| API_KEYS_JSON | JSON 字符串 | 开启鉴权后为角色分配 API Key。 |
+| DATABASE_URL | PostgreSQL URL | 数据库连接。 |
 
-```bash
-(cd backend && python -m pytest -q)        # 第一层：mock 自动化测试（不调用模型），含 21 个约束三态单测
-python eval/run.py --dry-run               # 20 条评测用例，只测规则层（确定性编排器，不花模型钱）
-python eval/run.py                         # 真实模型：抽取 + LLM 编排
-python eval/smoke_real_model.py            # 第二层：两种模型契约的真实冒烟，输出 eval/smoke_report.json
-```
+### 代理与证书
 
-测试用独立的内嵌数据库 `.pgdata-test/`，不影响开发库。
+当开发机通过企业代理或本地 HTTPS 调试代理访问模型服务时，应用会把 SSL_CERT_FILE 的代理证书与系统 CA 合并，仍保持 TLS 校验开启。只有系统 CA 不在默认路径时，才需要设置：
 
-## 目录
+~~~dotenv
+LLM_CA_BUNDLE=/path/to/ca-bundle.pem
+~~~
 
-```
-backend/app/
-  api/v1/          conversations / plans / search / trace（前缀 /api/v1 集中定义）
-  core/            config（阈值与权重）/ db / llm（Opus 5 注意点）/ errors（统一错误结构）/ logging（trace_log）
-  models/          SQLAlchemy：资源侧 7 张 + 业务侧 6 张（含 generation_task）
-  schemas/         Pydantic 一套三用：slots / plan / search / cost / facts / common
-  services/        extract / planner（LLM + 确定性编排器 + 回退重排）/ retrieval / render（三道防线）
-                   constraints（7 条硬约束三态）/ conflicts（3 条）/ cost（规则引擎）/ card / tasks
-  services/prompts/ extract_slots.md / plan_itinerary.md（Prompt 独立文件）
-  static/index.html 最小验收界面（三栏：对话 / 需求卡 / 方案）
-backend/tests/     test_seed_traps / test_constraints(21) / test_search_filter / test_cost / test_render_guard
-                   test_conflicts / test_api_gate / test_tasks / test_card / test_pipeline
-backend/alembic/   迁移（af351a7a956b 初始 13 张表）
-seed/              generate.py（确定性生成 + assert_traps 门禁）/ load.py / data/*.json
-eval/              cases/*.yaml（20 条）/ run.py / smoke_real_model.py
-docs/              PRD 与阶段文档副本
-```
+请勿以关闭 TLS 校验来规避证书问题。
 
-## 关键约定（写代码前先看）
+## API 概览
 
-- **空值 ≠ 无限制。** `min_child_age` / `closed_days` / `accessible` / `child_friendly` / `luggage_28` 为 NULL 表示「未记录」，约束校验器必须判 `UNKNOWN`（进待核实清单），不得静默通过。见 `services/constraints.py`。
-- **金额只来自 `services/cost.py`。** 模型输出 schema（`PlannedItem`）里没有价格、名称、营业时间等事实字段；任何从 LLM 响应读金额的代码都是 bug。
-- **三道防线。** ① schema 限定模型只输出 `resource_id`；② `render.py` 校验 ID 必须在本次候选池内；③ 回填后逐字段与库值比对。拦截项标 `blocked` 并触发重排，绝不静默丢弃。
-- **人工节点①。** 需求卡未 confirm 时 `POST /api/v1/plans` 返回 409 `CARD_NOT_CONFIRMED`；完整度低于阈值不允许 confirm。
-- **客户 PII 最小化。** 顾问原话中的姓名、电话、邮箱、微信、证件号和地址在入库及发送模型前统一脱敏；trace 只记录脱敏文本摘要与是否发生脱敏，不保存原文。
-- **模型输入按不可信数据处理。** 所有结构化模型调用都会注入稳定的安全边界，客户文本、槽位与资源文本中的越权指令不得改变角色、规则或输出契约。
-- **任务可恢复。** 生成状态落 `generation_task` 表并带心跳；服务启动时把僵死任务标 `failed/ORPHANED`。
-- **Opus 5 参数。** 不传 `temperature` / `top_p` / `budget_tokens`；深度用 `output_config.effort`；结构化输出用 `messages.parse()`，不用 prefill。
-- **编排器模式。** `PLANNER_MODE=llm`（默认）| `heuristic`（确定性编排器，供 `eval --dry-run`、测试与 LLM 不可用时的降级）。
+所有 API 均使用 /api/v1 前缀；完整定义以启动后的 Swagger 为准。
 
-## 验收清单
+| 方法 | 路径 | 作用 |
+| --- | --- | --- |
+| POST | /conversations | 创建会话与空白需求卡。 |
+| POST | /conversations/{conv_id}/messages | 提交客户原话，触发槽位抽取与下一轮引导。 |
+| GET | /conversations/{conv_id}/card | 读取当前需求卡。 |
+| PATCH | /conversations/{conv_id}/card | 顾问修订字段；已确认卡会生成新版本。 |
+| POST | /conversations/{conv_id}/card/confirm | 校验完整度、必问项和冲突后冻结需求卡。 |
+| POST | /plans | 异步创建方案任务。 |
+| GET | /plans/{plan_id}/status | 轮询检索、编排、校验与成本任务状态。 |
+| GET | /plans/{plan_id}/versions/{version} | 获取完成的方案、校验项和成本摘要。 |
 
-见 `docs/技术适配声明与第一阶段技术开发文档.md` 第十一节。免责：**资源数据为模拟数据集，非真实供应商信息**（`is_synthetic=true`，界面页脚已标注）。
+## 测试与质量检查
+
+~~~bash
+# 后端：单元 / 集成测试
+(cd backend && python -m pytest -q)
+
+# 规则层评测，不调用模型
+python eval/run.py --dry-run
+
+# 真实模型冒烟，会消耗模型额度
+python eval/smoke_real_model.py
+
+# 前端：静态检查、单测、构建和端到端测试
+(cd frontend && npm run lint)
+(cd frontend && npm run typecheck)
+(cd frontend && npm run test)
+(cd frontend && npm run build)
+(cd frontend && npm run e2e)
+~~~
+
+端到端测试覆盖从需求提交到方案生成、候选不足后的恢复建议、客户版交付入口等核心闭环。
+
+## 隐私、权限与数据边界
+
+- 客户姓名、电话、邮箱、微信、证件号和地址会在入库和发送模型前脱敏。
+- 需求字段保留来源；模型不直接决定价格、资源事实或供应商数据。
+- 金额只由服务端成本规则引擎计算，模型输出中不包含价格字段。
+- 默认演示身份为 local-advisor。部署时请开启 AUTH_ENABLED=true，并为销售、顾问、主管、采购和管理员设置独立高熵 API Key。
+- 销售等无成本权限角色由后端直接移除净价、价格档和价格来源，避免仅依赖前端隐藏。
+- 演示资源是合成数据；用于真实生产前需接入真实供应商、库存、价格和预订链路，并关闭 DEMO_MODE。
+
+## 产品边界与下一步
+
+当前版本已经实现需求采集、顾问确认、资源筛选与编排、校验到客户版导出的第一阶段完整闭环。后续可继续接入：
+
+- 真实供应商库存、报价与预订链接；
+- CRM、客户档案与咨询记录；
+- 地图路由、实时交通与天气；
+- 方案协作、审批、版本对比与客户反馈；
+- 云端部署、组织级鉴权、监控与审计。
+
+## 相关文档
+
+- [产品需求文档（PRD-v2）](docs/高端旅行智能方案生成平台-PRD-v2.md)
+- [实施版 PRD（v3）](docs/PRD-v3-实施版.md)
+- [第一阶段技术开发文档](docs/技术适配声明与第一阶段技术开发文档.md)
+- [前端技术开发文档](docs/前端技术适配声明与第一阶段前端开发文档.md)
+- [前端开发说明](frontend/README.md)
+
+---
+
+Built for premium travel consultants · Beyond Dream Travel · 行策
